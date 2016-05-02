@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage3D Vertex Buffer formats &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Stage3D Vertex Buffer formats &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Stage3D Vertex Buffer formats &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">08 Oct 2011, 02:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/p2496" class="post-title">Stage3D Vertex Buffer formats</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                                under 
+                                
+                                
+                                    <a class="post-category post-category-development" href="https://thejare.github.io/categories/development">Development</a>
+                                
+                                    <a class="post-category post-category-uncategorized" href="https://thejare.github.io/categories/uncategorized">Uncategorized</a>
+                                
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
+
+<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color&#8217;s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
+
+<p><strong>Vector.<Number></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
+
+<p>You must use a <strong>ByteArray</strong>, to which you will copy the values manually with the right format. In our example above, 3 <strong>writeFloat()</strong> calls plus a <strong>writeUnsignedInt()</strong> for the 32-bit color. A detail that stumped me for a while is that you must ensure the <strong>ByteArray</strong> is <strong>Endian.LITTLE_ENDIAN</strong>, it defaults to <strong>BIG_ENDIAN</strong>. I wrote this function to perform this process, with the aid of an array that stores the format of each varying parameter:</p>
+
+<pre>private static function DumpVectorComponentsIntoByteArray(dest:ByteArray,
+                                                          src:Vector.&lt;Number&gt;,
+                                                          componentFormats:Array): void
+{
+    dest.endian = Endian.LITTLE_ENDIAN;
+    for (var i:int = 0; i &lt; src.length; )
+    {
+        for (var j:int = 0; j &lt; componentFormats.length; ++j)
+        {
+            switch (componentFormats[j])
+            {
+                case Context3DVertexBufferFormat.FLOAT_2:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i+1]);
+                    i += 2;
+                    break;
+                case Context3DVertexBufferFormat.FLOAT_3:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i + 1]);
+                    dest.writeFloat(src[i + 2]);
+                    i += 3;
+                    break;
+                case Context3DVertexBufferFormat.FLOAT_4:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i + 1]);
+                    dest.writeFloat(src[i + 2]);
+                    dest.writeFloat(src[i + 3]);
+                    i += 4;
+                    break;
+                case Context3DVertexBufferFormat.BYTES_4:
+                    dest.writeUnsignedInt(src[i]);
+                    ++i;
+                    break;
+            }
+        }
+    }
+}</pre>
+
+<p>So, in the case of the spinning cube, the component array would be:</p>
+
+<pre>var vertexBufferComponents:Array = new Array(
+    Context3DVertexBufferFormat.FLOAT_3,
+    Context3DVertexBufferFormat.BYTES_4
+);</pre>
+
+<p>With that array in hand, another useful function to set the array components into the context:</p>
+
+<pre>private function SetVertexArrays(componentFormats:Array, vertices:VertexBuffer3D): void
+{
+    var offset:int = 0;
+    for (var j:int = 0; j &lt; componentFormats.length; ++j)
+    {
+        renderContext.setVertexBufferAt( j, vertices, offset, componentFormats[j] );
+        switch (componentFormats[j])
+        {
+            case Context3DVertexBufferFormat.FLOAT_2:
+                offset += 2;
+                break;
+            case Context3DVertexBufferFormat.FLOAT_3:
+                offset += 3;
+                break;
+            case Context3DVertexBufferFormat.FLOAT_4:
+                offset += 4;
+                break;
+            case Context3DVertexBufferFormat.BYTES_4:
+                offset += 1;
+                break;
+        }
+    }
+}</pre>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

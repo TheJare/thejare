@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Source Code on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/tags/source-code/</link>
+    <description>Recent content in Source Code on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 May 2013 02:55:18 +0000</lastBuildDate>
+    <atom:link href="https://thejare.github.io/tags/source-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Firedemo 20th anniversary</title>
+      <link>https://thejare.github.io/p2756</link>
+      <pubDate>Sat, 04 May 2013 02:55:18 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2756</guid>
+      <description>&lt;p&gt;It&amp;#8217;s been nearly 20 years since we released that old fire effect and the demoscene turned out to love it. I have &lt;a href=&#34;http://www.iguanademos.com/Jare/files/Fire/&#34; target=&#34;_blank&#34;&gt;ported it to HTML5&lt;/a&gt; to celebrate!&lt;/p&gt;
+
+&lt;p&gt;It all started when we bought a math coprocessor for our &lt;sup&gt;386&lt;/sup&gt;&amp;frasl;&lt;sub&gt;25&lt;/sub&gt; and I started playing with fractals and plasmas. A few programming mistakes later, this thing came out and looked neat, so we slapped JCAB&amp;#8217;s VT player and released it. Eternal gratitude to Jester of Sanity for unknowingly lending me his fantastic &lt;a href=&#34;http://mod.haxor.fi/Jester/mod.elysium&#34; target=&#34;_blank&#34;&gt;&amp;#8216;Elysium&amp;#8217; mod&lt;/a&gt; &amp;#8211; it didn&amp;#8217;t take me long to learn that such acts were VERY badly frowned upon.&lt;/p&gt;
+
+&lt;p&gt;You can check out the &lt;a href=&#34;https://github.com/TheJare/FiredemoHTML5&#34; target=&#34;_blank&#34;&gt;source code on github&lt;/a&gt; if you are so inclined. The comments are slightly better this time! This version runs rather slowly on Chrome, and I don&amp;#8217;t really know why, but IE, Firefox (Win and Android) and iOS Safari work great.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Githubbed!</title>
+      <link>https://thejare.github.io/p2623</link>
+      <pubDate>Wed, 16 May 2012 01:35:49 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2623</guid>
+      <description>&lt;p&gt;A few months ago I created a &lt;a href=&#34;https://github.com/TheJarehttp://&#34;&gt;Github account&lt;/a&gt; to see what it&amp;#8217;s all about. Even if you use it yourself without all the nice features of a &lt;a href=&#34;http://en.wikipedia.org/wiki/Distributed_revision_control&#34; target=&#34;_blank&#34;&gt;distributed version control system&lt;/a&gt;, it&amp;#8217;s a great way to manage &amp;amp; publish your open source projects!&lt;/p&gt;
+
+&lt;p&gt;I put up there some of my old C/C++ code, and a few experiments I&amp;#8217;ve toyed with in my (now scarce) spare time, mostly related to JavaScript. Feel free to check them out!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

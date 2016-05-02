@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About-mes on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/about-me/</link>
+    <description>Recent content in About-mes on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Jul 2012 00:35:38 +0000</lastBuildDate>
+    <atom:link href="https://thejare.github.io/about-me/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>https://thejare.github.io/about-me/</link>
+      <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/about-me/</guid>
+      <description>&lt;p&gt;My name is Javier Arévalo Baeza, I was born in sunny Spain in the year 1970. I have been &lt;a href=&#34;http://www.mobygames.com/developer/sheet/view/developerId,36254/&#34;&gt;making videogames&lt;/a&gt; for over 25 years, and I intend to keep doing that for as long as I can.&lt;/p&gt;
+
+&lt;p&gt;Other places you can reach me:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Facebook: &lt;a href=&#34;https://www.facebook.com/TheJare&#34;&gt;https://www.facebook.com/TheJare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Twitter: &lt;a href=&#34;https://twitter.com/TheJare&#34;&gt;https://twitter.com/TheJare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Github: &lt;a href=&#34;https://github.com/TheJare&#34;&gt;https://github.com/TheJare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Google+: &lt;a href=&#34;https://plus.google.com/109393462510769944302/&#34;&gt;https://plus.google.com/109393462510769944302/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

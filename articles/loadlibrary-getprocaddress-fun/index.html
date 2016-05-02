@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoadLibrary-GetProcAddress Fun &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="LoadLibrary-GetProcAddress Fun &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="LoadLibrary-GetProcAddress Fun &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 01:56</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/loadlibrary-getprocaddress-fun/" class="post-title">LoadLibrary-GetProcAddress Fun</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article first appeared as a <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=Tip-LoadLibraryGetProcAddress&amp;#038;forum=totd&amp;#038;id=-1">Tip Of The Day</a> in <a href="http://www.flipcode.com">Flipcode</a>.</p>
+
+<p>I explain a macro trick used by the authors of the BASS sound library to help with dynamic loading of the DLL; then I introduce a way to make it even easier to apply. Afterwards I extend the idea with a modified macro + a header file trick which useful by itself. 3 totds in one! 🙂</p>
+
+<p>Last night, adding the sound library BASS (visit <a href="http://www.un4seen.com/music/">http://www.un4seen.com/music/</a>) to a pet project, I noticed they had added and documented a nice trick to help people who want to load the DLL at runtime instad of static-linking it. The trick is in the way all the functions in the DLL&#8217;s header file bass.h are declared:</p>
+
+<pre><code class="language-c">BOOL BASSDEF(BASS_GetDeviceDescription)(int devnum, char **desc)
+</code></pre>
+
+<p>i.e. with the macro BASSDEF surrounding the function name. This macro is defined at the beginning:</p>
+
+<pre><code class="language-c">#ifndef BASSDEF
+#define BASSDEF(f) WINAPI f
+#endif
+
+// The declaration above is, after the macro substitution, a plain old 
+function declaration:
+BOOL WINAPI BASS_GetDeviceDescription(int devnum, char **desc);
+</code></pre>
+
+<p>Normally, if you want to load a DLL at runtime and GetProcAddress() the functions you want, you are forced to declare your own function pointer vars with the right parameter declaration. However, in BASS, when you include the header file, you can simply do</p>
+
+<pre><code class="language-c">#define BASSDEF(f) (WINAPI *f) // define the functions as pointers
+#include &quot;bass.h&quot;
+
+// The declaration above is now interpreted differently:
+BOOL (WINAPI *BASS_GetDeviceDescription)(int devnum, char **desc);
+</code></pre>
+
+<p>and instead of the useless (for dynamic loading) function declarations, you have obtained a list of function pointer variables with the right parameters. Cool! Now it&#8217;s up to you to write:</p>
+
+<pre><code class="language-c">BASS_GetDeviceDescription = GetProcAddress(bass, &quot;BASS_GetDeviceDescription&quot;);
+</code></pre>
+
+<p>for each function you want, and then call BASS_GetDeviceDescription(-1, &amp;pInfo) just like you normally would. What a cool tip of the day, right?</p>
+
+<p>WRONG! You missed type checking. A C++ compiler will complain that BASS_GetDeviceDescription is of type int (\__stdcall *)(int, char**), while GetProcAddress() returns a int (__stdcall *)(void) value. DAMN! We&#8217;re right where we started because we have to typecast each GetProcAddress separately, and to do so we need the right parameters again.</p>
+
+<p>Instead of that mess, we can do some weird typecast trickery:</p>
+
+<pre><code class="language-cpp">*(void**)&amp;BASS_GetDeviceDescription=(void*)GetProcAddress(bass, &quot;BASS_GetDeviceDescription&quot;);
+</code></pre>
+
+<p>Since we already know the funcptr variables have the correct types (because they come from the official header), we can simply coerce the compiler into treating them as (void*) variables during the assignment, and avoid repeating the function declarations. I ended up using a macro to further simplify things:</p>
+
+<pre><code class="language-c">#define INITBASSF(f) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
+
+INITBASSF(BASS_Init);
+INITBASSF(BASS_Start);
+INITBASSF(BASS_Stop);
+INITBASSF(BASS_Free);
+INITBASSF(BASS_GetInfo);
+</code></pre>
+
+<p>There&#8217;s even more! We still have to write our list of funcptr initializations. Should we forget one, the funcptr variable will be uninitialized, trying to call it may cause major havok. I know this is a minor burden since you will catch most errors right away in a debug build; however, can we automate this further? YES! They could have separated the function declarations into their own header file (without any single-include guards), with the standard BASSDEF macro taking also the parameter declaration as a macro parameter:</p>
+
+<pre><code class="language-c">// Inside &quot;Bass.h&quot;
+#define BASSDEF(f,p) WINAPI f p
+...
+#include &quot;BassFunctions.h&quot;
+
+// BassFunctions.h:
+BOOL BASSDEF(BASS_GetDeviceDescription, (int devnum, char **desc));
+void BASSDEF(BASS_SetBufferLength, (float length));
+//... the rest of the BASSDEF function declarations
+</code></pre>
+
+<p>With that little help bit, my MusicPlayer.cpp wrapper file would look something like this:</p>
+
+<pre><code class="language-c">#define BASSDEF(f,p) (WINAPI *f) p // define the functions as pointers
+#include &quot;Bass.h&quot;
+//....
+bool CMusicPlayer::Init()
+{
+   HINSTANCE bass=LoadLibrary(&quot;BASS.DLL&quot;); // load BASS
+   if (!bass) return false;
+
+   #undef BASSDEF
+   #define BASSDEF(f,p) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
+   #include &quot;BassFunctions.h&quot;
+   // Your initialization here....
+}
+</code></pre>
+
+<p>And there you have it. No maintenance burden, no typing mistakes, no need to repeat a list of names. With the original BASS header file built the way I propose, you only need 6 lines of code to switch from static to dynamic linking.</p>
+
+<p>I have used the &#8220;declarator macro + listing include file&#8221; technique quite a few times, in situations well unrelated to DLLs, Windows, Visual C or games altogether, so I guess any C++ programmer can benefit from it. 🙂 For instance, you have a series of enumerated type constants and you want to have them available also in string form (say, to read the constant in string form from a text script file):</p>
+
+<pre><code class="language-c">// UnitIdList.h
+DECLARE_ID(UNITID_SOLDIER)
+DECLARE_ID(UNITID_WORKER)
+DECLARE_ID(UNITID_MACHINE)
+DECLARE_ID(UNITID_RESOURCE)
+
+// UnitId.h
+//...
+#define DECLARE_ID(a) a,
+enum TUnitId
+{
+#include &quot;UnitIdList.h&quot;
+   UNITID_INVALID
+};
+//...
+
+// somewhere in my cpps...
+#include &quot;UnitId.h&quot;
+
+#undef DECLARE_ID
+#define DECLARE_ID(a) { a, #a },
+static struct { int id; const char *pszId; }
+s_aUnitIds[] =
+{
+#include &quot;UnitIdList.h&quot;
+};
+
+TUnitId FindUnitIdFromStringID(const char *pszId)
+{
+   for (int i = 0; i &lt; ARRAY_LEN(s_aUnitIds); i++)
+     if (0 == stricmp(s_aUnitIds[i].pszId, pszId))
+       return s_aUnitIds[i].id;
+   return UNITID_INVALID;
+}
+</code></pre>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

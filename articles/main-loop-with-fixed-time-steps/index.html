@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Loop with Fixed Time Steps &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Main Loop with Fixed Time Steps &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Main Loop with Fixed Time Steps &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 01:38</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/main-loop-with-fixed-time-steps/" class="post-title">Main Loop with Fixed Time Steps</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article first appeared as a <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=Tip-MainLoopTimeSteps&amp;#038;forum=totd&amp;#038;id=-1">Tip Of The Day</a> in <a href="http://www.flipcode.com">Flipcode</a>.</p>
+
+<p>The following description came up during a thread in the SWEng mailing list, and I thought it would make and interesting Tip Of The Day. Thanks to Neil Stewart for his input, and Dave Smith for bringing it up in the first place.</p>
+
+<p>Most games want to keep a consistent gameplay speed regardless of the framerate achieved by the visuals. Given the wildly varying performance of PC hardware, this is not immediately obvious. The key idea here is the assumption that rendering takes MUCH more time than game logic.</p>
+
+<p>In our current project, we&#8217;re using a fixed timestep scheme. In the past I have worked with variable timesteps, and somehow always keep coming back to fixed. 🙂 What we do in our main game loop is, essentially:</p>
+
+<pre><code class="language-c">time0 = getTickCount();
+do
+{
+  time1 = getTickCount();
+  frameTime = 0;
+  int numLoops = 0;
+
+  while ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
+  {
+    GameTickRun();
+    time0 += TICK_TIME;
+    frameTime += TICK_TIME;
+    numLoops++;
+
+// Could this be a good idea? We're not doing it, anyway.
+//    time1 = getTickCount();
+  }
+  IndependentTickRun(frameTime);
+
+  // If playing solo and game logic takes way too long, discard pending
+time.
+  if (!bNetworkGame &amp;&amp; (time1 - time0) &gt; TICK_TIME)
+    time0 = time1 - TICK_TIME;
+
+  if (canRender)
+  {
+    // Account for numLoops overflow causing percent &gt; 1.
+
+    float percentWithinTick = Min(1.f, float(time1 - time0)/TICK_TIME);
+    GameDrawWithInterpolation(percentWithinTick);
+  }
+}
+while (!bGameDone);
+</code></pre>
+
+<p>Let&#8217;s examine the main parts:</p>
+
+<pre><code class="language-c">while ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
+{
+  GameTickRun();
+  time0 += TICK_TIME;
+  frameTime += TICK_TIME;
+  numLoops++;
+  time1 = getTickCount();
+}
+</code></pre>
+
+<p>The concept behind this is forcing every game logic tick to represent a fixed amount of real-time (real-time is the time shown on your wristwatch). Of course, ticks better take less CPU time to execute, than the real-time it represents. For the record, a variable timestep model would look more like this:</p>
+
+<pre><code class="language-c">GameTickRun(m1-m0); // Each tick represents a varying amount of time.
+time0 = time1;
+</code></pre>
+
+<p>I won&#8217;t go in the details &amp; issues of a variable timestep model, although it would make another great TOTD (hint, hint).</p>
+
+<p>Imagine the following situation: You want to have a ball rolling at a speed of 10 pixels per second (real-time seconds). You have a TICK_TIME of 50 milliseconds (20 ticks per second), which means that every tick, or call to GameTickRun(), the ball should move 0.5 pixels per tick. That&#8217;s the internal speed the game should use for each time it updates the ball&#8217;s position inside the GameTickRun() function.</p>
+
+<p>No, let&#8217;s say that rendering each frame takes 100 milliseconds, and that updating the ball position takes no time. This means that every time you enter the loop, time1 will be 100 more than time0, therefore the loop will execute twice for each frame rendered (at 10 fps). If each render takes 50 milliseconds (say you got a better videocard), the loop will be done just once and you&#8217;ll be achieving 20 fps. In both cases, you&#8217;ll get your ball moving at 10 pixels per second, the second one with smoother framerate than the first. Remember, we&#8217;re not fixing a framerate, we&#8217;re rendering as fast as our hardware permits, and running the game logic whenever we have to.</p>
+
+<p>Things get more interesting if we say that we&#8217;re achieving the framerate of 30, therefore each render takes 33.333333333 milliseconds to complete. What do we get? The first time we run the loop after rendering, we find that only 33.33333 milliseconds have elapsed, not enough to fulfill a single game logic tick (TICK_TIME == 50), so we just skip the game logic and render a frame. Next time the time elapsed is 66.666666666, so we run one logic tick and account for the 50 milliseconds a tick represents, thus getting 16.666666666 milliseconds left, and render. Next tick we have 16.66666+33.3333333333 = 50 milliseconds, so we run a tick, get a remainder of 0 milliseconds, render, and go on and on&#8230;</p>
+
+<p>The real-world situation is that your framerate varies anywhere from 30 to 60 fps for a fast PC game (console games often try to achieve a constant framerate).</p>
+
+<p>As for the concern that a series of game logic ticks would take more time to execute, than time they represent, that&#8217;s what MAX_LOOPS is for, to limit the amount of ticks executed before rendering. Yes I have seen this happen many times, that&#8217;s why I have added it. If you&#8217;re playing a network game you usually can&#8217;t just slow down the &#8220;game time&#8221; unless all machines do the same, so you can&#8217;t use the MAX_LOOPS guard. (I&#8217;m assuming a lockstep network model)</p>
+
+<p>I love the separation between frames (visual updates) and ticks (game logic updates), makes everything so simple.</p>
+
+<pre><code class="language-c">IndependentTickRun(frameTime);
+</code></pre>
+
+<p>This is where we gather user input and update the whole user interface and perform general housekeeping. 🙂 Things that don&#8217;t need to be run at a precise real-time speed. Since we want our game logic to be perfectly deterministic, the things executed here (or during rendering) must <strong>not</strong> affect the fixed-step game logic, in any way. In fact we have a run mode where we record the user commands to a file, and we can play back these commands entirely within the timestep loop above. This is an <strong>invaluable</strong> aid for debugging, and is the basis for the lockstep network model we employ.</p>
+
+<pre><code class="language-c">float percentWithinTick = Min(1.f, float(time1 - time0)/TICK_TIME);
+GameDrawWithInterpolation(percentWithinTick);
+</code></pre>
+
+<p>This litte thing allows us to interpolate the positions, orientations, etc of the visuals, in between game ticks. It smooths the visual aliasing caused by a non-constant framerate. Which is the case, because we run a game logic tick 15 times per second (TICK_TIME = <sup>1000</sup>&frasl;<sub>15</sub>), while displaying at framerates in the range 20-60 frames per second (fingers crossed).</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

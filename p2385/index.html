@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nginx 1.0 &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="nginx 1.0 &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="nginx 1.0 &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">16 Apr 2011, 01:56</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/p2385" class="post-title">nginx 1.0</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Since I started working on Pyro&#8217;s server backend for its social games, I have grown to love the <a href="http://nginx.org/">nginx</a> web server. Compact, efficient and fully featured, it&#8217;s a great alternative to Apache if you are in full control of your web server and apps.</p>
+
+<p>A few days ago nginx came of age with the release of 1.0, so I did a refresh of my simple web dev setup at home:</p>
+
+<p>&#8211; Download nginx 1.0 Windows binary <a href="http://nginx.org/download/nginx-1.0.0.zip">here</a><br />
+&#8211; Download thread-safe php Windows binary <a href="http://windows.php.net/downloads/releases/php-5.3.6-Win32-VC9-x86.zip">here</a><br />
+&#8211; Unzip them to their own folders<br />
+&#8211; Copy php.ini-development to php.ini. Edit php.ini and uncomment the lines containing <strong>extension=php_mysql.dll</strong> and <strong>extension_dir = &ldquo;ext&rdquo;</strong>.<br />
+&#8211; Start php by running <strong>php-cgi.exe -b 127.0.0.1:9000</strong>. You can later stop it with Ctrl-C, <strong>taskkill /IM php-cgi.exe</strong> or with your favourite process killing method.<br />
+&#8211; Make the following edits to <strong>conf\nginx.conf</strong>:<br />
+&#8211; If you are running Vista or later with IPv6, change the line <strong>listen 80</strong> to <strong>listen [::]:80</strong>. This makes nginx listen on both IPv4 and IPv6. Even if you are not doing any work related to IPv6, your Windows hosts file will probably contain the IPv6 loopback entry for localhost (::1), and your browsers will try to use that IPv6 address for localhost. Enabling IPv6 in nginx lets you use all three loopbacks (<a href="http://127.0.0.1/">http://127.0.0.1/</a>, <a href="http://[::1]/">http://[::1]/</a> and <a href="http://localhost/">http://localhost/</a>) intercheangeably and without problems.<br />
+&#8211; Uncomment the block lines starting with <strong>location ~ .php$</strong> to enable php scripts.<br />
+&#8211; Change the fastcgi_param line to eliminate the hardcoded &ldquo;scripts&rdquo; folder path. It should be <strong>fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</strong>.<br />
+&#8211; Add index.php to the index line so it looks like <strong>index index.html index.htm index.php;</strong><br />
+&#8211; Remove all the <strong>root html;</strong> lines and leave a single <strong>root d:\dev\mywebdevfolder</strong> line at the server scope. I usually put it just below the <strong>server_name localhost;</strong> line.<br />
+&#8211; Start nginx by running <strong>nginx.exe</strong> or, since it can&#8217;t be killed with Ctrl-C, <strong>start nginx.exe</strong>.<br />
+&#8211; use the command-line signals to control nginx: <strong>nginx -s quit</strong> to stop it, <strong>nginx -s reload</strong> to reload the configuration.</p>
+
+<p>That should be it, nginx+php in 5 minutes or less!</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

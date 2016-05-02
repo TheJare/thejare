@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slides on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/tags/slides/</link>
+    <description>Recent content in Slides on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Mar 2014 01:52:19 +0000</lastBuildDate>
+    <atom:link href="https://thejare.github.io/tags/slides/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>GDC 2014 Slides Compilation</title>
+      <link>https://thejare.github.io/p2763</link>
+      <pubDate>Wed, 19 Mar 2014 01:52:19 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2763</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: I think the &lt;a href=&#34;http://www.gdcvault.com/free/gdc-14&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt; has been updated with all available content, so you may want to go there instead. See you next year!?&lt;/p&gt;
+
+&lt;p&gt;Get&amp;#8217;em while they&amp;#8217;re fresh! If you know of stuff missing here, please tell me about it on Twitter &lt;a href=&#34;https://twitter.com/TheJare&#34; target=&#34;_blank&#34;&gt;@TheJare&lt;/a&gt;. You can also check industry sites like &lt;a href=&#34;http://www.gamasutra.com/&#34; target=&#34;_blank&#34;&gt;Gamasutra&lt;/a&gt;, &lt;a href=&#34;http://www.polygon.com/&#34; target=&#34;_blank&#34;&gt;Polygon&lt;/a&gt; or &lt;a href=&#34;http://www.develop-online.net/&#34; target=&#34;_blank&#34;&gt;Develop&lt;/a&gt; for ongoing coverage, and hopefully a lot of these materials will show up in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt; soon.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Design&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a title=&#34;A Study in Transparency: How Board Games Matter&#34; href=&#34;http://www.designer-notes.com/?p=777&#34; target=&#34;_blank&#34;&gt;A Study in Transparency: How Board Games Matter&lt;/a&gt; by Soren Johnson&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://chesstris.com/2014/03/18/usability-lessons-from-mobile-board-game-conversions-notes-references/&#34; target=&#34;_blank&#34;&gt;Usability Lessons from Mobile Board Game Conversions&lt;/a&gt; by Martin Grider&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.paranoidproductions.com/writings.html&#34; target=&#34;_blank&#34;&gt;Death to 3 Act Structure&lt;/a&gt; by Richard Rouse III&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/ChristinaNorman/gdc-2014-competitive-storytelling&#34; target=&#34;_blank&#34;&gt;Competitive Storytelling&lt;/a&gt; by Christina Norman&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gamespot.com/videos/narrative-legos-with-ken-levine-gdc-2014/2300-6417876/&#34; target=&#34;_blank&#34;&gt;Narrative Legos&lt;/a&gt; (video) by Ken Levine&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gamespot.com/videos/battlefield-4-creating-a-more-dynamic-battlefield/2300-6417875/&#34; target=&#34;_blank&#34;&gt;Battlefield 4: Creating a More Dynamic Battlefield&lt;/a&gt; (video) by Linnea Harrison&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gamespot.com/videos/creating-bioshock-infinite-s-elizabeth/2300-6417846/&#34; target=&#34;_blank&#34;&gt;Creating BioShock Infinite&amp;#8217;s Elizabeth&lt;/a&gt; (video) by Shawn Robertson&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://michelle-clough.com/2014/03/24/post-gdc-2014-week-slides-for-fewer-tifas-or-more-sephiroths-male-sexualization-in-games/&#34; target=&#34;_blank&#34;&gt;Fewer Tifas, or More Sephiroths? Male Sexualization in Games&lt;/a&gt; by Michelle Clough&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.raphkoster.com/2014/03/24/a-new-formalism-critical-proximity-talk/&#34; target=&#34;_blank&#34;&gt;A New Formalism&lt;/a&gt; by Raph Koster&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.camposanto.com/post/80595747009/i-spoke-at-the-game-developers-conference-here-in&#34; target=&#34;_blank&#34;&gt;Pursuing Interactive Suspension of Disbelief&lt;/a&gt; by Sean Vanaman&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Tech&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.terathon.com/gdc14_lengyel.pdf&#34; target=&#34;_blank&#34;&gt;Grassmann Algebra in Game Development&lt;/a&gt; by Eric Lengyel&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.dropbox.com/s/q4ja88smj1l4fxj/gdc.pdf&#34; target=&#34;_blank&#34;&gt;Make Programming Fun&lt;/a&gt; by Phoenix Perry&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.dtecta.com/files/GDC14_VanDenBergen_Gino_Math_Tut.pdf&#34; target=&#34;_blank&#34;&gt;Math for Game Programmers: Inverse Kinematics&lt;/a&gt; by Gino van den Bergen&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://aras-p.info/texts/files/201403-GDC_UnityPhysicallyBasedShading.pdf&#34; target=&#34;_blank&#34;&gt;Physically Based Shading in Unity&lt;/a&gt; (and &lt;a href=&#34;http://aras-p.info/texts/files/201403-GDC_UnityPhysicallyBasedShading_notes.pdf&#34; target=&#34;_blank&#34;&gt;notes&lt;/a&gt;) by Aras Pranckevičius&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.khronos.org/assets/uploads/developers/library/2014-gdc/SYCL-for-OpenCL-GDC-Mar14.pdf&#34; target=&#34;_blank&#34;&gt;SYCL for OpenCL&lt;/a&gt; by Andrew Richards&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.frostbite.com/2014/03/rendering-battlefield-4-with-mantle/&#34; target=&#34;_blank&#34;&gt;Rendering Battlefield 4 with Mantle&lt;/a&gt; by Johan Andersson&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/ManchorKo/dictionary-learningingames-kodraft7gdc14mathforgames&#34; target=&#34;_blank&#34;&gt;Dictionary Learning in Games&lt;/a&gt; by Manny Ko&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://imgur.com/a/qnPph#0&#34; target=&#34;_blank&#34;&gt;DirectX 12 presentation&lt;/a&gt; by Microsoft (clunky photos &amp;#8211; better off reading &lt;a href=&#34;http://blogs.msdn.com/b/directx/archive/2014/03/20/directx-12.aspx&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/CassEveritt/approaching-zero-driver-overhead&#34; target=&#34;_blank&#34;&gt;Approaching Zero Driver Overhead&lt;/a&gt; by Cass Everitt, Graham Sellers, John McDonald and Tim Foley&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.khronos.org/developers/library/2014-gdc&#34; target=&#34;_blank&#34;&gt;Various presentations on OpenCL, OpenGL, OpenVX&lt;/a&gt; by Khronos Group&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/file/d/0B11iL4IgOgWLdFhzalpmX2kzSmM&#34; target=&#34;_blank&#34;&gt;Advanced Lighting Techniques in Unity&lt;/a&gt; by Aras Pranckevičius, Jens Fursund and Sam Martin (Jesper Mortensen &amp;amp; Kuba Cupisz too?)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://people.mozilla.org/~lwagner/gdc-pres/gdc-2014.html#/&#34; target=&#34;_blank&#34;&gt;Getting Started with asm.js and Emscripten&lt;/a&gt; by Alon Zakai and Luke Wagner&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://bartwronski.com/publications/&#34; target=&#34;_blank&#34;&gt;Assassin’s Creed 4: Road to Next-gen Graphics&lt;/a&gt; by Bart Wronski&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/tenpn/practical-unit-testing-gdc-2014&#34; target=&#34;_blank&#34;&gt;Practical Unit Testing&lt;/a&gt; by Andrew Fray&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/nateware/gdc2014-aws-gameanalytics&#34; target=&#34;_blank&#34;&gt;Game Analytics with AWS&lt;/a&gt; by Nate Wiger&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mynameismjp.files.wordpress.com/2014/03/rad_gdc_2014.pptx&#34; target=&#34;_blank&#34;&gt;Crafting a Next-Gen Material Pipeline for The Order:1886&lt;/a&gt; by David Neubelt and Matt Pettineo&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://raw.githubusercontent.com/macton/presentation-archive/master/gdc14_code_clinic.pptx&#34; target=&#34;_blank&#34;&gt;Code Clinic: How to Write Code the Compiler can Actually Optimize&lt;/a&gt; by Mike Acton&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.essentialmath.com/GDC2014/GDC14_frames.pdf&#34; target=&#34;_blank&#34;&gt;Intro to Frames, Dictionaries and K-SVD&lt;/a&gt; by Jim Van Verth and Manny Ko&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://box2d.org/2014/03/gdc-2014-physics-tutorial/&#34; target=&#34;_blank&#34;&gt;Understanding Constraints&lt;/a&gt; by Erin Catto&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/1LbnnWyEcZrnljK2B0z9LGz6nUBjfRGRWlhWfDHyf37s&#34; target=&#34;_blank&#34;&gt;Exploring MLCP solvers and Featherstone&lt;/a&gt; by Erwin Coumans&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://fr.slideshare.net/crowdscontrol/simple-formation-assignment-gdc-14-ai-summit&#34; target=&#34;_blank&#34;&gt;Simple Formation Assignment&lt;/a&gt; by Cloderic Mars&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Production &amp;amp; Biz&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://vili.lehdonvirta.com/files/zaxb5492/LehdonvirtaGDC14Sinkdesign.pdf&#34; target=&#34;_blank&#34;&gt;Economic Balancing and Improved Monetization Through Clever Sink Design&lt;/a&gt; by Vili Lehdonvirta&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/emily_greer/gdc-2014-core-games-real-numbers-going-crossplatform&#34; target=&#34;_blank&#34;&gt;Core Games, Real Numbers: Going Cross-Platform&lt;/a&gt; by Emily Greer&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/FlurryMobile/the-global-android-explosion-gdc-2014&#34; target=&#34;_blank&#34;&gt;The Global Android Explosion&lt;/a&gt; by Torrey Lincoln&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/JamesLaLonde1/gdc-2014-yodo1-keynote-how-ski-safari-become-a-chinese-hit-v2&#34; target=&#34;_blank&#34;&gt;How Ski Safari became a Chinese hit&lt;/a&gt; by Henry Fong&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/bcpbcp/gdc14-loc-emerging-communities-v29public2&#34; target=&#34;_blank&#34;&gt;Emerging Communities: a Snapshot of the Brazilian Indie Game Development Scene&lt;/a&gt; by Artur Mittelbach, Arthur Protasio and Bruno Campagnolo&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/abyssi/why-whales-sing&#34; target=&#34;_blank&#34;&gt;Why Whales Sing?&lt;/a&gt; by Jussi Laakkonen&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/jradoff/jon-radoff-mobilemodelslooking&#34; target=&#34;_blank&#34;&gt;Mobile Models: Looking Closer at LTV, CPI &amp;amp; ROI&lt;/a&gt; by Jon Radoff&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://steelpangolin.wordpress.com/2014/03/21/see-my-gdc-2014-slides/&#34; target=&#34;_blank&#34;&gt;Building Customer Support and Loyalty&lt;/a&gt; by Jeremy Ehrhardt&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/ShoMasuda/gdc-presentation-3182014&#34; target=&#34;_blank&#34;&gt;The Most Effective Mobile User Acquisition Techniques&lt;/a&gt; by Sho Masuda&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Misc&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9uapfLNzpGM&#34; target=&#34;_blank&#34;&gt;Ten (rant)&lt;/a&gt; (video) by Chris Hecker&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gamespot.com/videos/classic-studio-postmortem-lucasfilm-games/2300-6417836/&#34; target=&#34;_blank&#34;&gt;Classic Studio Postmortem: Lucasfilm Games&lt;/a&gt; (video)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gamespot.com/videos/classic-game-postmortem-shenmue/2300-6417813/&#34; target=&#34;_blank&#34;&gt;Classic Game Postmortem &amp;#8211; Shenmue&lt;/a&gt; (video) by Yu Suzuki&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=RPKaOTA4YdU&#34; target=&#34;_blank&#34;&gt;Meanwhile, in Japan&lt;/a&gt; (video) by Kenji Inafune and Mark McDonald&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/document/d/1m17UNDc-nnA6s5LDKFCdehutw9viNFx8p-1CkH6tMws/edit&#34; target=&#34;_blank&#34;&gt;Greg Costikyan&amp;#8217;s rant&lt;/a&gt; (writeup)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SpainJS</title>
+      <link>https://thejare.github.io/p2628</link>
+      <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2628</guid>
+      <description>&lt;p&gt;Yesterday I had the honor to give a presentation at the &lt;a href=&#34;http://spainjs.org/&#34; target=&#34;_blank&#34;&gt;SpainJS&lt;/a&gt; Javascript conference in Madrid, on the topic of Videogames and Javascript. I wasted a lot of time preparing a dynamic HTML5 page for my deck of slides, which was my excuse to play with CSS 3d transitions and fancy formatting. You can see the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/&#34; target=&#34;_blank&#34;&gt;dynamic deck&lt;/a&gt; (which needs Chrome/Firefox or a similarly decent browser), the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/#all&#34; target=&#34;_blank&#34;&gt;static deck&lt;/a&gt; (should work everywhere), a &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/spainjs.pdf&#34;&gt;PDF&lt;/a&gt; I converted using &lt;a href=&#34;http://code.google.com/p/wkhtmltopdf/&#34; target=&#34;_blank&#34;&gt;wkhtmltopdf&lt;/a&gt;, the &lt;a href=&#34;https://speakerdeck.com/u/thejare/p/overview-of-javascript-in-games&#34; target=&#34;_blank&#34;&gt;Speakerdeck&lt;/a&gt;, or the &lt;a href=&#34;http://www.youtube.com/watch?v=j4JmYAVjm1c&#34; target=&#34;_blank&#34;&gt;video&lt;/a&gt;. Enjoy!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GDC 2012</title>
+      <link>https://thejare.github.io/p2583</link>
+      <pubDate>Fri, 09 Mar 2012 01:25:41 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2583</guid>
+      <description>&lt;p&gt;[Edit]: The &lt;a href=&#34;http://www.gdcvault.com/free/gdc-12&#34; target=&#34;_blank&#34;&gt;GDC Vault is now open&lt;/a&gt; for business, with lots of slides and presentations. Meggan Scavio also had &lt;a href=&#34;https://twitter.com/#!/megganpez/status/185857804324712448&#34; target=&#34;_blank&#34;&gt;good news on Twitter&lt;/a&gt; about availability of free videos.&lt;/p&gt;
+
+&lt;p&gt;Another Game Developers Conference I miss, but I&amp;#8217;ll try to track as many presentations as I can:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewwillmott.com/talks/inside-glassbox&#34; target=&#34;_blank&#34;&gt;GlassBox, the new SimCity simulation engine&lt;/a&gt; and &lt;a href=&#34;http://www.youtube.com/watch?v=CtZ7uDF48yY&#34; target=&#34;_blank&#34;&gt;some clips of the demos&lt;/a&gt;, by  Ocean Quigley, Dan Moskowitz and Andrew Willmott&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.raphkoster.com/2012/03/09/gdc2012-slides-for-good-bad-great-design/&#34; target=&#34;_blank&#34;&gt;Good, Bad, Great Design&lt;/a&gt; by Raph Koster&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.darklorde.com/2012/03/the-5-domains-of-play-slides/&#34; target=&#34;_blank&#34;&gt;The 5 Domains of Play&lt;/a&gt; by Jason VandenBerghe&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.scribd.com/fullscreen/84728657&#34; target=&#34;_blank&#34;&gt;Core Games, Real Numbers&lt;/a&gt; by Kongregate&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.dtecta.com/files/GDC2012_vandenBergen_Gino_Math_Tut.pdf&#34; target=&#34;_blank&#34;&gt;Math for Game Programmers: Dual Numbers&lt;/a&gt; and &lt;a href=&#34;http://www.dtecta.com/files/GDC2012_vandenBergen_Gino_Physics_Tut.pdf&#34; target=&#34;_blank&#34;&gt;Physics for Game Programmers: Collision Detection&lt;/a&gt; by Gino van den Bergen&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://chrishecker.com/The_Dysfunctional_Three-Way&#34; target=&#34;_blank&#34;&gt;The Dysfunctional Three-Way&lt;/a&gt; rant by Chris Hecker&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.bitsquid.se/technology.html#papers&#34; target=&#34;_blank&#34;&gt;Cutting the Pipe: Achieving Sub-Second Iteration Times&lt;/a&gt; by Niklas Frykholm&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://bitsquid.se/technology.html#papers&#34; target=&#34;_blank&#34;&gt;Flexible Rendering for Multiple Platforms and Practical Particle Lighting&lt;/a&gt; by Tobias Persson&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://engineroom.ubi.com/deferred-radiance-transfer-volumes/&#34; target=&#34;_blank&#34;&gt;Deferred Radiance Transfer Volumes: Global Illumination in Far Cry 3&lt;/a&gt; by Mickael Gilabert and Nikolay Stefanov&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.google.com/file/d/0B0AdsFXmX1ORZEFJcVV2MDZRSGk4aEo4VmJzS01vUQ/edit?pli=1&#34; target=&#34;_blank&#34;&gt;Frames, Sparsity and Global Illumination&lt;/a&gt; by Robin Green and Manny Ko&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=_adMEEAtDwE&#34; target=&#34;_blank&#34;&gt;The Bleeding Edge of Open Web Tech&lt;/a&gt; by Vincent Scheibn (video)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://reedbeta.com/gdc/&#34; target=&#34;_blank&#34;&gt;Ambient Occlusion Fields and Decals in Infamous 2&lt;/a&gt; by Nathan Reed&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mainroach.blogspot.com/2012/03/native-client-gdc.html&#34; target=&#34;_blank&#34;&gt;Porting your game to Native Client&lt;/a&gt;, &lt;a href=&#34;http://mainroach.blogspot.com/2012/03/native-client-gdc.html&#34; target=&#34;_blank&#34;&gt;Best practices in developing a web game&lt;/a&gt; and &lt;a href=&#34;http://mainroach.blogspot.com/2012/03/native-client-gdc.html&#34; target=&#34;_blank&#34;&gt;DXT is not enough! Advanced topics in texture compression&lt;/a&gt; by Colt &amp;#8220;MainRoach&amp;#8221; McAnlis&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/bcousins/when-the-consoles-die-what-comes-next&#34; target=&#34;_blank&#34;&gt;When The Consoles Die, What Comes Next?&lt;/a&gt; by Ben Cousins&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://research.tri-ace.com/Data/GDC2012_PracticalPBRinRealtime.ppt&#34; target=&#34;_blank&#34;&gt;Practical Physically Based Rendering in Real-Time&lt;/a&gt; by Yoshiharu Gotanda&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://robert.cupisz.eu/2012/light-probe-interpolation/&#34; target=&#34;_blank&#34;&gt;Light probe interpolation&lt;/a&gt; by Robert Cupisz&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://publications.dice.se/&#34; target=&#34;_blank&#34;&gt;Terrain in Battlefield 3: A Modern, Complete and Scalable System&lt;/a&gt; by Mattias Widmark&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://publications.dice.se/&#34; target=&#34;_blank&#34;&gt;Stable SSAO in Battlefield 3 with Selective Temporal Filtering&lt;/a&gt; by Louis Bavoil and Johan Andersson&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://publications.dice.se/&#34; target=&#34;_blank&#34;&gt;Modular Rigging in Battlefield 3&lt;/a&gt; by Johan Ramström&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=XAqIpGU8ZZk&#34; target=&#34;_blank&#34;&gt;From Console to Chrome&lt;/a&gt; by Lilli Thompson (video)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.insomniacgames.com/gdc12-john-obrien-math-for-gameplay-and-ai/&#34; target=&#34;_blank&#34;&gt;Math for Gameplay and AI&lt;/a&gt; by John O’Brien&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.insomniacgames.com/gdc12-sean-ahern-it-stinks-and-i-dont-like-it-making-a-better-engine-experience-at-insomniac-games/&#34; target=&#34;_blank&#34;&gt;It Stinks and I Don’t Like It: Making a Better Engine Experience At Insomniac Games&lt;/a&gt; by Sean Ahern&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.insomniacgames.com/gdc12-drew-murray-culture-shock-user-research-on-resistance-3/&#34; target=&#34;_blank&#34;&gt;What You Don’t Know IS Hurting You: How Aggressive User Research Improved Resistance 3&lt;/a&gt; by Drew Murray&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.insomniacgames.com/gdc12-mike_acton-data-oriented-design-for-math/&#34; target=&#34;_blank&#34;&gt;Data-Oriented Design for Math&lt;/a&gt; by Mike Acton&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.essentialmath.com/GDC2012/GDC2012_JMV_Rotations.pdf&#34;&gt;Understanding Rotations&lt;/a&gt; and &lt;a href=&#34;http://www.essentialmath.com/GDC2012/GDC2012_JMV_Fluids.pdf&#34; target=&#34;_blank&#34;&gt;Fluid Techniques&lt;/a&gt; by Jim Van Verth, who also maintains an &lt;a href=&#34;http://www.essentialmath.com/tutorial.htm&#34; target=&#34;_blank&#34;&gt;archive of math and physics materials&lt;/a&gt; from this and past GDCs.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.essentialmath.com/GDC2012/GDC_2012_Computational_Geometry_Rhodes_FINAL.zip&#34;&gt;Computational Geometry&lt;/a&gt; by Graham Rhodes&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://developer.nvidia.com/gdc-2012&#34; target=&#34;_blank&#34;&gt;Lots of stuff&lt;/a&gt; from or sponsored by NVIDIA&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://code.google.com/p/box2d/downloads/detail?name=GDC2012_ErinCatto_Ragdolls.pdf&#34; target=&#34;_blank&#34;&gt;Diablo 3 Ragdolls&lt;/a&gt; by Erin Catto&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://directtovideo.wordpress.com/2012/03/15/get-my-slides-from-gdc2012/&#34; target=&#34;_blank&#34;&gt;Advanced Procedural Rendering in DirectX 11&lt;/a&gt; by Matt Swoboda&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.stfj.net/text/2012/03/10/controls-you-can-feel-putting-tactility-back-into-touch-controls/&#34; target=&#34;_blank&#34;&gt;Controls You Can Feel&lt;/a&gt; by Zach Gage&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.confettispecialfx.com/slides-for-dynamic-global-illumination-system&#34; target=&#34;_blank&#34;&gt;Dynamic Global Illumination from many Lights&lt;/a&gt; by Wolfgang Engel, Igor Lobanchikov and Timothy Martin&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.terathon.com/gdc12_lengyel.pdf&#34; target=&#34;_blank&#34;&gt;Fundamentals of Grassman Algebra&lt;/a&gt; by Eric Lengyel&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://crashworks.org/gdc12/GDC2012_Ruskin_Elan_DynamicDialog.pdf&#34; target=&#34;_blank&#34;&gt;AI-driven dynamic dialogue&lt;/a&gt; by Elan Ruskin&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://tantalon.com/pete/files/fastercpp.zip&#34; target=&#34;_blank&#34;&gt;Faster C++: Move Constructors and Perfect Forwarding&lt;/a&gt; by Pete Isensee&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://developer.amd.com/documentation/presentations/GPUTechnicalPublications/Pages/default.aspx&#34; target=&#34;_blank&#34;&gt;A bunch of stuff&lt;/a&gt; from AMD&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=OLqk4aqpXlQ&#34; target=&#34;_blank&#34;&gt;Portal 2 Postmortem&lt;/a&gt; by Erik Wolpaw and Chet Faliszek (video)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://theinstructionlimit.com/cubes-all-the-way-down-igs-gdc&#34; target=&#34;_blank&#34;&gt;Fez Tech Postmortem&lt;/a&gt; by Renaud Bédard&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://struct.ca/share/fun/MattRix_LevelDesign_GDC2012.pdf&#34; target=&#34;_blank&#34;&gt;Trainyard: A level design post-mortem&lt;/a&gt; by Matt Rix&lt;/li&gt;
+&lt;li&gt;&amp;#8230;&lt;/li&gt;
+&lt;li&gt;plus many excellent writeups from &lt;a href=&#34;http://www.gamasutra.com/gdc-2012/&#34; target=&#34;_blank&#34;&gt;Gamasutra&lt;/a&gt; and &lt;a href=&#34;http://www.sirlin.net/&#34;&gt;Dave Sirlin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://adrianboeing.blogspot.com.es/2012/04/game-developers-conference-2012.html&#34; target=&#34;_blank&#34;&gt;Technical Summary&lt;/a&gt; by Adrian Boeing&lt;/li&gt;
+&lt;li&gt;and hopefully soon, lots of this and much more will be available in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This list is being updated all the time, so I&amp;#8217;m not organizing the links yet, I just add them at the end to make it easier to find new additions since your last visit.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Downloads on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/downloads/</link>
+    <description>Recent content in Downloads on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Jul 2012 00:35:38 +0000</lastBuildDate>
+    <atom:link href="https://thejare.github.io/downloads/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Downloads</title>
+      <link>https://thejare.github.io/downloads/</link>
+      <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/downloads/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Articles and lecture slides
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../docs/2006_GameLab_Diseno.zip&#34;&gt;Slides&lt;/a&gt; from my talks at Mundos Digitales and GameLab, July 2006 (in Spanish).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../docs/UPC2006-DesarrolloDeVideojuegos.ppt&#34;&gt;Slides&lt;/a&gt; from my talk at the Universidad Politecnica de Catalunya, March 2006 (in Spanish).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../docs/2005UCMVideojuegos.zip&#34;&gt;Slides&lt;/a&gt; from my talk at the Universidad Complutense de Madrid, April 2005 (in Spanish).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../docs/DesaGamesPpt.zip&#34;&gt;Slides&lt;/a&gt; from my talk at the University of Seville in March 2003 (in Spanish).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Source Code
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/RectLayout.zip&#34;&gt;RectLayout&lt;/a&gt;, a class to aid in resolution-independent 2D layout of rectangles.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/FontCreator_1.0.zip&#34;&gt;FontCreator 1.0&lt;/a&gt;, a tool to generate bitmap fonts from TrueTypes.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/SpacePaintInst.exe&#34;&gt;SpacePaint&lt;/a&gt;, a minigame.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/SciteStart.zip&#34;&gt;SciteStart&lt;/a&gt; program to open files in existing SciTE window.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/DXCSharp_02.zip&#34;&gt;DXCSharp 0.2&lt;/a&gt; minigame using C# and the DirectX Managed Extensions.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/Durantro_src.zip&#34;&gt;Durantro Source Code&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/DespSrc.zip&#34;&gt;Despair Demo Source Code&lt;/a&gt;. Note: this will not compile as-is&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/HasteSrc.zip&#34;&gt;Speed Haste Game Source Code&lt;/a&gt;. Note: this will not compile as-is&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/zipload.zip&#34;&gt;Minimal ZIP file loader&lt;/a&gt;. Note: requires the &lt;a href=&#34;http://www.info-zip.org/pub/infozip/zlib/&#34;&gt;zlib library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/DLLUsage.zip&#34;&gt;Windows DLL Interfacing&lt;/a&gt; sample C++ project.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Demos and games
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/SpacePaintInst.exe&#34;&gt;SpacePaint&lt;/a&gt;, a minigame.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/DXCSharp_02.zip&#34;&gt;DXCSharp 0.2&lt;/a&gt; minigame using C# and the DirectX Managed Extensions.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/DurantroSlide.zip&#34;&gt;Durantro 2 (Durango Love Tour Slideshow)&lt;/a&gt; joke production for the Durango Party &amp;lsquo;03.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/Durantro.zip&#34;&gt;Durantro&lt;/a&gt; 20Kb Intro for the Durango Party.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/Ign_Desp.zip&#34;&gt;1996&amp;rsquo;s Despair Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.iguanademos.com/Jare/wp/../files/Headh14.zip&#34;&gt;HeadHunter Technology Demo&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Links to related external sites and applications
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://scintilla.sourceforge.net/SciTE.html&#34;&gt;SciTE&lt;/a&gt;, an open source text editor.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://office.microsoft.com/downloads/2002/ppView97.aspx&#34;&gt;Microsoft Powerpoint viewer&lt;/a&gt; to read ppt files.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

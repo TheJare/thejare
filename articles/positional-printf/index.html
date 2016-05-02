@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positional Printf &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Positional Printf &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Positional Printf &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 02:01</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/positional-printf/" class="post-title">Positional Printf</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article was originally found at <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=COTD-posprintf&amp;#038;forum&amp;#038;forum=cotd&amp;#038;id=-1">Code Of The Day</a> in <a href="http://www.flipcode.com">Flipcode</a>.</p>
+
+<p>Printf-style formatting is well known, flexible and very useful in general. All the worries about unchecked parameters and so on have proven to be a non-íssue in my experience. However, it lacks parameter positioning, the way .NET allows. Why is this important for games? Any modern game needs to have a good localisation system; most game translators understand printf-style format strings and know what to do with them when they are among the text strings to be localised. There is a subtle kind of localised strings that can&rsquo;t be easily translated most of the times: strings in which parameterized data changes position depending on the language. A good example is the date format, dd/mm/yy as we use in Europe as opposed to the mm/dd/yy format in the US. The format string would be &ldquo;%d/%d/%d&rdquo;, and the call could be something like:</p>
+
+<p><code>printf(LTEXT\_DATE\_STRING, day, month, year);</code></p>
+
+<p>How would you localise a string like that to the US without modifying the code? Using system locale functions defeats the point I&rsquo;m making; another example are strings like &ldquo;Rick&rsquo;s Bar&rdquo; as opposed to &ldquo;El Bar de Rick&rdquo;, where both &ldquo;Rick&rdquo; and &ldquo;Bar&rdquo; would change positions if they are parameters.</p>
+
+<p>The function I present here wraps printf with an extension to format specifiers, which allows for parameter placement. In the given example, the US string would be &ldquo;%{1}d/%{0}d/%{2}d&rdquo;, where the number in parenthesis specifies which parameter should be used in that place of the format string. If no placement modifier is included, it assumes the next parameter from the previous format specifier. This way, the function will work fine with regular printf format strings.</p>
+
+<p>The code will need modifications to be a full-blown function to use in your own application, and is only presented as an example of the technique. Check it, read the comments and modify at will. It is templatized in order to support both 8-bit chars and 16-bit wchar_t strings.</p>
+
+<p>Caveats:</p>
+
+<ul>
+<li>Asterisks (&rsquo;*&lsquo;) in the format string can&rsquo;t be supported this way.</li>
+<li>It only supports &ldquo;%c&rdquo;, &ldquo;%d&rdquo;, &ldquo;%g&rdquo; and &ldquo;%s&rdquo; format strings (but will work with all format modifiers except the mentioned asterisk). Extending this support is trivial.</li>
+<li>Portions of the code are system-dependent. This example currently works in Microsoft&rsquo;s .NET compiler, but it shouldn&rsquo;t be hard to modify for your own platform.</li>
+</ul>
+
+<pre><code class="language-c">// -----------------------------------------------
+// PositionalPrintfTest.cpp
+
+#define UNICODE
+#include &lt;tchar.h&gt;
+#include &lt;stdio.h&gt;
+
+#include &quot;PositionalPrintf.h&quot;
+
+// Try different things with the fancy printf function
+int _tmain(int argc, _TCHAR* argv[])
+{
+  printf(_T(&quot;%s %g %d %c\n&quot;), _T(&quot;Hola&quot;), 3.4f, 34, _T('3'));
+
+  PositionalPrintf(&quot;%s %g %d %c\n&quot;, &quot;Hola&quot;, 3.4f, 34, '3');
+  PositionalPrintf(L&quot;%s %g %d %c\n&quot;, L&quot;Hola&quot;, 3.4f, 34, L'3');
+  PositionalPrintf(_T(&quot;%s %g %d %c\n&quot;), _T(&quot;Hola&quot;), 3.4f, 34, _T('3'));
+
+  PositionalPrintf(&quot;%{3}c %g - %{0}s's %{1}s\n%{3}c %{4}g - El %{1}s de %{0}s&quot;, &quot;Rick&quot;, &quot;Bar&quot;, 'S', 'E', 3.1415f);
+}
+</code></pre>
+
+<pre><code class="language-c">// -----------------------------------------------
+// PositionalPrintf.h
+
+// Only two versions of this template are instantiated, char and wchar_t
+// Any other attempt to use this function will result in a link error.
+template&lt;typename T&gt;
+void PositionalPrintf(const T *pszFmt, ...);
+</code></pre>
+
+<pre><code class="language-c">// -----------------------------------------------
+// PositionalPrintf.cpp
+
+#include &lt;stdarg.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Templated functions for char/wchar_t operations.
+template &lt;typename T&gt; int TempAtoi(const T *p);
+
+template&lt;&gt; int TempAtoi(const char *p) { return atoi(p); }
+template&lt;&gt; int TempAtoi(const wchar_t *p) { return _wtoi(p); }
+
+template &lt;typename T&gt; void TempVPrintf(const T *p, va_list va);
+
+template&lt;&gt; void TempVPrintf(const char *p, va_list va)     { vprintf(p, va); }
+
+
+template&lt;&gt; void TempVPrintf(const wchar_t *p, va_list va)  { vwprintf(p, va); }
+
+// The actual function
+template&lt;typename T&gt;
+void PositionalPrintf(const T *pszFmt, ...)
+{
+  enum TParam
+  {
+    TP_UNK,
+    TP_CHAR,
+    TP_INT,
+    TP_STR,
+    TP_FLOAT,
+  };
+  static const int MAX_PARAMS = 100;
+
+  // Here we store the parameters we should be expecting on the stack
+
+
+  // We decide this based on the format string.
+  int nParams  = 0;
+  int nextParam = 0;
+  TParam aParams[MAX_PARAMS];
+
+  // Here we store each '%' format element's data from the format string.
+  struct
+  {
+    TParam param;
+    int    pos;
+  } aFormats[MAX_PARAMS];
+  int nFormats = 0;
+
+  for (int i = 0; i &lt; MAX_PARAMS; ++i)
+    aParams[i] = TP_UNK;
+
+  // Scan the format string to detect expected parameters and the way to extract them from the stack.
+
+
+  bool bError = false;
+  for (const T *s = pszFmt; *s; ++s)
+  {
+    if (*s == T('%'))
+    {
+      // Found a format element. First thing to do is identify the position of the parameter
+      // on the stack.
+
+
+      int pos;
+      if (*(s+1) == T('{'))
+      {
+        // Explicit position modifier
+        pos = TempAtoi(s+2);
+        nextParam = pos+1;
+      }
+      else
+        pos = nextParam++; // Just se the next position.
+      while (*s &amp;&amp; *s != T('c') &amp;&amp; *s != T('d') &amp;&amp; *s != T('g') &amp;&amp; *s != T('s'))
+      {
+        // Here we could detect '*' parameters (which won't work), missing '}', etc.
+
+
+        s++;
+      }
+      if (!*s)
+        break;
+
+      if (pos &gt;= MAX_PARAMS)
+      {
+        // error
+        printf(&quot;ERROR! Parameter %d out of range.\n&quot;, pos);
+        bError = true;
+      }
+      else 
+      {
+        // Identifica el tipo de parámetro que es
+
+
+        // Aqui podemos extender esto un montón para cubrir todos los tipos de formato
+        TParam p;
+        if (*s == T('c'))      p = TP_CHAR;
+        else if (*s == T('d')) p = TP_INT;
+        else if (*s == T('s')) p = TP_STR;
+        else                   p = TP_FLOAT;
+
+        if (aParams[pos] != TP_UNK &amp;&amp; aParams[pos] != p)
+        {
+          // error
+
+
+          printf(&quot;ERROR! Parameter %d used with different format specifiers (%d and %d).\n&quot;, pos, aParams[pos], p);
+          bError = true;
+        }
+
+        // Store the parameter type to be expected at position 'pos' on the stack.
+        aParams[pos] = p;
+        if (nParams &lt;= pos)
+          nParams = pos+1;
+
+        // Store the parameter type and position on the stack, for this format element.
+        if (nFormats &gt;= MAX_PARAMS)
+        {
+          // error
+
+
+          printf(&quot;ERROR! Too many format elements (%d)!\n&quot;, nFormats);
+          bError = true;
+        }
+        else
+        {
+          aFormats[nFormats].param = p;
+          aFormats[nFormats].pos   = pos;
+          nFormats++;
+        }
+      }
+    }
+  }
+
+  // Verify that all parameters on the stack are referenced. (optional)
+  for (int i = 0; i &lt; nParams; i++)
+  {
+    if (aParams[i] == TP_UNK)
+    {
+      // error
+
+
+      // Benign if we assume that unused parameters are of INT size.
+//      printf(&quot;ERROR! Parameter %d undefined.\n&quot;, i);
+//      bError = true;
+    }
+  }
+  if (bError)
+    return;
+
+  // Build a new format string removing the {n} modifiers
+  T szNewFmt[3000];
+  {
+    T *p = szNewFmt;
+
+    szNewFmt[0] = T(0);
+
+    for (const T *s = pszFmt; *s; s++)
+    {
+      *p++ = *s;
+      if (*s == T('%'))
+      {
+        if (*(s+1) == T('{'))
+        {
+          s += 2;
+          while (*s &amp;&amp; *s != T('}'))
+            s++;
+          if (!*s)
+            break;
+        }
+      }
+    }
+    *p = T(0); // Zero-end the new format string
+
+
+  }
+  
+  // Copy the parameters to the parameter buffer in correct order.
+  // Here comes the system-dependent part
+  char aParamBuf[3000];
+  {
+    char *p = aParamBuf;
+
+    for (int i = 0; i &lt; nFormats; ++i)
+    {
+      va_list va;
+      va_start(va, pszFmt);
+
+      // Skip stack parameters until the one we're looking for.
+
+
+      // System-dependent: assumes that anything that is not of type double is of INT size
+      for (int j = 0; j &lt; aFormats[i].pos; ++j)
+      {
+        if (aParams[j] == TP_FLOAT)
+          va_arg(va, double);
+        else
+
+          va_arg(va, int);
+      }
+
+      // Copy the parameter into the new parameter buffer
+      // System-dependent: the size thing again.
+      // System-dependent: assumes things about the order in which parameters are stored on the stack.
+      if (aParams[j] == TP_FLOAT)
+      {
+        double d = va_arg(va, double);
+        memcpy(p, &amp;d, sizeof(d));
+        p += sizeof(d);
+      }
+      else
+
+      {
+        int d = va_arg(va, int);
+        memcpy(p, &amp;d, sizeof(d));
+        p += sizeof(d);
+      }
+    }
+  }
+
+  // System-dependent: assumes that aParamBuf can be cast straight to va_list.
+  TempVPrintf(szNewFmt, (va_list)aParamBuf);
+}
+
+// Instantiate the char and wchar_t versions of the function.
+
+template void PositionalPrintf(const char *pszFmt, ...);
+
+template void PositionalPrintf(const wchar_t *pszFmt, ...);
+</code></pre>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

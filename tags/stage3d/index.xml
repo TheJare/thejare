@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stage3d on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/tags/stage3d/</link>
+    <description>Recent content in Stage3d on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Dec 2011 00:09:45 +0000</lastBuildDate>
+    <atom:link href="https://thejare.github.io/tags/stage3d/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Unity3D 3.5 Developer preview is out</title>
+      <link>https://thejare.github.io/p2538</link>
+      <pubDate>Wed, 28 Dec 2011 00:09:45 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2538</guid>
+      <description>&lt;p&gt;And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it&amp;#8217;s a really odd situation. With the current outlook of Flash after the &amp;#8216;&lt;a href=&#34;http://creativecodingpodcast.com/?p=140&#34; target=&#34;_blank&#34;&gt;Flashmageddon&lt;/a&gt;&amp;#8216;, it&amp;#8217;s hard to say how relevant this will be in the long term, but it&amp;#8217;s an impressive feature! And the obligatory cube to celebrate it:&lt;/p&gt;
+
+&lt;p&gt;[kml_flashembed publishmethod=&amp;#8221;static&amp;#8221; fversion=&amp;#8221;11.0.0&amp;#8243; movie=&amp;#8221;/Jare/files/Stage3D/testcube.swf&amp;#8221; width=&amp;#8221;480&amp;#8243; height=&amp;#8221;320&amp;#8243; targetclass=&amp;#8221;flashmovie&amp;#8221; wmode=&amp;#8221;direct&amp;#8221;]&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://adobe.com/go/getflashplayer&#34;&gt;&lt;img src=&#34;http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif&#34; alt=&#34;Get Adobe Flash player&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[/kml_flashembed]&lt;/p&gt;
+
+&lt;p&gt;The good side is, Unity is incredibly easy to use (&lt;a href=&#34;http://catlikecoding.com/unity/tutorials/&#34; target=&#34;_blank&#34;&gt;these tutorials&lt;/a&gt; were my starting point). The bad side, the generated SWF takes a hefty 2Mb (the unity web player object is just 41Kb). Anyway, &lt;a href=&#34;http://unity3d.com/&#34; target=&#34;_blank&#34;&gt;Grab Unity&lt;/a&gt; and start playing!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Stage3D Vertex Buffer formats</title>
+      <link>https://thejare.github.io/p2496</link>
+      <pubDate>Sat, 08 Oct 2011 02:00:59 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2496</guid>
+      <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&amp;#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
+
+&lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color&amp;#8217;s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Vector.&lt;Number&gt;&lt;/strong&gt; and &lt;strong&gt;uploadFromVector()&lt;/strong&gt; do not give you control over the byte format of value. How do you solve this?&lt;/p&gt;
+
+&lt;p&gt;You must use a &lt;strong&gt;ByteArray&lt;/strong&gt;, to which you will copy the values manually with the right format. In our example above, 3 &lt;strong&gt;writeFloat()&lt;/strong&gt; calls plus a &lt;strong&gt;writeUnsignedInt()&lt;/strong&gt; for the 32-bit color. A detail that stumped me for a while is that you must ensure the &lt;strong&gt;ByteArray&lt;/strong&gt; is &lt;strong&gt;Endian.LITTLE_ENDIAN&lt;/strong&gt;, it defaults to &lt;strong&gt;BIG_ENDIAN&lt;/strong&gt;. I wrote this function to perform this process, with the aid of an array that stores the format of each varying parameter:&lt;/p&gt;
+
+&lt;pre&gt;private static function DumpVectorComponentsIntoByteArray(dest:ByteArray,
+                                                          src:Vector.&amp;lt;Number&amp;gt;,
+                                                          componentFormats:Array): void
+{
+    dest.endian = Endian.LITTLE_ENDIAN;
+    for (var i:int = 0; i &amp;lt; src.length; )
+    {
+        for (var j:int = 0; j &amp;lt; componentFormats.length; ++j)
+        {
+            switch (componentFormats[j])
+            {
+                case Context3DVertexBufferFormat.FLOAT_2:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i+1]);
+                    i += 2;
+                    break;
+                case Context3DVertexBufferFormat.FLOAT_3:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i + 1]);
+                    dest.writeFloat(src[i + 2]);
+                    i += 3;
+                    break;
+                case Context3DVertexBufferFormat.FLOAT_4:
+                    dest.writeFloat(src[i]);
+                    dest.writeFloat(src[i + 1]);
+                    dest.writeFloat(src[i + 2]);
+                    dest.writeFloat(src[i + 3]);
+                    i += 4;
+                    break;
+                case Context3DVertexBufferFormat.BYTES_4:
+                    dest.writeUnsignedInt(src[i]);
+                    ++i;
+                    break;
+            }
+        }
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;So, in the case of the spinning cube, the component array would be:&lt;/p&gt;
+
+&lt;pre&gt;var vertexBufferComponents:Array = new Array(
+    Context3DVertexBufferFormat.FLOAT_3,
+    Context3DVertexBufferFormat.BYTES_4
+);&lt;/pre&gt;
+
+&lt;p&gt;With that array in hand, another useful function to set the array components into the context:&lt;/p&gt;
+
+&lt;pre&gt;private function SetVertexArrays(componentFormats:Array, vertices:VertexBuffer3D): void
+{
+    var offset:int = 0;
+    for (var j:int = 0; j &amp;lt; componentFormats.length; ++j)
+    {
+        renderContext.setVertexBufferAt( j, vertices, offset, componentFormats[j] );
+        switch (componentFormats[j])
+        {
+            case Context3DVertexBufferFormat.FLOAT_2:
+                offset += 2;
+                break;
+            case Context3DVertexBufferFormat.FLOAT_3:
+                offset += 3;
+                break;
+            case Context3DVertexBufferFormat.FLOAT_4:
+                offset += 4;
+                break;
+            case Context3DVertexBufferFormat.BYTES_4:
+                offset += 1;
+                break;
+        }
+    }
+}&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Flash Stage 3D is out!</title>
+      <link>https://thejare.github.io/p2480</link>
+      <pubDate>Thu, 06 Oct 2011 08:06:41 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/p2480</guid>
+      <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D&lt;/a&gt;. Here&amp;#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make sure you have a Java runtime installed, you need it for the Flash compiler.&lt;/li&gt;
+&lt;li&gt;Download &lt;a href=&#34;http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.5.1.zip&#34; target=&#34;_blank&#34;&gt;Flash SDK 4.5.1&lt;/a&gt; from &lt;a href=&#34;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&#34;&gt;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&lt;/a&gt;&lt;/a&gt;. Extract to a folder (I will assume &lt;strong&gt;flex_sdk_4.5.1&lt;/strong&gt;).&lt;/li&gt;
+&lt;li&gt;Download the appropriate versions of the debug, standalone and plugin Flash Player 11 from &lt;a href=&#34;http://www.adobe.com/support/flashplayer/downloads.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.adobe.com/support/flashplayer/downloads.html&#34;&gt;http://www.adobe.com/support/flashplayer/downloads.html&lt;/a&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;While you&amp;#8217;re there, download the latest &lt;a href=&#34;http://fpdownload.macromedia.com/pub/flashplayer/updaters/11/playerglobal11_0.swc&#34;&gt;Flash Runtime library&lt;/a&gt;.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Inside the folder &lt;strong&gt;flex_sdk_4.5.1/frameworks/libs/player/&lt;/strong&gt; create a folder &amp;#8220;&lt;strong&gt;11.0&lt;/strong&gt;&amp;#8220;. Copy the &lt;strong&gt;playerglobal11_0.swc&lt;/strong&gt; you just downloaded inside that folder, and rename it to &lt;strong&gt;playerglobal.swc&lt;/strong&gt;. Result:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;flex_sdk_4.5.1/frameworks/libs/player/11.0/playerglobal.swc&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create your working folder, and copy the &lt;a href=&#34;http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display3D/Context3D.html#includeExamplesSummary&#34; target=&#34;_blank&#34;&gt;rotating cube example&lt;/a&gt; from the Adobe docs into a file called &lt;strong&gt;Context3DExample.as&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Delete line 59: &lt;strong&gt;this.stage.nativeWindow.activate(); //AIR only&lt;/strong&gt; and also remove the third &amp;#8220;&lt;strong&gt;false&lt;/strong&gt;&amp;#8221; parameter from the calls to &lt;strong&gt;assemble()&lt;/strong&gt; from lines 70 and 71.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the &lt;a href=&#34;https://github.com/flashplatformsdk/Flash-Platform-SDK/zipball/master&#34;&gt;Flash Platform SDK&lt;/a&gt; as a ZIP file. Extract the contents of &amp;#8220;&lt;strong&gt;src&lt;/strong&gt;&amp;#8221; in your work folder. This should result in a folder called &amp;#8220;&lt;strong&gt;com&lt;/strong&gt;&amp;#8221; side by side with the file &amp;#8220;&lt;strong&gt;Context3DExample.as&lt;/strong&gt;&amp;#8220;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compile the sample: &lt;strong&gt;flex_sdk_4.5.1/bin/mxmlc -static-link-runtime-shared-libraries -swf-version=13 -target-player=11.0 Context3DExample.as&lt;/strong&gt;. Note the &lt;strong&gt;swf-version&lt;/strong&gt; and &lt;strong&gt;target-player&lt;/strong&gt; parameters.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the resulting SWF file with the standalone player 11 you downloaded, or embed it inside a web page. Important: for Stage3D to work properly on hardware, you must add the parameter &lt;strong&gt;&lt;param value=&amp;#8221;direct&amp;#8221; name=&amp;#8221;wmode&amp;#8221;&gt;&lt;/strong&gt; to the swf &lt;strong&gt;&lt;object&gt;&lt;/strong&gt; tag, and the attribute &lt;strong&gt;wmode=&amp;#8221;direct&amp;#8221;&lt;/strong&gt; to the &lt;strong&gt;&lt;embed&gt;&lt;/strong&gt; tag.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The result should be a spinning cube like this (only visible if you have the updated plugin):&lt;/p&gt;
+
+&lt;p&gt;[kml_flashembed publishmethod=&amp;#8221;static&amp;#8221; fversion=&amp;#8221;11.0.0&amp;#8243; movie=&amp;#8221;/Jare/files/Stage3D/Test3D.swf&amp;#8221; width=&amp;#8221;320&amp;#8243; height=&amp;#8221;240&amp;#8243; targetclass=&amp;#8221;flashmovie&amp;#8221; wmode=&amp;#8221;direct&amp;#8221;]&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://adobe.com/go/getflashplayer&#34;&gt;&lt;img src=&#34;http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif&#34; alt=&#34;Get Adobe Flash player&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[/kml_flashembed]&lt;/p&gt;
+
+&lt;p&gt;Further reading and links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/package-summary.html&#34; target=&#34;_blank&#34;&gt;Flash SDK documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/WSd6a006f2eb1dc31e-310b95831324724ec56-8000.html&#34; target=&#34;_blank&#34;&gt;Shader assembler docs&lt;/a&gt; from &lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/index.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/index.html&#34;&gt;http://help.adobe.com/en_US/as3/dev/index.html&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.flashdevelop.org/wikidocs/index.php?title=Main_Page&#34; target=&#34;_blank&#34;&gt;FlashDevelop&lt;/a&gt; for a convenient IDE.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D demos and frameworks/libraries&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Happy 3D&amp;#8217;ing!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

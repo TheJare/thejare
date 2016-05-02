@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reducing Game Load Times &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Reducing Game Load Times &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Reducing Game Load Times &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 02:09</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/reducing-game-load-times/" class="post-title">Reducing Game Load Times</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article was originally found at <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=Tip-ReducingGameLoadTimes&amp;#038;forum=totd&amp;#038;id=-1">Tip Of The Day</a> in <a href="http://www.flipcode.com">Flipcode</a>.</p>
+
+<p>Sebastian Wagner started an interesting thread on this topic, but my response got long enough that I think a totd is more appropriate.</p>
+
+<p>I will explain some of the things we did in Commandos 2 and Praetorians in order to speed up load times. Notice that in Praetorians, some levels will load in one or two seconds, with five seconds maybe for the largest, so for the most part the load time.</p>
+
+<ul>
+<li><p>Have a correct mindset: Windows&rsquo; memory allocation or file handling are not a problem, the slow DVD reads and seek times are not a problem. The way YOU use those things can be a problem, however. They are just part of the environment you have to work with.</p></li>
+
+<li><p>Design the file formats that your game loads with engine speed in mind. This usually means, lay out in a piece of paper what the engine needs and the order in which it needs it, and then turn that into a file format. NEVER use your tool&rsquo;s file format for the actual game. We&rsquo;re using XML for simple data files in our next engine, but I&rsquo;m curious to see if we will run into trouble with speed.</p></li>
+
+<li><p>Avoid any processing during loads, that process can probably be done beforehand and stored.</p></li>
+
+<li><p>Have a centralized FileSystem module in your core engine, and use that to access files. NEVER allow direct access to files using other means.</p></li>
+
+<li><p>Ensure that you fseek() as little as possible, and don&rsquo;t have to seek backwards at all. Issue a warning on your textlog (you have one, don&rsquo;t you?) every time a seek goes backwards.</p></li>
+
+<li><p>Group and compress your datafiles into a pack file; if a file exists outside the packfile, it is used instead, to ease development. Praetorians&rsquo; packfiles are just ZIP files, like Quake&rsquo;s, with (optional) encryption on top. Since you never seek backwards, you can decompress on the fly with a small buffer (we used 32K) without worries. Of course, decompressing must be faster than loading, so don&rsquo;t use a compressor with long decompression times. For example, some of our graphics are DXTC compressed even if we don&rsquo;t actually use DXTC textures.</p></li>
+
+<li><p>Ensure that your pack files support uncompressed, unencrypted files with as little processing and memcpy&rsquo;ing around as possible. This will allow you to do seamless loading on the background. In Praetorians, we do not load any sounds until the level is loaded and playable, at that point we start a background sound loading process with priorities, requests and all that stuff (this is a topic on its own).</p></li>
+
+<li><p>Avoid loading from several files at the same time. For example, if you have a file that contains a list of sounds, load the file, then iterate the list to load the actual sounds, and then drop the list. This helps with hard drives, but it is absolutely crucial for DVDs.</p></li>
+
+<li><p>Add a little filename logger so you can see in which order are files being loaded, so you can place them consecutively in the packfile and reduce seek times even further.</p></li>
+
+<li><p>Consider redundancy in your data files. For the PSX research port of Commandos 2 we started, we needed to load the scenery bitmaps on the fly, so we did a background process to load tiles as the player was scrolling. We quickly saw that for 8-way scrolling, we would typically need to load a new row and a new column of tiles, so we stored the maps twice, one in row-major order and another in column-major order, so we only needed to issue two seeks and two reads. The PSX port of the game was obviously stopped at some point (it was hard enough to cram it into the PS2!!), but this optimization made it into the final game.</p></li>
+
+<li><p>Make quick loading speeds a matter of pride. Despite our lighting fast load times, we considered optimizing the load when the level or civilizations you&rsquo;re reloading are already in memory. This was low priority and never got done, but the important thing is that we wanted to go that far. Someone mentioned to me once that long load times helped extend the play hours a game gives you, and reduced the &#8220;quicksave-try-die-retry&#8221; dumbness that some players went into and forced them to actually plan their game actions, but I think this is NOT a good mindset. 🙂</p></li>
+
+<li><p>Profile, profile, profile. Profile both in Release and Debug mode, load from the network, burn your installed game into a CD and load from there as if it was the hard drive. Try the absolutely worst cases: you will be surprised what you find:</p></li>
+
+<li><p>In Praetorians, after putting out the singleplayer game, we noticed that a good 30-50% of our load times were spent searching for the file in the packfile directories. We hadn&rsquo;t noticed this before because our dev machines had most of the data files outside of packfiles, and even with packfiles, the load time was fairly fast in Release mode. However, when one of the guys started running with the final packfiles, he noticed the slower times and did a little profile. With a couple hours&rsquo; work adding a little tree structure to the filename lists, this search time disappeared.</p></li>
+
+<li><p>In Commandos: Beyond The Call Of Duty, my last two weeks were spent optimizing code around (I didn&rsquo;t work on the game itself). The two major pieces were save and load times: I was able to cut them in more than half just by profiling and applying common sense! The funkiest point was to find that the progress bar was being updated too frequently, and adding a plain if() saved a ton of time.</p></li>
+
+<li><p>Try to do a little work so your loading progress bars actually reflect the time spent: seeing a progress bar jump from 50% to 90% and then staying there for a long time is annoying.</p></li>
+
+<li><p>Don&rsquo;t load your levels twice, like the game Sin did. 😉</p></li>
+</ul>
+
+<p>All this work will not turn a bad game into a good one, of course, but people will perceive it as more polished, and you will be more ready for console work, where it DOES matter.</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

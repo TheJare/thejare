@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows DLL Interfacing via abstract classes &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Windows DLL Interfacing via abstract classes &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Windows DLL Interfacing via abstract classes &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 01:56</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/dll-interfaces/" class="post-title">Windows DLL Interfacing via abstract classes</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Importing functions from a DLL loaded at run-time via ::LoadLibrary() is a cumbersome and error-prone process. You must declare a few pointers to functions, refer to these functions by name, typecast the pointer returned by ::GetProcAddress()&hellip; bah, that may be fine for a couple functions, but when the interface starts to grow, it&rsquo;s a real pain to do. What&rsquo;s more, the DLL may be interested in using some services provided by the loading application, but ::GetProcAddress() can&rsquo;t handle that. Here I present a nice and extremely simple way to do it in C++. Applications that support runtime-loaded plugins are a clear example of this situation; in fact, this technique is inspired by (read: &ldquo;ripped straight out of&rdquo;) the plugin system used it Autodesk&rsquo;s 3DStudio Max modelling package (wait, it&rsquo;s Kinetix&hellip; er, no, it&rsquo;s Discreet. Hm, never mind, by the time you read this it will have changed again).</p>
+
+<p>The idea is to put all the elements that form the interface to the DLL into an abstract class. This class will be derived by actual DLL instances, which provide the implementation of the interface. The app also provides an similar interface to the DLL. A minimal but fully working example of this can be found in this MSVC++ 6 project. A brief discussion on the technique was held in this Flipcode COTD Article by Justin Blackwell. I have tried to keep the code as simple as possible so there&rsquo;s no real error checking or other niceties.</p>
+
+<pre><code class="language-c">// --------------
+// DLLInterface.h
+// --------------
+
+#ifndef __DLLINTERFACE_H__
+#define __DLLINTERFACE_H__
+
+// Can't believe vc doesn't automate this kind of stuff
+#ifdef __DO_DLL_EXPORT__
+#define __DLL_FUNCTION__ __declspec(dllexport)
+#else
+#define __DLL_FUNCTION__ __declspec(dllimport)
+#endif
+
+// Interface that the app provides to the DLL
+class IAppInterface
+{
+public:
+  virtual int Operation(int parm) = 0;
+  // ...
+};
+
+// Interface that the DLL provides to the app;
+class IDLLInterface
+{
+public:
+  virtual void MyDLLFunction(int parm) = 0;
+  // ...
+};
+
+extern &quot;C&quot; __DLL_FUNCTION__ IDLLInterface *CreateDLLInterface(IAppInterface *pApp);
+typedef IDLLInterface *(*FuncCreateDLLInterface) (IAppInterface *pApp);
+
+#endif //__DLLINTERFACE_H__
+</code></pre>
+
+<pre><code class="language-c">// --------------
+// DLL.cpp
+// This is compiled as a DLL
+// --------------
+
+#include &lt;windows.h&gt;
+#include &lt;stdio.h&gt;
+
+#define __DO_DLL_EXPORT__
+#include &quot;DLLInterface.h&quot;
+
+BOOL APIENTRY DllMain( HANDLE hModule, 
+                       DWORD  ul_reason_for_call, 
+                       LPVOID lpReserved )
+{
+    return TRUE;
+}
+
+// Actual funcionality provided by the DLL.
+class CDLLImplementation: public IDLLInterface
+{
+  IAppInterface *m_pApp;
+public:
+  CDLLImplementation(IAppInterface *pApp): m_pApp(pApp) { }
+
+  void MyDLLFunction(int parm) { printf(&quot;Yes, %d\n&quot;, m_pApp-&gt;Operation(parm)); }
+  // ...
+};
+
+IDLLInterface *CreateDLLInterface(IAppInterface *pApp)
+{
+  static CDLLImplementation dllImpl(pApp);
+  return &amp;dllImpl;
+}
+</code></pre>
+
+<pre><code class="language-c">// --------------
+// App.cpp
+// This is compiled as an EXE
+// --------------
+
+#include &lt;windows.h&gt;
+#include &quot;DLLInterface.h&quot;
+
+// Actual funcionality provided by the app.
+class CAppImplementation: public IAppInterface
+{
+public:
+  int Operation(int parm) { return parm*2; }
+};
+
+void main()
+{
+  HMODULE hDLL = ::LoadLibrary(&quot;DLL&quot;);
+  FuncCreateDLLInterface createFunc = (FuncCreateDLLInterface)::GetProcAddress(hDLL, &quot;CreateDLLInterface&quot;);
+
+  CAppImplementation App;
+  IDLLInterface *pDLL = createFunc(&amp;App);
+  pDLL-&gt;MyDLLFunction(10); //Calls the DLL, which in turn calls the app back.
+}
+</code></pre>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

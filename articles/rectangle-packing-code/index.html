@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Packing Code &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Rectangle Packing Code &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rectangle Packing Code &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 02:17</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/rectangle-packing-code/" class="post-title">Rectangle Packing Code</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article first appeared as a <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=COTD-RectPlacement&amp;#038;forum=cotd&amp;#038;id=-1">Tip Of The Day</a> in <a href="http://www.flipcode.com">Flipcode</a>.</p>
+
+<p>You have a bunch of rectangular pieces. You need to arrange them in a rectangular surface so that they don&rsquo;t overlap, keeping the total area of the rectangle as small as possible. This is fairly common when arranging characters in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as well.</p>
+
+<p>The idea of this algorithm is that, as we add rectangles, we can pre-select &ldquo;interesting&rdquo; places where we can try to add the next rectangles. For optimal results, the rectangles should be added in order. I initially tried using area as a sorting criteria, but it didn&rsquo;t work well with very tall or very flat rectangles. I then tried using the longest dimension as a selector, and it worked much better. So much for intuition &#8230;</p>
+
+<p>These &ldquo;interesting&rdquo; places are just to the right and just below the currently added rectangle. The first rectangle, obviously, goes at the top left, the next one would go either to the right or below this one, and so on. It is a weird way to do it, but it seems to work very nicely.</p>
+
+<p>The way we search here is fairly brute-force, the fact being that for most off-line purposes the performance seems more than adequate. I have generated a japanese font with around 8500 characters and all the time was spent generating the bitmaps.</p>
+
+<p>Also, for all we care, we could grow the parent rectangle in a different way than power of two. It just happens that power of 2 is very convenient for graphics hardware textures.</p>
+
+<p>I&rsquo;d be interested in hearing of other approaches to this problem. Make sure to post them on <a href="http://www.flipcode.com">http://www.flipcode.com</a>.</p>
+
+<p>File: RectPlacement.h</p>
+
+<pre><code class="language-c">// --------------------------------------------------------------------------------
+// Name        : RectPlacement.h
+// Description : A class that allocates subrectangles into power-of-2 rectangles
+//               (C) Copyright 2000-2002 by Javier Arevalo
+//               This code is free to use and modify for all purposes
+// --------------------------------------------------------------------------------
+
+#ifndef _RECT_PLACEMENT_H_
+#define _RECT_PLACEMENT_H_
+
+
+#include &lt;vector&gt;
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+class CRectPlacement
+{
+  public:
+
+    // Helper classes
+    struct TPos
+    {
+      int x, y;
+
+      TPos() { }
+      TPos(int _x, int _y): x(_x), y(_y) { }
+
+      bool operator ==(const TPos &amp;p) const { return x == p.x &amp;&amp; y == p.y; }
+    };
+
+    struct TRect: public TPos
+    {
+      int w, h;
+
+      TRect() { }
+      TRect(int _x, int _y, int _w, int _h): TPos(_x, _y), w(_w &gt; 0? _w : 0), h(_h &gt; 0? _h : 0) { }
+
+      bool Contains   (const TPos &amp;p)  const { return (p.x &gt;= x &amp;&amp; p.y &gt;= y &amp;&amp;
+                                                       p.x &lt; (x+w) &amp;&amp; p.y &lt; (y+h)); }
+      bool Contains   (const TRect &amp;r) const { return (r.x &gt;= x &amp;&amp; r.y &gt;= y &amp;&amp;
+                                                       (r.x+r.w) &lt;= (x+w) &amp;&amp; (r.y+r.h) &lt;= (y+h)); }
+      bool Intersects (const TRect &amp;r) const { return w &gt; 0 &amp;&amp; h &gt; 0 &amp;&amp; r.w &gt; 0 &amp;&amp; r.h &gt; 0 &amp;&amp;
+                                                      ((r.x+r.w) &gt; x &amp;&amp; r.x &lt; (x+w) &amp;&amp;
+                                                       (r.y+r.h) &gt; y &amp;&amp; r.y &lt; (y+h)); }
+
+    //  Greater rect area. Not as good as the next heuristic
+    //  static bool Greater(const TRect &amp;a, const TRect &amp;b) { return a.w*a.h &gt; b.w*b.h; }
+
+      // Greater size in at least one dim.
+      static bool Greater(const TRect &amp;a, const TRect &amp;b) { return (a.w &gt; b.w &amp;&amp; a.w &gt; b.h) ||
+                                                                   (a.h &gt; b.w &amp;&amp; a.h &gt; b.h); }
+    };
+
+    // ---------------------
+
+    typedef std::vector&lt;TPos&gt;  CPosArray;
+    typedef std::vector&lt;TRect&gt; CRectArray;
+
+    // ---------------------
+
+    CRectPlacement()                    { Init(); }
+    ~CRectPlacement()                   { End(); }
+
+    void      Init    (int w = 1, int h = 1);
+    void      End     ();
+    bool      IsOk    ()                      const { return m_size.w &gt; 0; }
+
+    int       GetW    ()                      const { return m_size.w; }
+    int       GetH    ()                      const { return m_size.h; }
+    long      GetArea ()                      const { return m_area; }
+    long      GetTotalArea ()                 const { return m_size.w*m_size.h; }
+
+    bool AddAtEmptySpotAutoGrow (TRect *pRect, int maxW, int maxH);
+
+  private:
+    TRect       m_size;
+    CRectArray  m_vRects;
+    CPosArray   m_vPositions;
+    long        m_area;
+
+    // ---------------------
+
+    bool IsFree                 (const TRect &amp;r) const;
+    void AddPosition            (const TPos &amp;p);
+    void AddRect                (const TRect &amp;r);
+    bool AddAtEmptySpot         (TRect &amp;r);
+};
+
+
+#endif //_RECT_PLACEMENT_H_
+</code></pre>
+
+<p>File: RectPlacement.cpp</p>
+
+<pre><code class="language-c">// ----------------------------------------------------------------------------------------
+// Name        : RectPlacement.cpp
+// Description : A class that fits subrectangles into a power-of-2 rectangle
+//               (C) Copyright 2000-2002 by Javier Arevalo
+//               This code is free to use and modify for all purposes
+// ----------------------------------------------------------------------------------------
+
+/*
+  You have a bunch of rectangular pieces. You need to arrange them in a 
+  rectangular surface so that they don't overlap, keeping the total area of the 
+  rectangle as small as possible. This is fairly common when arranging characters 
+  in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as 
+  well.
+
+  The idea of this algorithm is that, as we add rectangles, we can pre-select 
+  &quot;interesting&quot; places where we can try to add the next rectangles. For optimal 
+  results, the rectangles should be added in order. I initially tried using area 
+  as a sorting criteria, but it didn't work well with very tall or very flat 
+  rectangles. I then tried using the longest dimension as a selector, and it 
+  worked much better. So much for intuition...
+
+  These &quot;interesting&quot; places are just to the right and just below the currently 
+  added rectangle. The first rectangle, obviously, goes at the top left, the next 
+  one would go either to the right or below this one, and so on. It is a weird way 
+  to do it, but it seems to work very nicely.
+
+  The way we search here is fairly brute-force, the fact being that for most off-
+  line purposes the performance seems more than adequate. I have generated a 
+  japanese font with around 8500 characters and all the time was spent generating 
+  the bitmaps.
+
+  Also, for all we care, we could grow the parent rectangle in a different way 
+  than power of two. It just happens that power of 2 is very convenient for 
+  graphics hardware textures.
+
+  I'd be interested in hearing of other approaches to this problem. Make sure
+  to post them on http://www.flipcode.com
+*/
+
+#include &quot;RectPlacement.h&quot;
+
+// --------------------------------------------------------------------------------
+// Name        : 
+// Description : 
+// --------------------------------------------------------------------------------
+void CRectPlacement::Init    (int w, int h)
+{
+  End();
+  m_size = TRect(0, 0, w, h);
+  m_vPositions.push_back(TPos(0,0));
+  m_area = 0;
+}
+
+
+// --------------------------------------------------------------------------------
+// Name        : 
+// Description : 
+// --------------------------------------------------------------------------------
+void CRectPlacement::End     ()
+{
+  m_vPositions.clear();
+  m_vRects.clear();
+  m_size.w = 0;
+}
+
+// --------------------------------------------------------------------------------
+// Name        : IsFree
+// Description : Check if the given rectangle is partially or totally used
+// --------------------------------------------------------------------------------
+bool CRectPlacement::IsFree (const TRect &amp;r) const
+{
+  if (!m_size.Contains(r))
+    return false;
+  for (CRectArray::const_iterator it = m_vRects.begin();
+       it != m_vRects.end();
+       ++it)
+    if (it-&gt;Intersects(r))
+      return false;
+  return true;
+}
+
+
+// --------------------------------------------------------------------------------
+// Name        : AddPosition
+// Description : Add new anchor point
+// --------------------------------------------------------------------------------
+void CRectPlacement::AddPosition    (const TPos &amp;p)
+{
+  // Try to insert anchor as close as possible to the top left corner
+  // So it will be tried first
+  bool bFound = false;
+  CPosArray::iterator it;
+  for (it = m_vPositions.begin();
+       !bFound &amp;&amp; it != m_vPositions.end();
+       ++it)
+  {
+    if (p.x+p.y &lt; it-&gt;x+it-&gt;y)
+      bFound = true;
+  }
+  if (bFound)
+    m_vPositions.insert(it, p);
+  else
+
+    m_vPositions.push_back(p);
+}
+
+// --------------------------------------------------------------------------------
+// Name        : AddRect
+// Description : Add the given rect and updates anchor points
+// --------------------------------------------------------------------------------
+void CRectPlacement::AddRect  (const TRect &amp;r)
+{
+  m_vRects.push_back(r);
+  m_area += r.w*r.h;
+
+  // Add two new anchor points
+  AddPosition(TPos(r.x, r.y+r.h));
+  AddPosition(TPos(r.x+r.w, r.y));
+}
+
+// --------------------------------------------------------------------------------
+// Name        : AddAtEmptySpot
+// Description : Add the given rectangle
+// --------------------------------------------------------------------------------
+bool CRectPlacement::AddAtEmptySpot   (TRect &amp;r)
+{
+  // Find a valid spot among available anchors.
+
+  bool bFound = false;
+  CPosArray::iterator it;
+  for (it = m_vPositions.begin();
+       !bFound &amp;&amp; it != m_vPositions.end();
+       ++it)
+  {
+    TRect Rect(it-&gt;x, it-&gt;y, r.w, r.h);
+
+    if (IsFree(Rect))
+    {
+      r = Rect;
+      bFound = true;
+      break; // Don't let the loop increase the iterator.
+    }
+  }
+  if (bFound)
+  {
+    // Remove the used anchor point
+    m_vPositions.erase(it);
+
+    // Sometimes, anchors end up displaced from the optimal position
+    // due to irregular sizes of the subrects.
+    // So, try to adjut it up &amp; left as much as possible.
+    for (int x = 1; x &lt;= r.x; x++)
+      if (!IsFree(TRect(r.x - x, r.y, r.w, r.h)))
+        break;
+    for (int y = 1; y &lt;= r.y; y++)
+      if (!IsFree(TRect(r.x, r.y - y, r.w, r.h)))
+        break;
+    if (y &gt; x)
+      r.y -= y-1;
+    else
+
+      r.x -= x-1;
+    AddRect(r);
+  }
+  return bFound;
+}
+
+
+// --------------------------------------------------------------------------------
+// Name        : AddAtEmptySpotAutoGrow
+// Description : Add a rectangle of the given size, growing our area if needed
+//               Area grows only until the max given.
+//               Returns the placement of the rect in the rect's x,y coords
+// --------------------------------------------------------------------------------
+
+bool CRectPlacement::AddAtEmptySpotAutoGrow   (TRect *pRect, int maxW, int maxH)
+{
+  if (pRect-&gt;w &lt;= 0)
+    return true;
+
+  int orgW = m_size.w;
+  int orgH = m_size.h;
+
+  // Try to add it in the existing space
+  while (!AddAtEmptySpot(*pRect))
+  {
+    int pw = m_size.w;
+    int ph = m_size.h;
+
+    // Sanity check - if area is complete.
+    if (pw &gt;= maxW &amp;&amp; ph &gt;= maxH)
+    {
+      m_size.w = orgW;
+      m_size.h = orgH;
+      return false;
+    }
+
+    // Try growing the smallest dim
+    if (pw &lt; maxW &amp;&amp; (pw &lt; ph || ((pw == ph) &amp;&amp; (pRect-&gt;w &gt;= pRect-&gt;h))))
+      m_size.w = pw*2;
+    else
+      m_size.h = ph*2;
+    if (AddAtEmptySpot(*pRect))
+      break;
+
+    // Try growing the other dim instead
+    if (pw != m_size.w)
+    {
+      m_size.w = pw;
+      if (ph &lt; maxW)
+        m_size.h = ph*2;
+    }
+    else
+    {
+      m_size.h = ph;
+      if (pw &lt; maxW)
+        m_size.w = pw*2;
+    }
+
+    if (pw != m_size.w || ph != m_size.h)
+      if (AddAtEmptySpot(*pRect))
+        break;
+
+    // Grow both if possible, and reloop.
+    m_size.w = pw;
+    m_size.h = ph;
+    if (pw &lt; maxW)
+      m_size.w = pw*2;
+    if (ph &lt; maxH)
+      m_size.h = ph*2;
+  }
+  return true;
+}
+</code></pre>
+
+<p>File: Test.cpp</p>
+
+<pre><code class="language-c">// ----------------------------------------------------------------------------------------
+// Name        : Test.cpp
+// Description : Test the RectPlacement class
+//               (C) Copyright 2000-2002 by Javier Arevalo
+//               This code is free to use and modify for all purposes
+// ----------------------------------------------------------------------------------------
+
+#include &lt;stdio.h&gt;
+#include &lt;algorithm&gt;
+
+#include &quot;RectPlacement.h&quot;
+
+#define MAX_TEXTURE_W 256
+#define MAX_TEXTURE_H 256
+
+#define NUM_SUBRECTS  500
+#define MIN_SUBRECT    15
+#define MAX_SUBRECT    50
+
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+struct TSubRect: public CRectPlacement::TRect
+{
+  int n;      // Original index of this subrect, before sorting
+  int nTex;   // Texture in which this subrect will be placed.
+
+  TSubRect() { }
+  TSubRect(int _w, int _h, int _n): TRect(0, 0, _w, _h), n(_n), nTex(0) { }
+};
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+typedef std::vector&lt;TSubRect&gt;       CSubRectArray;
+typedef std::vector&lt;CRectPlacement&gt; CTextureArray;
+
+// --------------------------------------------------------------------------------
+// Name        : CreateLetters
+// Description : Here's where you calculate your rectangles,
+// --------------------------------------------------------------------------------
+
+void CreateLetters  (CSubRectArray &amp;vecSubRects)
+{
+  vecSubRects.clear();
+
+  // Let's just fill this with random stuff
+  for (int i = 0; i &lt; NUM_SUBRECTS; i++)
+    vecSubRects.push_back(TSubRect((rand() % MAX_SUBRECT) + MIN_SUBRECT,
+                                   (rand() % MAX_SUBRECT) + MIN_SUBRECT, i));
+}
+
+// --------------------------------------------------------------------------------
+// Name        : CreateTextures
+// Description : Create array of textures containing all subrects
+// --------------------------------------------------------------------------------
+void CreateTextures (CTextureArray &amp;vecTextures, CSubRectArray &amp;vecSubRects, int maxTexW, int maxTexH)
+{
+  // Sort the subRects based on dimensions, larger dimension goes first.
+  std::sort(vecSubRects.begin(), vecSubRects.end(), CRectPlacement::TRect::Greater);
+
+  // Generate the first texture
+  vecTextures.clear();
+  vecTextures.push_back(CRectPlacement());
+
+  // Add all subrects
+  for (CSubRectArray::iterator it = vecSubRects.begin();
+       it != vecSubRects.end();
+       ++it)
+  {
+    // We make sure we leave one pixel between subrects, so texels don't bleed with bilinear.
+    CRectPlacement::TRect r(0, 0, it-&gt;w+1, it-&gt;h+1);
+
+    // If an existing texture has actual space
+    bool bPlaced = false;
+    for (int i = 0; !bPlaced &amp;&amp; i &lt; vecTextures.size(); i++)
+    {
+      bPlaced = vecTextures[i].AddAtEmptySpotAutoGrow(&amp;r, maxTexW, maxTexH);
+      if (bPlaced)
+        it-&gt;nTex = i;
+    }
+
+    // Try starting a new texture and fit the rect in there
+    if (!bPlaced)
+    {
+      vecTextures.push_back(CRectPlacement());
+      bPlaced = vecTextures[vecTextures.size()-1].AddAtEmptySpotAutoGrow(&amp;r, maxTexW, maxTexH);
+      if (bPlaced)
+        it-&gt;nTex = vecTextures.size()-1;
+      else
+        printf(&quot;ERROR: Subrect is too big to fit in texture!&quot;, it-&gt;w, it-&gt;h);
+    }
+
+    // If correctly placed in a texture, the coords are returned in r.x and r.y
+    // Store them.
+    if (bPlaced)
+    {
+      it-&gt;x = r.x;
+      it-&gt;y = r.y;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------------
+// Name        : main
+// Description : heh
+// --------------------------------------------------------------------------------
+int main()
+{
+  CTextureArray vecTextures;
+  CSubRectArray vecSubRects;
+
+  CreateLetters(vecSubRects);
+  CreateTextures(vecTextures, vecSubRects, MAX_TEXTURE_W, MAX_TEXTURE_H);
+
+  {
+    for (CSubRectArray::const_iterator it = vecSubRects.begin();
+         it != vecSubRects.end();
+         ++it)
+    {
+      printf(&quot;Subrect %d (originally %d), size %dx%d, goes into texture %d at pos %d,%d\n&quot;,
+             it - vecSubRects.begin(), it-&gt;n, it-&gt;w, it-&gt;h, it-&gt;nTex, it-&gt;x, it-&gt;y);
+    }
+  }
+
+  printf(&quot;Created a total of %d textures\n&quot;, vecTextures.size());
+  {
+    for (CTextureArray::const_iterator it = vecTextures.begin();
+         it != vecTextures.end();
+         ++it)
+    {
+      printf(&quot;  Texture %d, size %dx%d, Coverage %d / %d (%d%%)\n&quot;,
+             it - vecTextures.begin(), it-&gt;GetW(), it-&gt;GetH(),
+             it-&gt;GetArea(), it-&gt;GetTotalArea(), it-&gt;GetArea()*100/it-&gt;GetTotalArea());
+    }
+  }
+  return 0;
+}
+</code></pre>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

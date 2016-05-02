@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C&#43;&#43; Object Initialization and Finalization Protocol &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="C&#43;&#43; Object Initialization and Finalization Protocol &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="C&#43;&#43; Object Initialization and Finalization Protocol &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">25 Sep 2011, 01:56</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/articles/init-end/" class="post-title">C&#43;&#43; Object Initialization and Finalization Protocol</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Note: this article first appeared as a <a href="http://www.flipcode.com/cgi-bin/msg.cgi?showThread=Tip-ObjectInitFinal&amp;forum=totd&amp;id=-1">Tip Of The Day</a> in <a href="http://www.flipcode.com/">Flipcode</a>.</p>
+
+<p>This is a coding procedure we have adopted as standard in all of Pyro Studios projects. The roots of it probably come from the fact that the first Object Oriented language I learned was Borland&rsquo;s Turbo Pascal 5; it didn&rsquo;t have automatic construction or destruction calls, so you had to initialize the instances explicitly. Ok, no big deal, the real benefits were extensible classes and virtual methods.</p>
+
+<p>Then I arrived to the C++ world, reading who is probably the best writer about C++: Brucke Eckel. All those magic things happening under the hood! Constructors! Virtual multiple inheritance! Templates and Exceptions! WOW. At first I was thinking every new feature was cooler than the previous one. At some point, however, I came to the conclusion that I just had too many features in my hands, and not all of them were good all the time. But how to structure this? I can handle it just by intuition when I&rsquo;m coding at home, but when it comes to a programming team composed of more than ten programmers, intuition is just not there. So I evolved a set of coding standards that would enable more coherence in the code written by a team of people. This is just one of those standards, which I have discussed and refined over time with teammates like Dwight Luetscher, Scott Corley, Terry Wellman, Unai Landa and Jon Beltran de Heredia.</p>
+
+<p>Any class in a software system will conform to this structure:
+Constructor: Does not receive parameters, and its body simply assigns a specific value to one member field.
+Destructor: Simply calls the End() member funcion
+It will have at least the following member functions:</p>
+
+<pre><code class="language-c">bool Init(...);     // Whatever initialization parameters actually needed.
+void End();         // No parameters and no return value for finalization.
+
+bool IsOk() const;  // Typically will be inlined.
+</code></pre>
+
+<p>The Init() funcion may have parameters, and the return value is some sort of error code indicating whether the object was properly initialized (error codes are a whole separate topic worth its own tip of the day).</p>
+
+<p>The End() funcion never gets parameters, which means that the object must remember any potential piece of data necessary for freeing its resources.</p>
+
+<p>The function IsOk() returns true if the object is correctly initialized and ready for use. It will always return false before the first call to Init(), after a call to End(), or after a call to Init() that returns an error.</p>
+
+<p>Any of these three functions must be acceptable at any point in time. This means, You may call Init() several times in a row without any memory or resource leakage. You may also call End() succesively without the code attempting any invalid operation.</p>
+
+<p>Any other member functions may check the IsOk() state before going to perform their operations. In many cases you will want to use assert() to flag as a programming error any attempts to use an object which failed to initialize properly.</p>
+
+<p>This is a typical implementation:</p>
+
+<pre><code class="language-c">---- File InitEndTest.h ----
+
+class CInitEndTest
+{
+  public:
+    CInitEndTest    (): m_bOk(false)   { }
+    ~CInitEndTest   ()                 { End(); }
+
+    bool    Init    (parameters);
+    void    End     ();
+    bool    IsOk    ()           const { return m_bOk; }
+
+    void    DoStuff ();
+
+  private:
+    bool    m_bOk;
+};
+</code></pre>
+
+<pre><code class="language-c">---- File InitEndTest.cpp ----
+
+#include &quot;InitEndTest.h&quot;
+
+bool CInitEndTest::Init(parameters)
+{
+  End();
+  // ... perform initializations
+  // ... set m_bOk to true if everything goes right.
+  return m_bOk;
+}
+
+void CInitEndTest::End()
+{
+  if (m_bOk)
+  {
+    // Free resources.
+    m_bOk = false;
+  }
+}
+
+void CInitEndTest::DoStuff()
+{
+  ASSERT(IsOk());
+  // Actually do the stuff
+}
+</code></pre>
+
+<p>When you derive a new class from one that uses this protocol, you should be calling the base&rsquo;s Init() and End() functions at the right places, instead of messing around with the m_bOk member. If you use virtual functions and polymorphic behaviour, then both the destructor and the End() function must be virtual as well (in the base and the derived classes). Supposing the previous example had them properly virtualized, here&rsquo;s an example of derivation:</p>
+
+<pre><code class="language-c">---- File VirtualTest.h ----
+
+#include &quot;InitEndTest.h&quot;
+
+class CVirtualTest: public CInitEndTest
+{
+    typedef CInitEndTest inherited;  // To avoid the actual base's name.
+
+  public:
+            CVirtualTest    ()                 { }
+    virtual ~CVirtualTest   ()                 { End(); }
+
+            bool    Init    (parameters);
+    virtual void    End     ();
+
+  private:
+};
+</code></pre>
+
+<pre><code class="language-c">---- File VirtualTest.cpp ----
+
+#include &quot;VirtualTest.h&quot;
+
+bool CVirtualTest::Init(parameters)
+{
+  End();
+
+  // Initialize the base first.  
+  if (inherited::Init())
+  {
+    // ... perform my own initializations
+    // ... call inherited::End() if they fail.
+  }
+  return IsOk();
+}
+
+/*virtual*/ void CVirtualTest::End()
+{
+  if (IsOk())
+  {
+    // Free my own resources
+    // Free the base's at the end.
+    inherited::End();
+  }
+}
+</code></pre>
+
+<p>So what&rsquo;s the advantage of limiting the use of the powerful C++ constructor / destructor syntax? Simply, that the initialization and lifespan of an instance are not tied together. This can be useful in many situations when you want to reinitialize a set of objects that are pointed to from many different places in the system, for example textures and lost surfaces in a 3D engine after the user Alt-TABs out and back into your app.</p>
+
+<p>Thanks to the ASSERT sentences you quickly catch any initializations when a return code was not properly checked. With correct inlining, there is no speed penalty to IsOk() calls. And the construction doesn&rsquo;t fill in any unnecessary fields, making array allocations faster to execute.</p>
+
+<p>In some situations where you want to keep the memory or code tight, you might use an actual data member to flag initialization, instead of a separate m_bOk member. For example, in a File class wrapper, if you have a FILE *m_pFile member to point to the actual stdio file, then your constructor would set it to NULL and your IsOk() function would compare it to NULL; an array class might use &ldquo;m_numElements == 0&rdquo;, a DirectX wrapper might use &ldquo;m_pDD == NULL&rdquo; and so on.</p>
+
+<p>&ldquo;So what&rsquo;s the big deal? I have done this already when I figured I needed it.&rdquo; The real advantage lies in the fact that, when you apply this protocol all through a big system, you always have a standard way of checking for the state of an object before you use it. Different programmers don&rsquo;t figure out their own names and code paths, and you can catch missing error checks quickly. As usual, the counterpart is that any simple class already requires writing a few lines of boring &ldquo;bureaucratic&rdquo; code. As time passed, I found myself using this protocol for even the simplest of classes in my own personal projects, and has now become about as standard a part of development as a good Source Control system.</p>
+
+<p>Note: you may want to dispense of this protocol for classes that are simple data structures with no resource allocation, like math vectors, matrices and such, where initialization is a simple matter of assigning values.</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
