@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Standards &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Coding Standards &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Coding Standards &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">12 Jun 2006, 15:57</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/2006/06/coding-standards/" class="post-title">Coding Standards</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>Programmers and programming teams should strive to use a reasonably well defined and consistent set of coding standards in their projects. These typically include rules for notation (use of case and special characters in identifiers, etc), style (layout of language elements within the source code), and idioms (specific usage of language features).</p>
+
+<p>The benefits of a clear and useful coding standard are twofold: make the code easy to read and understand even in the absence of code inspection tools or previous knowledge, and encourage the creation of code whose performance and functionality are safe, predictable, verifiable and maintainable.</p>
+
+<p>Programmers tend to be fairly vocal and strict about defending their preferred set of coding standards (whether they are equally strict at adhering to these standards varies a lot). This often leads to endless religious wars where opinions and personal experiences are presented as facts or universally applicable ideas. But, if widely varying sets of standards have proven to work in different projects, there can&#8217;t be a universally &ldquo;best&rdquo; standard?</p>
+
+<p>Of course there isn&#8217;t. Duh!</p>
+
+<p>There are <em>bad</em> practices, <em>good</em> practices and <em>best</em> practices. Bad practices (for example, lack of error checking) can be considered to produce universally undesirable results, whereas best practices (for example, strict const-correctness) should yield better code regardless of the circumstances.</p>
+
+<p>The thing is, most decent standards offer mostly a collection of good practices. The value and applicability of these is relative to the context in which they are used, and as such can&#8217;t be considered universally valid or invalid. Different projects and different programmers have varying requirements and levels of expertise. Programmers naturally tend to restrict and partition any problem space into manageable subsets. Divide and conquer, so to speak. However, the huge scope of what defines the <em>context</em> of a programming task, often leads to implicit and biased assumptions about what is practical, what is relevant, and what is plain habit.</p>
+
+<p>Being exposed, using and adapting to different standards is, in my experience, one of the best ways to gain insight into what defines the context of a project, and what works best in different situations.</p>
+
+<p>John Lakos&#8217; <a href="http://www.amazon.com/gp/product/0201633620" target="_blank">&ldquo;Large Scale C++ Software Design&rdquo;</a> is one of the classic books touching this topic, but there are few freely available online references. I was happy to come across this <a href="http://www.research.att.com/~bs/JSF-AV-rules.pdf" target="_blank">coding standards document</a> in Bjarne Stroustrup&#8217;s homepage. It is a very long but enjoyable exploration of a C++ coding standard that is widely different to the one I regularly advocate and use. Every goal, concept and rule (and there are many) is described and justified in a very concise manner. All of them make a lot of sense.</p>
+
+<p>Being safety-critical is an often desired quality, but rarely a top priority of games software. That is probably a good place to start when comparing that document with your own context and coding standard. Enjoy the ride!</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

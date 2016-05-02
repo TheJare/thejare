@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web design &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Web design &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Web design &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">22 Apr 2011, 00:44</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/2011/04/web-design/" class="post-title">Web design</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>I wrote a minimalistic <a href="http://www.albanordest.com/gallery/" target="_blank">photo gallery</a> for my wife. It&#8217;s a quick mix of php and MySQL on the server, css/html page, and some Javascript+jQuery for a still unfinished slideshow function.</p>
+
+<p>The layout spec was:</p>
+
+<p>&#8211; left-side navigation column<br />
+&#8211; picture to the right of the navigation, with a title centered underneath<br />
+&#8211; work with pictures of varying sizes<br />
+&#8211; a screen-wide footer<br />
+&#8211; as little else as possible</p>
+
+<p>I wanted to make it as friendly as possible to screen sizes and form factors, so that even in the smallest or weirdest screen, you would see as much of the picture as possible. Therefore, I stuck the title in the nav bar rather than as a horizontal banner, so that the picture would not have wasted space above it.</p>
+
+<p>As far as I can see, it looks great on everything from large monitors to an iPhone. The photo uses all the height available the device, the left bar will squeeze and word wrap in horizontally narrow screens, the photo will be pleasantly centered in wide screens, and it will adapt nicely to on-the-fly changes in screen size.</p>
+
+<p>Being the old dog that I am, I laid out the page using classic html tables rather than the more modern css layout paradigm (of course, I still used css for styling). When I was done, I looked into doing it the css way; table cells and nested tables are hard to keep track of in html, and the design is so simple, that css should make it much easier. Conclusion?</p>
+
+<p>It can&#8217;t be done with css.</p>
+
+<p>Separate elements in css can&#8217;t have the kind of flexibility and influence on each other that table cells have. In essence:</p>
+
+<p>&#8211; you can&#8217;t dock two elements together with css, so if you have two elements side by side, in narrow screens the element on the right will wrap to the &ldquo;next&rdquo; line, ending up below the left element.</p>
+
+<p>&#8211; to force elements to stay on the same line, you have to take them out of the normal layout flow, which means they can&#8217;t influence each other anymore or dynamically resize to adapt to their content and the size of their container.</p>
+
+<p>So tables it is. How disappointing! If you know how to solve this, please give me a shout. (And no, solutions that include any sort of hardcoded position or size are not acceptable)</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

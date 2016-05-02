@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Studio 2005 &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.15" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Visual Studio 2005 &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Visual Studio 2005 &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">08 Nov 2005, 11:23</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/2005/11/visual-studio-2005/" class="post-title">Visual Studio 2005</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>So I guess I&#8217;m not the only one who finds it <a href="http://minimsft.blogspot.com/2005/11/vs-2005-why-do-you-want-to-make.html" target="_blank">less than stellar.</a> It&#8217;s just a first contact, but it&#8217;s been a rough ride: bugs and general slowness in the IDE, bugs in standard user interface elements (I managed to crash the scrollbar in the Output window!?!?!), the whole &ldquo;security push&rdquo; making a good chunk of the standard library <em>deprecated</em> by default.</p>
+
+<p>Oh well I&#8217;m sure I will find good stuff after using it for some time.</p>
+
+<p>Random bits I found out:</p>
+
+<p>&#8211; Changing the fonts and colors to a black background is as nightmarish as ever.</p>
+
+<p>&#8211; When converting projects from 2003, check the resulting options <u>thoroughly.</u> It seems some defaults have changed, but the conversion doesn&#8217;t take this into account, so an option that you had on default (Yes) in 2003 may now be default (No) in 2005. &ldquo;for scoping rules&rdquo; comes to mind.</p>
+
+<p>&#8211; Also about projects, immediately disable warning 4996. Until their Security Push crap becomes ANSI, I don&#8217;t want to hear about it. You can do it at once for all projects and configurations, so it&#8217;s not a big deal.</p>
+
+<p>&#8211; &ldquo;Automatic use of precompiled headers&rdquo; is gone. Either you set them up specifically, or you don&#8217;t get any. A pity for small projects, but all in all, good riddance.</p>
+
+<p>&#8211; Compilation times seem faster, maybe thanks to the multithreaded compilation taking advantage of HyperThreading.</p>
+
+<p>&#8211; Disabling exceptions and using the STL seems like a no-no. Lots of weirdness on this topic.</p>
+
+<p>&#8211; Much more strict checking for C++ details. One that stood out today is the fact that you must pass lvalues (roughly: values that can be modified) to functions that receive non-const references.</p>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

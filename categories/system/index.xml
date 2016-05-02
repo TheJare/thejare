@@ -11,10 +11,10 @@
     
     <item>
       <title>node.js</title>
-      <link>https://thejare.github.io/p2561</link>
+      <link>https://thejare.github.io/2012/01/node.js/</link>
       <pubDate>Sat, 28 Jan 2012 03:47:06 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2561</guid>
+      <guid>https://thejare.github.io/2012/01/node.js/</guid>
       <description>&lt;p&gt;cdoral in &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2385#comment-3491&#34;&gt;another post&lt;/a&gt; mentions &lt;a href=&#34;http://nodejs.org/&#34; target=&#34;_blank&#34;&gt;node.js&lt;/a&gt;. I have been following this project for a while so I thought I&amp;#8217;d write a little blurb about it and include a few links for further and more in-depth information. Coincidentally, the &lt;a href=&#34;http://nodesummit.com/&#34; target=&#34;_blank&#34;&gt;Node Summit&lt;/a&gt; was held this week in SF, so there may be interesting and fresh material coming from there soon.&lt;/p&gt;
 
 &lt;p&gt;First things first: I have played with node.js for little experiments but haven&amp;#8217;t yet found an opportunity to put it to real, production use. Version 0.6 addressed some of my questions about its capabilities and performance, and it is already being used on production servers for many traffic-heavy sites like eBay or LinkedIn, so it&amp;#8217;s clearly gone beyond the experimental stage. If you are building a web service today, node.js is a technology you should consider.&lt;/p&gt;
@@ -58,10 +58,10 @@
     
     <item>
       <title>Text Editors</title>
-      <link>https://thejare.github.io/p2519</link>
+      <link>https://thejare.github.io/2011/12/text-editors/</link>
       <pubDate>Thu, 15 Dec 2011 08:48:58 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2519</guid>
+      <guid>https://thejare.github.io/2011/12/text-editors/</guid>
       <description>&lt;p&gt;Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that&amp;#8217;s just what we do.&lt;/p&gt;
 
 &lt;p&gt;Back in MS-DOS days, my editor of choice was &lt;a title=&#34;QEdit&#34; href=&#34;http://www.semware.com/&#34; target=&#34;_blank&#34;&gt;QEdit&lt;/a&gt;, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to &lt;a title=&#34;Emacs&#34; href=&#34;http://www.gnu.org/s/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt; multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.&lt;/p&gt;

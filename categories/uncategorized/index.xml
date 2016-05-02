@@ -11,10 +11,10 @@
     
     <item>
       <title>Improv math</title>
-      <link>https://thejare.github.io/p2658</link>
+      <link>https://thejare.github.io/2013/03/improv-math/</link>
       <pubDate>Sat, 16 Mar 2013 11:59:45 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2658</guid>
+      <guid>https://thejare.github.io/2013/03/improv-math/</guid>
       <description>&lt;p&gt;I always loved math and it was one of my favourite subjects during school. I have to thank my dad and my bro for instilling that love in my head. My young self was always baffled by how most people around me not only hated math, but they seemed to have a hard time with it. How could it be hard? It was all logical, you hardly needed to work or memorize anything because, hey, with just a few basics in your head you could deduce any formulas or theorems you needed during an exam, right? Heh.&lt;/p&gt;
 
 &lt;p&gt;This year I&amp;#8217;m one of the tutors for the &lt;a href=&#34;http://www.u-tad.com/masteres-2/programacion-videojuegos/&#34; target=&#34;_blank&#34;&gt;Master on Game Programming&lt;/a&gt; at the U-Tad. The subject I&amp;#8217;m teaching this course is Game Architecture: Game Objects, Main Loop and Timing, Reading &amp;amp; Saving, etc. This is the Master&amp;#8217;s debut year, so while I believe the course is going great (and students seem to agree so far), some bits and pieces are not ideal and will need improvement for the following years.&lt;/p&gt;
@@ -69,20 +69,20 @@
     
     <item>
       <title>Unity3D 3.5 mobile is free&amp;#8230;</title>
-      <link>https://thejare.github.io/p2581</link>
+      <link>https://thejare.github.io/2012/03/unity3d-3.5-mobile-is-free</link>
       <pubDate>Wed, 07 Mar 2012 03:37:03 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2581</guid>
+      <guid>https://thejare.github.io/2012/03/unity3d-3.5-mobile-is-free</guid>
       <description>&lt;p&gt;..Until April 8th. It normally costs around $800, so &lt;a href=&#34;https://store.unity3d.com/index.html&#34; target=&#34;_blank&#34;&gt;get it&lt;/a&gt; even if you don&amp;#8217;t have immediate plans to use it.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Metro and JavaScript</title>
-      <link>https://thejare.github.io/p2579</link>
+      <link>https://thejare.github.io/2012/03/metro-and-javascript/</link>
       <pubDate>Wed, 07 Mar 2012 03:18:08 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2579</guid>
+      <guid>https://thejare.github.io/2012/03/metro-and-javascript/</guid>
       <description>&lt;p&gt;On Facebook I wrote a bunch of thoughts on the fact that Windows 8 treats JavaScript as a first-class citizen for native Metro apps. It was triggered by &lt;a title=&#34;Asynchronous programming in JavaScript using promises&#34; href=&#34;http://msdn.microsoft.com/en-us/library/windows/apps/hh464930.aspx&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; and a few other related reads on WinJS.&lt;/p&gt;
 
 &lt;p&gt;In general, there is value in having a single language available for all your needs and platforms even if it&amp;#8217;s not 100% portable (look at C/C++). JavaScript is the most widely available language today and, while ugly, the popularity of runtimes like NodeJS and the myriad HTML5 mobile app wrappers like PhoneGap prove that it is viable.&lt;/p&gt;
@@ -95,10 +95,10 @@
     
     <item>
       <title>Facebook IPO and Mobile Social Games</title>
-      <link>https://thejare.github.io/p2571</link>
+      <link>https://thejare.github.io/2012/02/facebook-ipo-and-mobile-social-games/</link>
       <pubDate>Sat, 04 Feb 2012 02:45:34 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2571</guid>
+      <guid>https://thejare.github.io/2012/02/facebook-ipo-and-mobile-social-games/</guid>
       <description>&lt;p&gt;Facebook&amp;#8217;s IPO has been announced, and this means lots of details on Facebook financials have become public. The most interesting bits for social game developers (in VERY broad terms):&lt;/p&gt;
 
 &lt;ul&gt;
@@ -126,10 +126,10 @@
     
     <item>
       <title>Stage3D Vertex Buffer formats</title>
-      <link>https://thejare.github.io/p2496</link>
+      <link>https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/</link>
       <pubDate>Sat, 08 Oct 2011 02:00:59 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2496</guid>
+      <guid>https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/</guid>
       <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&amp;#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
 
 &lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color&amp;#8217;s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
@@ -213,10 +213,10 @@
     
     <item>
       <title>Fun with HTML5</title>
-      <link>https://thejare.github.io/p2473</link>
+      <link>https://thejare.github.io/2011/09/fun-with-html5/</link>
       <pubDate>Thu, 29 Sep 2011 21:50:34 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2473</guid>
+      <guid>https://thejare.github.io/2011/09/fun-with-html5/</guid>
       <description>&lt;p&gt;I have been playing around with HTML5, Canvas and WebGL. Not a lot to show for it, but at least I forced myself to write a bit again. Check it out &lt;a href=&#34;http://www.iguanademos.com/Jare/docs/html5/Lessons/&#34;&gt;here&lt;/a&gt; if you&amp;#8217;re curious, and good luck reaching a score of 150 on Lesson 5!&lt;/p&gt;
 
 &lt;p&gt;By the way, for some reason Firefox has started to run Lesson 5 rather slow in both my PCs. I&amp;#8217;m pretty sure it used to be a rock solid 60 fps back when I wrote the game, but at some point either upgrading past Firefox 5, or upgrading to Windows 7, has made it slow. Other Canvas or WebGL stuff (for example &lt;a href=&#34;http://helloracer.com/webgl/&#34;&gt;Hello Racer&lt;/a&gt;) show similar slowdowns. Chrome and Opera run everything silk smooth, so it&amp;#8217;s definitely not a hardware or drivers problem.&lt;/p&gt;
@@ -227,10 +227,10 @@
     
     <item>
       <title>Hello world again</title>
-      <link>https://thejare.github.io/p2407</link>
+      <link>https://thejare.github.io/2011/09/hello-world-again/</link>
       <pubDate>Sat, 24 Sep 2011 12:25:42 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2407</guid>
+      <guid>https://thejare.github.io/2011/09/hello-world-again/</guid>
       <description>&lt;p&gt;I may be getting interested in writing stuff again with more depth and detail, appropriate (even if small) audience, and with clearer ownership than social networks provide. Twitter is cool as a sort of RSS aggregator; Facebook has become intrusive, annoying and just generally inadequate for anything but on-the-fly photo and YouTube sharing; and Google+ has flatlined. In preparation for more writing, I have added a WordPress blog to my site, because my old blog system was fun to write but boring to maintain and extend.&lt;/p&gt;
 
 &lt;p&gt;I imported all the old content, converted the markup with a php script (destroying a bunch of stuff along the way) and deleted most of the old spam comments I could find (over 700).&lt;/p&gt;
@@ -241,10 +241,10 @@
     
     <item>
       <title>Google&#43;</title>
-      <link>https://thejare.github.io/p2391</link>
+      <link>https://thejare.github.io/2011/06/google/</link>
       <pubDate>Thu, 30 Jun 2011 22:53:54 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2391</guid>
+      <guid>https://thejare.github.io/2011/06/google/</guid>
       <description>&lt;p&gt;Catch me there:&lt;br /&gt;
 &lt;a href=&#34;https://plus.google.com/109393462510769944302/&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;https://plus.google.com/109393462510769944302/&#34;&gt;https://plus.google.com/109393462510769944302/&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -252,10 +252,10 @@
     
     <item>
       <title>Relinuxed</title>
-      <link>https://thejare.github.io/p2388</link>
+      <link>https://thejare.github.io/2011/05/relinuxed/</link>
       <pubDate>Thu, 12 May 2011 12:44:33 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2388</guid>
+      <guid>https://thejare.github.io/2011/05/relinuxed/</guid>
       <description>&lt;p&gt;Time for that old laptop to receive Ubuntu 11.04!&lt;/p&gt;
 
 &lt;p&gt;Er&amp;#8230;&lt;/p&gt;

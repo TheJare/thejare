@@ -11,10 +11,10 @@
     
     <item>
       <title>Firedemo 20th anniversary</title>
-      <link>https://thejare.github.io/p2756</link>
+      <link>https://thejare.github.io/2013/05/firedemo-20th-anniversary/</link>
       <pubDate>Sat, 04 May 2013 02:55:18 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2756</guid>
+      <guid>https://thejare.github.io/2013/05/firedemo-20th-anniversary/</guid>
       <description>&lt;p&gt;It&amp;#8217;s been nearly 20 years since we released that old fire effect and the demoscene turned out to love it. I have &lt;a href=&#34;http://www.iguanademos.com/Jare/files/Fire/&#34; target=&#34;_blank&#34;&gt;ported it to HTML5&lt;/a&gt; to celebrate!&lt;/p&gt;
 
 &lt;p&gt;It all started when we bought a math coprocessor for our &lt;sup&gt;386&lt;/sup&gt;&amp;frasl;&lt;sub&gt;25&lt;/sub&gt; and I started playing with fractals and plasmas. A few programming mistakes later, this thing came out and looked neat, so we slapped JCAB&amp;#8217;s VT player and released it. Eternal gratitude to Jester of Sanity for unknowingly lending me his fantastic &lt;a href=&#34;http://mod.haxor.fi/Jester/mod.elysium&#34; target=&#34;_blank&#34;&gt;&amp;#8216;Elysium&amp;#8217; mod&lt;/a&gt; &amp;#8211; it didn&amp;#8217;t take me long to learn that such acts were VERY badly frowned upon.&lt;/p&gt;
@@ -25,20 +25,20 @@
     
     <item>
       <title>SpainJS</title>
-      <link>https://thejare.github.io/p2628</link>
+      <link>https://thejare.github.io/2012/07/spainjs/</link>
       <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2628</guid>
+      <guid>https://thejare.github.io/2012/07/spainjs/</guid>
       <description>&lt;p&gt;Yesterday I had the honor to give a presentation at the &lt;a href=&#34;http://spainjs.org/&#34; target=&#34;_blank&#34;&gt;SpainJS&lt;/a&gt; Javascript conference in Madrid, on the topic of Videogames and Javascript. I wasted a lot of time preparing a dynamic HTML5 page for my deck of slides, which was my excuse to play with CSS 3d transitions and fancy formatting. You can see the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/&#34; target=&#34;_blank&#34;&gt;dynamic deck&lt;/a&gt; (which needs Chrome/Firefox or a similarly decent browser), the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/#all&#34; target=&#34;_blank&#34;&gt;static deck&lt;/a&gt; (should work everywhere), a &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/spainjs.pdf&#34;&gt;PDF&lt;/a&gt; I converted using &lt;a href=&#34;http://code.google.com/p/wkhtmltopdf/&#34; target=&#34;_blank&#34;&gt;wkhtmltopdf&lt;/a&gt;, the &lt;a href=&#34;https://speakerdeck.com/u/thejare/p/overview-of-javascript-in-games&#34; target=&#34;_blank&#34;&gt;Speakerdeck&lt;/a&gt;, or the &lt;a href=&#34;http://www.youtube.com/watch?v=j4JmYAVjm1c&#34; target=&#34;_blank&#34;&gt;video&lt;/a&gt;. Enjoy!&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Colors!</title>
-      <link>https://thejare.github.io/p2533</link>
+      <link>https://thejare.github.io/2011/12/colors/</link>
       <pubDate>Mon, 26 Dec 2011 10:07:57 +0000</pubDate>
       
-      <guid>https://thejare.github.io/p2533</guid>
+      <guid>https://thejare.github.io/2011/12/colors/</guid>
       <description>&lt;p&gt;Our little one loves to grab anything shiny, but is especially attracted to LCD screens of any type. He loves the netbook, the MacBook, my desktop&amp;#8217;s dual monitors, and of course the big TV, but most of all he loves the iPhone. I often activate the camera in reverse mode and let him play with it, but there&amp;#8217;s always been a problem: while he manipulates the phone, he will push some control or other and stop the camera, go to the desktop and start pushing random icons. I was wishing for some sort of &amp;#8216;baby mode&amp;#8217; where something neat would be happening on the screen, but controls would be disabled.&lt;/p&gt;
 
 &lt;p&gt;I decided to use the Sunday morning to dust off my Canvas, CSS and JavaScript skills to code, with Alba&amp;#8217;s design input and feedback, a little BabySaver that could keep his attention with bright colors, and be impossible to quit for him. &lt;a title=&#34;Colors BabySaver&#34; href=&#34;http://www.iguanademos.com/Jare/temp/html5/BabySavers/Colors/&#34; target=&#34;_blank&#34;&gt;Click here&lt;/a&gt; to see its current form. Click on the &amp;#8220;Endless&amp;#8221; button to enable interactions, otherwise any clicks will take you to my homepage.&lt;/p&gt;
