@@ -6,8 +6,18 @@
     <description>Recent content in Posts on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2014 01:52:19 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 May 2016 03:14:02 +0200</lastBuildDate>
     <atom:link href="https://thejare.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ported to Hugo</title>
+      <link>https://thejare.github.io/2016/05/ported-to-hugo/</link>
+      <pubDate>Mon, 02 May 2016 03:14:02 +0200</pubDate>
+      
+      <guid>https://thejare.github.io/2016/05/ported-to-hugo/</guid>
+      <description>&lt;p&gt;I have ported the Wordpress site to &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, an excellent static site generator. In the process I have also hosted it on GitHub Pages, at &lt;a href=&#34;https://thejare.github.io/&#34;&gt;https://thejare.github.io/&lt;/a&gt;. Some posts will be badly formatted, or missing related files.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>GDC 2014 Slides Compilation</title>
@@ -502,110 +512,6 @@
 &lt;p&gt;I haven&amp;#8217;t tried it on any Androids or Windows Phones, but I have high hopes. Now that all the boring pieces are in place I&amp;#8217;ll probably try to write more effects and sounds to see how he likes them.&lt;/p&gt;
 
 &lt;p&gt;Feedback is welcome!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Text Editors</title>
-      <link>https://thejare.github.io/2011/12/text-editors/</link>
-      <pubDate>Thu, 15 Dec 2011 08:48:58 +0000</pubDate>
-      
-      <guid>https://thejare.github.io/2011/12/text-editors/</guid>
-      <description>&lt;p&gt;Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that&amp;#8217;s just what we do.&lt;/p&gt;
-
-&lt;p&gt;Back in MS-DOS days, my editor of choice was &lt;a title=&#34;QEdit&#34; href=&#34;http://www.semware.com/&#34; target=&#34;_blank&#34;&gt;QEdit&lt;/a&gt;, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to &lt;a title=&#34;Emacs&#34; href=&#34;http://www.gnu.org/s/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt; multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.&lt;/p&gt;
-
-&lt;p&gt;After Windows 95 came and became my regular environment, the best choice was &lt;a title=&#34;Ultraedit&#34; href=&#34;http://www.ultraedit.com/&#34; target=&#34;_blank&#34;&gt;Ultraedit&lt;/a&gt;. Very soon, Microsoft Visual Studio became the compiler and IDE of choice for Win95 development, and its built-in editor proved quite powerful, so I would use Ultraedit for editing files that were not C++.&lt;/p&gt;
-
-&lt;p&gt;The big annoyance with Ultraedit was that, being a paid product, it was not readily available everywhere I could go. At work, at someone else&amp;#8217;s computer, etc. And it seemed to become more bloated with each version. I started looking for alternatives, and settled with &lt;a title=&#34;SciTE&#34; href=&#34;http://www.scintilla.org/SciTE.html&#34; target=&#34;_blank&#34;&gt;SciTE&lt;/a&gt;. SciTE is the editor built around the Scintilla text-editing component / library. It&amp;#8217;s a very powerful and extensible text editor, but the default installation is rather barebones and lacks many useful text manipulation tools. I was also bothered by the way it implemented rectangular block selections. So I started looking for alternatives again.&lt;/p&gt;
-
-&lt;p&gt;The next editor I used was &lt;a title=&#34;Notepad++&#34; href=&#34;http://notepad-plus-plus.org/&#34; target=&#34;_blank&#34;&gt;Notepad++&lt;/a&gt;, another editor built around Scintilla. Free, lots of features, and lots of free and easy to install plugins. I was completely comfortable with it, no major complaints. Ok well, yeah, one major complaint actually: the &amp;#8220;Find in Files&amp;#8221; dialog box was fixed in size, and the space available for the listbox of folders to search in was rather short. It was annoying to work with long, descriptive paths. I changed the dialog size and recompiled the editor, but it sucked to do that for every new version of the editor. The other issue with Notepad++ was that I was using Linux (Ubuntu) both at work and on my netbook, and Notepad++ is 100% Windows-only. Oh, and some of the settings are really awkward to configure. Yeah, a great editor, but a number of annoyances.&lt;/p&gt;
-
-&lt;p&gt;In text-mode terminals on Ubuntu I had been using joe for quick edits, but for any significant amount of work I slowly started using (and getting used to) &lt;a title=&#34;vim&#34; href=&#34;http://www.vim.org/&#34; target=&#34;_blank&#34;&gt;vim&lt;/a&gt; again. Since I was restless with Notepad++, I tried getting used to gvim on Windows, but despite its &lt;a href=&#34;http://www.viemu.com/a-why-vi-vim.html&#34; target=&#34;_blank&#34;&gt;many good points&lt;/a&gt;, I just could not stomach it. When working in a GUI, sorry but I need at least decent multi-file support with tabs, Ctrl-N to quickly create a scratch file, and of course my Ctrl-C and Ctrl-V and common GUI shortcuts; gvim&amp;#8217;s UI is at odds with everything else in the GUI world.&lt;/p&gt;
-
-&lt;p&gt;Then someone pointed me to &lt;a title=&#34;Sublime Text 2&#34; href=&#34;http://www.sublimetext.com/&#34; target=&#34;_blank&#34;&gt;Sublime Text 2&lt;/a&gt;. Great editor, lots of tools, features, and neat details. Works on Windows, Mac and Linux. Supports the notion of projects. Scriptable in Python, awesome! I have been using it on and off for a while to see if I really want to switch to it. It is a commercial product, and I suspect that some of the old ghosts with rectangular block selections and Find in Files will come back and deter me from ST2, but for now I&amp;#8217;m enjoying it. I wrote a little plugin to add basic Perforce integration:&lt;/p&gt;
-
-&lt;pre&gt;# Simple Perforce plugin for Sublime Text 2
-# (C) 2011 by Javier Arevalo
-# Free for anyone to use, distribute and modify
-
-# Copy this file to ST2&#39;s Data/Packages/User/perforce.py
-# Add the functions to the Tools menu with the following in a file named
-#   Data/Packages/User/Main.sublime-menu:
-#[
-#    {
-#        &#34;id&#34;: &#34;tools&#34;,
-#        &#34;children&#34;:
-#        [
-#            { &#34;caption&#34;: &#34;-&#34; },
-#            { &#34;command&#34;: &#34;p4_edit&#34;, &#34;caption&#34;: &#34;P4 Edit&#34; },
-#            { &#34;command&#34;: &#34;p4_revert&#34;, &#34;caption&#34;: &#34;P4 Revert&#34; },
-#            { &#34;command&#34;: &#34;p4_add&#34;, &#34;caption&#34;: &#34;P4 Add&#34; }
-#        ]
-#    }
-#]
-# And/or in Data/Packages/User/Context.sublime-menu:
-#[
-#    { &#34;caption&#34;: &#34;-&#34; },
-#    { &#34;command&#34;: &#34;p4_edit&#34;, &#34;caption&#34;: &#34;P4 Edit&#34; },
-#    { &#34;command&#34;: &#34;p4_revert&#34;, &#34;caption&#34;: &#34;P4 Revert&#34; },
-#    { &#34;command&#34;: &#34;p4_add&#34;, &#34;caption&#34;: &#34;P4 Add&#34; }
-#]
-
-import sublime, sublime_plugin
-import os, stat
-
-def UpdateViewWriteability(view):
-    if view.file_name():
-        if os.access(view.file_name(), os.W_OK):
-            view.set_read_only(False)
-        else:
-            view.set_read_only(True)
-
-# Detect readonly / writable files
-# These are both false for non-file buffers
-def IsWriteable(view):
-    return view.file_name() and os.access(view.file_name(), os.W_OK)
-
-def IsWriteProtected(view):
-    return view.file_name() and not os.access(view.file_name(), os.W_OK)
-
-# Event to catch buffer activation and check readonly/writeable
-# Note: Running the commands doesn&#39;t de- and re-activate the view focus,
-# so the ReadOnlyCheck event doesn&#39;t fire. We call the function manually
-# for each command.
-class ReadOnlyCheck(sublime_plugin.EventListener):
-    def on_activated(self, view):
-        UpdateViewWriteability(view)
-
-# Commands
-
-class P4EditCommand(sublime_plugin.TextCommand):
-    &#34;&#34;&#34;P4 Edit&#34;&#34;&#34;
-    def run(self, edit):
-        os.system(&#34;p4 edit \&#34;&#34; + self.view.file_name() + &#34;\&#34;&#34;)
-        UpdateViewWriteability(self.view) 
-
-    def is_enabled(self):
-        return IsWriteProtected(self.view)
-
-class P4RevertCommand(sublime_plugin.TextCommand):
-    &#34;&#34;&#34;P4 Revert if unchanged&#34;&#34;&#34;
-    def run(self, edit):
-        os.system(&#34;p4 revert -a \&#34;&#34; + self.view.file_name() + &#34;\&#34;&#34;)
-        UpdateViewWriteability(self.view)
-
-    def is_enabled(self):
-        return IsWriteable(self.view)
-
-class P4AddCommand(sublime_plugin.TextCommand):
-    &#34;&#34;&#34;P4 Add&#34;&#34;&#34;
-    def run(self, edit):
-        os.system(&#34;p4 add \&#34;&#34; + self.view.file_name() + &#34;\&#34;&#34;)
-        UpdateViewWriteability(self.view)
-
-    def is_enabled(self):
-        return IsWriteable(self.view)&lt;/pre&gt;
 </description>
     </item>
     

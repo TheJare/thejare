@@ -42,6 +42,7 @@
             <h2 class="brand-tagline"> Stuff I write </h2>
         </hgroup>
 
+        <p></p>
         <nav class="nav">
             <ul class="nav-list">
                 
@@ -90,6 +91,43 @@
             
             <div class="posts">
                 
+                <h1 class="content-subhead">08 Oct 2011, 02:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/" class="post-title">Stage3D Vertex Buffer formats</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                                
+                                    under 
+                                    
+                                    
+                                         <a class="post-category post-category-Development" href="https://thejare.github.io/categories/development">Development</a>
+                                    
+                                         <a class="post-category post-category-Uncategorized" href="https://thejare.github.io/categories/uncategorized">Uncategorized</a>
+                                    
+                                
+                            
+                        </p>
+                    </header>
+
+                    
+                        <div class="post-description">
+                            <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
+
+<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color&#8217;s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
+
+<p><strong>Vector.<Number></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
+
+                        </div>
+                        <p><a href="https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/" class="post-readmore">Read more...</a></p>
+                    
+                </section>
+                
                 <h1 class="content-subhead">06 Oct 2011, 08:06</h1>
                 <section class="post">
                     <header class="post-header">
@@ -101,20 +139,22 @@
                                 By <strong class="post-author">Jare</strong>
                             
                             
-                                under 
                                 
-                                
-                                     <a class="post-category post-category-Development" href="https://thejare.github.io/categories/development">Development</a>
+                                    under 
+                                    
+                                    
+                                         <a class="post-category post-category-Development" href="https://thejare.github.io/categories/development">Development</a>
+                                    
                                 
                             
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        <p>A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as <a href="http://www.adobe.com/devnet/flashplayer/stage3d.html" target="_blank">Stage3D</a>. Here&#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.</p>
-
-                    </div>
                     
+                        <div class="post-description">
+                            <p>A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as <a href="http://www.adobe.com/devnet/flashplayer/stage3d.html" target="_blank">Stage3D</a>. Here&#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.</p>
+
+                        </div>
                         <p><a href="https://thejare.github.io/2011/10/flash-stage-3d-is-out/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -130,19 +170,21 @@
                                 By <strong class="post-author">Jare</strong>
                             
                             
-                                under 
                                 
-                                
-                                     <a class="post-category post-category-Uncategorized" href="https://thejare.github.io/categories/uncategorized">Uncategorized</a>
+                                    under 
+                                    
+                                    
+                                         <a class="post-category post-category-Uncategorized" href="https://thejare.github.io/categories/uncategorized">Uncategorized</a>
+                                    
                                 
                             
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        I have been playing around with HTML5, Canvas and WebGL. Not a lot to show for it, but at least I forced myself to write a bit again. Check it out here if you&#8217;re curious, and good luck reaching a score of 150 on Lesson 5! By the way, for some reason Firefox has started to run Lesson 5 rather slow in both my PCs. I&#8217;m pretty sure it used to be a rock solid 60 fps back when I wrote the game, but at some point either upgrading past Firefox 5, or upgrading to Windows 7, has made it slow.
-                    </div>
                     
+                        <div class="post-description">
+                            I have been playing around with HTML5, Canvas and WebGL. Not a lot to show for it, but at least I forced myself to write a bit again. Check it out here if you&#8217;re curious, and good luck reaching a score of 150 on Lesson 5! By the way, for some reason Firefox has started to run Lesson 5 rather slow in both my PCs. I&#8217;m pretty sure it used to be a rock solid 60 fps back when I wrote the game, but at some point either upgrading past Firefox 5, or upgrading to Windows 7, has made it slow.
+                        </div>
                         <p><a href="https://thejare.github.io/2011/09/fun-with-html5/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -161,10 +203,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article first appeared as a Tip Of The Day in Flipcode. You have a bunch of rectangular pieces. You need to arrange them in a rectangular surface so that they don&rsquo;t overlap, keeping the total area of the rectangle as small as possible. This is fairly common when arranging characters in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as well. The idea of this algorithm is that, as we add rectangles, we can pre-select &ldquo;interesting&rdquo; places where we can try to add the next rectangles.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article first appeared as a Tip Of The Day in Flipcode. You have a bunch of rectangular pieces. You need to arrange them in a rectangular surface so that they don&rsquo;t overlap, keeping the total area of the rectangle as small as possible. This is fairly common when arranging characters in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as well. The idea of this algorithm is that, as we add rectangles, we can pre-select &ldquo;interesting&rdquo; places where we can try to add the next rectangles.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/rectangle-packing-code/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -183,10 +225,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article was originally found at Tip Of The Day in Flipcode. Sebastian Wagner started an interesting thread on this topic, but my response got long enough that I think a totd is more appropriate. I will explain some of the things we did in Commandos 2 and Praetorians in order to speed up load times. Notice that in Praetorians, some levels will load in one or two seconds, with five seconds maybe for the largest, so for the most part the load time.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article was originally found at Tip Of The Day in Flipcode. Sebastian Wagner started an interesting thread on this topic, but my response got long enough that I think a totd is more appropriate. I will explain some of the things we did in Commandos 2 and Praetorians in order to speed up load times. Notice that in Praetorians, some levels will load in one or two seconds, with five seconds maybe for the largest, so for the most part the load time.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/reducing-game-load-times/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -205,10 +247,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article was originally found at Code Of The Day in Flipcode. Printf-style formatting is well known, flexible and very useful in general. All the worries about unchecked parameters and so on have proven to be a non-íssue in my experience. However, it lacks parameter positioning, the way .NET allows. Why is this important for games? Any modern game needs to have a good localisation system; most game translators understand printf-style format strings and know what to do with them when they are among the text strings to be localised.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article was originally found at Code Of The Day in Flipcode. Printf-style formatting is well known, flexible and very useful in general. All the worries about unchecked parameters and so on have proven to be a non-íssue in my experience. However, it lacks parameter positioning, the way .NET allows. Why is this important for games? Any modern game needs to have a good localisation system; most game translators understand printf-style format strings and know what to do with them when they are among the text strings to be localised.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/positional-printf/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -227,10 +269,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article first appeared as a Tip Of The Day in Flipcode. This is a coding procedure we have adopted as standard in all of Pyro Studios projects. The roots of it probably come from the fact that the first Object Oriented language I learned was Borland&rsquo;s Turbo Pascal 5; it didn&rsquo;t have automatic construction or destruction calls, so you had to initialize the instances explicitly. Ok, no big deal, the real benefits were extensible classes and virtual methods.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article first appeared as a Tip Of The Day in Flipcode. This is a coding procedure we have adopted as standard in all of Pyro Studios projects. The roots of it probably come from the fact that the first Object Oriented language I learned was Borland&rsquo;s Turbo Pascal 5; it didn&rsquo;t have automatic construction or destruction calls, so you had to initialize the instances explicitly. Ok, no big deal, the real benefits were extensible classes and virtual methods.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/init-end/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -249,10 +291,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article first appeared as a Tip Of The Day in Flipcode. I explain a macro trick used by the authors of the BASS sound library to help with dynamic loading of the DLL; then I introduce a way to make it even easier to apply. Afterwards I extend the idea with a modified macro + a header file trick which useful by itself. 3 totds in one! 🙂 Last night, adding the sound library BASS (visit http://www.un4seen.com/music/) to a pet project, I noticed they had added and documented a nice trick to help people who want to load the DLL at runtime instad of static-linking it.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article first appeared as a Tip Of The Day in Flipcode. I explain a macro trick used by the authors of the BASS sound library to help with dynamic loading of the DLL; then I introduce a way to make it even easier to apply. Afterwards I extend the idea with a modified macro + a header file trick which useful by itself. 3 totds in one! 🙂 Last night, adding the sound library BASS (visit http://www.un4seen.com/music/) to a pet project, I noticed they had added and documented a nice trick to help people who want to load the DLL at runtime instad of static-linking it.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/loadlibrary-getprocaddress-fun/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -271,10 +313,10 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Importing functions from a DLL loaded at run-time via ::LoadLibrary() is a cumbersome and error-prone process. You must declare a few pointers to functions, refer to these functions by name, typecast the pointer returned by ::GetProcAddress()&hellip; bah, that may be fine for a couple functions, but when the interface starts to grow, it&rsquo;s a real pain to do. What&rsquo;s more, the DLL may be interested in using some services provided by the loading application, but ::GetProcAddress() can&rsquo;t handle that.
-                    </div>
                     
+                        <div class="post-description">
+                            Importing functions from a DLL loaded at run-time via ::LoadLibrary() is a cumbersome and error-prone process. You must declare a few pointers to functions, refer to these functions by name, typecast the pointer returned by ::GetProcAddress()&hellip; bah, that may be fine for a couple functions, but when the interface starts to grow, it&rsquo;s a real pain to do. What&rsquo;s more, the DLL may be interested in using some services provided by the loading application, but ::GetProcAddress() can&rsquo;t handle that.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/dll-interfaces/" class="post-readmore">Read more...</a></p>
                     
                 </section>
@@ -293,39 +335,11 @@
                         </p>
                     </header>
 
-                    <div class="post-description">
-                        Note: this article first appeared as a Tip Of The Day in Flipcode. The following description came up during a thread in the SWEng mailing list, and I thought it would make and interesting Tip Of The Day. Thanks to Neil Stewart for his input, and Dave Smith for bringing it up in the first place. Most games want to keep a consistent gameplay speed regardless of the framerate achieved by the visuals.
-                    </div>
                     
+                        <div class="post-description">
+                            Note: this article first appeared as a Tip Of The Day in Flipcode. The following description came up during a thread in the SWEng mailing list, and I thought it would make and interesting Tip Of The Day. Thanks to Neil Stewart for his input, and Dave Smith for bringing it up in the first place. Most games want to keep a consistent gameplay speed regardless of the framerate achieved by the visuals.
+                        </div>
                         <p><a href="https://thejare.github.io/articles/main-loop-with-fixed-time-steps/" class="post-readmore">Read more...</a></p>
-                    
-                </section>
-                
-                <h1 class="content-subhead">24 Sep 2011, 12:25</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://thejare.github.io/2011/09/hello-world-again/" class="post-title">Hello world again</a>
-
-                        <p class="post-meta">
-                            
-                                By <strong class="post-author">Jare</strong>
-                            
-                            
-                                under 
-                                
-                                
-                                     <a class="post-category post-category-Uncategorized" href="https://thejare.github.io/categories/uncategorized">Uncategorized</a>
-                                
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        I may be getting interested in writing stuff again with more depth and detail, appropriate (even if small) audience, and with clearer ownership than social networks provide. Twitter is cool as a sort of RSS aggregator; Facebook has become intrusive, annoying and just generally inadequate for anything but on-the-fly photo and YouTube sharing; and Google+ has flatlined. In preparation for more writing, I have added a WordPress blog to my site, because my old blog system was fun to write but boring to maintain and extend.
-                    </div>
-                    
-                        <p><a href="https://thejare.github.io/2011/09/hello-world-again/" class="post-readmore">Read more...</a></p>
                     
                 </section>
                 
