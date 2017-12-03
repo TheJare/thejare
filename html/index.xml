@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Htmls on Jare&#39;s Blog</title>
+    <link>https://thejare.github.io/html/</link>
+    <description>Recent content in Htmls on Jare&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://thejare.github.io/html/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://thejare.github.io/html/ld40/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/html/ld40/</guid>
+      <description>Idle Icon  html, body { width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; } #playarea { width: 96%; height: auto; margin: 1em 2%; position: relative; } #canvas { width: 100%; height: auto; background: #F0F; margin: 0; } #inventory { display: block; width: 100%; margin: 0; } .invitem { padding: 2; border: black solid 1px; box-sizing: border-box; } #score { font-family: Arial, Helvetica, sans-serif; font-size: 3vw; color: yellow; position:absolute; top: 1vw; left: 3vw; text-shadow: 0.</description>
+    </item>
+    
+  </channel>
+</rss>

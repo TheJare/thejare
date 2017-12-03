@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 May 2013 02:55:18 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/demoscene/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/demoscene/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Firedemo 20th anniversary</title>
@@ -19,8 +21,8 @@
 
 &lt;p&gt;It all started when we bought a math coprocessor for our &lt;sup&gt;386&lt;/sup&gt;&amp;frasl;&lt;sub&gt;25&lt;/sub&gt; and I started playing with fractals and plasmas. A few programming mistakes later, this thing came out and looked neat, so we slapped JCAB&amp;#8217;s VT player and released it. Eternal gratitude to Jester of Sanity for unknowingly lending me his fantastic &lt;a href=&#34;http://mod.haxor.fi/Jester/mod.elysium&#34; target=&#34;_blank&#34;&gt;&amp;#8216;Elysium&amp;#8217; mod&lt;/a&gt; &amp;#8211; it didn&amp;#8217;t take me long to learn that such acts were VERY badly frowned upon.&lt;/p&gt;
 
-&lt;p&gt;You can check out the &lt;a href=&#34;https://github.com/TheJare/FiredemoHTML5&#34; target=&#34;_blank&#34;&gt;source code on github&lt;/a&gt; if you are so inclined. The comments are slightly better this time! This version runs rather slowly on Chrome, and I don&amp;#8217;t really know why, but IE, Firefox (Win and Android) and iOS Safari work great.&lt;/p&gt;
-</description>
+&lt;p&gt;You can check out the &lt;a href=&#34;https://github.com/TheJare/FiredemoHTML5&#34; target=&#34;_blank&#34;&gt;source code on github&lt;/a&gt; if you are so inclined. The comments are slightly better this time! This version runs rather slowly on Chrome, and I don&amp;#8217;t really know why, but IE, Firefox (Win and Android) and iOS Safari work great.
+&lt;/p&gt;</description>
     </item>
     
   </channel>

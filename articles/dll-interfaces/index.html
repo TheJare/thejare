@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Windows DLL Interfacing via abstract classes &middot; Jare&#39;s Blog">
@@ -108,105 +107,96 @@
                         <p>Importing functions from a DLL loaded at run-time via ::LoadLibrary() is a cumbersome and error-prone process. You must declare a few pointers to functions, refer to these functions by name, typecast the pointer returned by ::GetProcAddress()&hellip; bah, that may be fine for a couple functions, but when the interface starts to grow, it&rsquo;s a real pain to do. What&rsquo;s more, the DLL may be interested in using some services provided by the loading application, but ::GetProcAddress() can&rsquo;t handle that. Here I present a nice and extremely simple way to do it in C++. Applications that support runtime-loaded plugins are a clear example of this situation; in fact, this technique is inspired by (read: &ldquo;ripped straight out of&rdquo;) the plugin system used it Autodesk&rsquo;s 3DStudio Max modelling package (wait, it&rsquo;s Kinetix&hellip; er, no, it&rsquo;s Discreet. Hm, never mind, by the time you read this it will have changed again).</p>
 
 <p>The idea is to put all the elements that form the interface to the DLL into an abstract class. This class will be derived by actual DLL instances, which provide the implementation of the interface. The app also provides an similar interface to the DLL. A minimal but fully working example of this can be found in this MSVC++ 6 project. A brief discussion on the technique was held in this Flipcode COTD Article by Justin Blackwell. I have tried to keep the code as simple as possible so there&rsquo;s no real error checking or other niceties.</p>
-
-<pre><code class="language-c">// --------------
-// DLLInterface.h
-// --------------
-
-#ifndef __DLLINTERFACE_H__
-#define __DLLINTERFACE_H__
-
-// Can't believe vc doesn't automate this kind of stuff
-#ifdef __DO_DLL_EXPORT__
-#define __DLL_FUNCTION__ __declspec(dllexport)
-#else
-#define __DLL_FUNCTION__ __declspec(dllimport)
-#endif
-
-// Interface that the app provides to the DLL
-class IAppInterface
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic">// DLLInterface.h
+</span><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#ifndef __DLLINTERFACE_H__
+</span><span style="color:#4c8317">#define __DLLINTERFACE_H__
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// Can&#39;t believe vc doesn&#39;t automate this kind of stuff
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#ifdef __DO_DLL_EXPORT__
+</span><span style="color:#4c8317">#define __DLL_FUNCTION__ __declspec(dllexport)
+</span><span style="color:#4c8317">#else
+</span><span style="color:#4c8317">#define __DLL_FUNCTION__ __declspec(dllimport)
+</span><span style="color:#4c8317">#endif
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// Interface that the app provides to the DLL
+</span><span style="color:#aaa;font-style:italic"></span>class IAppInterface
 {
 public:
-  virtual int Operation(int parm) = 0;
-  // ...
-};
+  virtual <span style="color:#0aa">int</span> Operation(<span style="color:#0aa">int</span> parm) = <span style="color:#099">0</span>;
+  <span style="color:#aaa;font-style:italic">// ...
+</span><span style="color:#aaa;font-style:italic"></span>};
 
-// Interface that the DLL provides to the app;
-class IDLLInterface
+<span style="color:#aaa;font-style:italic">// Interface that the DLL provides to the app;
+</span><span style="color:#aaa;font-style:italic"></span>class IDLLInterface
 {
 public:
-  virtual void MyDLLFunction(int parm) = 0;
-  // ...
-};
+  virtual <span style="color:#0aa">void</span> MyDLLFunction(<span style="color:#0aa">int</span> parm) = <span style="color:#099">0</span>;
+  <span style="color:#aaa;font-style:italic">// ...
+</span><span style="color:#aaa;font-style:italic"></span>};
 
-extern &quot;C&quot; __DLL_FUNCTION__ IDLLInterface *CreateDLLInterface(IAppInterface *pApp);
-typedef IDLLInterface *(*FuncCreateDLLInterface) (IAppInterface *pApp);
+<span style="color:#00a">extern</span> <span style="color:#a50"></span><span style="color:#a50">&#34;C&#34;</span> __DLL_FUNCTION__ IDLLInterface *CreateDLLInterface(IAppInterface *pApp);
+<span style="color:#00a">typedef</span> IDLLInterface *(*FuncCreateDLLInterface) (IAppInterface *pApp);
 
-#endif //__DLLINTERFACE_H__
-</code></pre>
-
-<pre><code class="language-c">// --------------
-// DLL.cpp
-// This is compiled as a DLL
-// --------------
-
-#include &lt;windows.h&gt;
-#include &lt;stdio.h&gt;
-
-#define __DO_DLL_EXPORT__
-#include &quot;DLLInterface.h&quot;
-
-BOOL APIENTRY DllMain( HANDLE hModule, 
+<span style="color:#4c8317">#endif //__DLLINTERFACE_H__</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic">// DLL.cpp
+</span><span style="color:#aaa;font-style:italic">// This is compiled as a DLL
+</span><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;windows.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdio.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#define __DO_DLL_EXPORT__
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;DLLInterface.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+BOOL APIENTRY <span style="color:#0a0">DllMain</span>( HANDLE hModule, 
                        DWORD  ul_reason_for_call, 
                        LPVOID lpReserved )
 {
-    return TRUE;
+    <span style="color:#00a">return</span> TRUE;
 }
 
-// Actual funcionality provided by the DLL.
-class CDLLImplementation: public IDLLInterface
+<span style="color:#aaa;font-style:italic">// Actual funcionality provided by the DLL.
+</span><span style="color:#aaa;font-style:italic"></span>class CDLLImplementation: public IDLLInterface
 {
   IAppInterface *m_pApp;
 public:
   CDLLImplementation(IAppInterface *pApp): m_pApp(pApp) { }
 
-  void MyDLLFunction(int parm) { printf(&quot;Yes, %d\n&quot;, m_pApp-&gt;Operation(parm)); }
-  // ...
-};
+  <span style="color:#0aa">void</span> MyDLLFunction(<span style="color:#0aa">int</span> parm) { printf(<span style="color:#a50"></span><span style="color:#a50">&#34;Yes, %d</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, m_pApp-&gt;Operation(parm)); }
+  <span style="color:#aaa;font-style:italic">// ...
+</span><span style="color:#aaa;font-style:italic"></span>};
 
-IDLLInterface *CreateDLLInterface(IAppInterface *pApp)
+IDLLInterface *<span style="color:#0a0">CreateDLLInterface</span>(IAppInterface *pApp)
 {
-  static CDLLImplementation dllImpl(pApp);
-  return &amp;dllImpl;
-}
-</code></pre>
-
-<pre><code class="language-c">// --------------
-// App.cpp
-// This is compiled as an EXE
-// --------------
-
-#include &lt;windows.h&gt;
-#include &quot;DLLInterface.h&quot;
-
-// Actual funcionality provided by the app.
-class CAppImplementation: public IAppInterface
+  <span style="color:#00a">static</span> CDLLImplementation dllImpl(pApp);
+  <span style="color:#00a">return</span> &amp;dllImpl;
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic">// App.cpp
+</span><span style="color:#aaa;font-style:italic">// This is compiled as an EXE
+</span><span style="color:#aaa;font-style:italic">// --------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;windows.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;DLLInterface.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// Actual funcionality provided by the app.
+</span><span style="color:#aaa;font-style:italic"></span>class CAppImplementation: public IAppInterface
 {
 public:
-  int Operation(int parm) { return parm*2; }
+  <span style="color:#0aa">int</span> Operation(<span style="color:#0aa">int</span> parm) { <span style="color:#00a">return</span> parm*<span style="color:#099">2</span>; }
 };
 
-void main()
+<span style="color:#0aa">void</span> <span style="color:#0a0">main</span>()
 {
-  HMODULE hDLL = ::LoadLibrary(&quot;DLL&quot;);
-  FuncCreateDLLInterface createFunc = (FuncCreateDLLInterface)::GetProcAddress(hDLL, &quot;CreateDLLInterface&quot;);
+  HMODULE hDLL = ::LoadLibrary(<span style="color:#a50"></span><span style="color:#a50">&#34;DLL&#34;</span>);
+  FuncCreateDLLInterface createFunc = (FuncCreateDLLInterface)::GetProcAddress(hDLL, <span style="color:#a50"></span><span style="color:#a50">&#34;CreateDLLInterface&#34;</span>);
 
   CAppImplementation App;
   IDLLInterface *pDLL = createFunc(&amp;App);
-  pDLL-&gt;MyDLLFunction(10); //Calls the DLL, which in turn calls the app back.
-}
-</code></pre>
-
+  pDLL-&gt;MyDLLFunction(<span style="color:#099">10</span>); <span style="color:#aaa;font-style:italic">//Calls the DLL, which in turn calls the app back.
+</span><span style="color:#aaa;font-style:italic"></span>}</code></pre></div>
                     </div>
                     
                 </section>

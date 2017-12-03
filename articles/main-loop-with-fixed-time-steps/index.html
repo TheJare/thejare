@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Main Loop with Fixed Time Steps &middot; Jare&#39;s Blog">
@@ -112,60 +111,51 @@
 <p>Most games want to keep a consistent gameplay speed regardless of the framerate achieved by the visuals. Given the wildly varying performance of PC hardware, this is not immediately obvious. The key idea here is the assumption that rendering takes MUCH more time than game logic.</p>
 
 <p>In our current project, we&#8217;re using a fixed timestep scheme. In the past I have worked with variable timesteps, and somehow always keep coming back to fixed. 🙂 What we do in our main game loop is, essentially:</p>
-
-<pre><code class="language-c">time0 = getTickCount();
-do
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">time0 = getTickCount();
+<span style="color:#00a">do</span>
 {
   time1 = getTickCount();
-  frameTime = 0;
-  int numLoops = 0;
+  frameTime = <span style="color:#099">0</span>;
+  <span style="color:#0aa">int</span> numLoops = <span style="color:#099">0</span>;
 
-  while ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
+  <span style="color:#00a">while</span> ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
   {
     GameTickRun();
     time0 += TICK_TIME;
     frameTime += TICK_TIME;
     numLoops++;
 
-// Could this be a good idea? We're not doing it, anyway.
-//    time1 = getTickCount();
-  }
+<span style="color:#aaa;font-style:italic">// Could this be a good idea? We&#39;re not doing it, anyway.
+</span><span style="color:#aaa;font-style:italic">//    time1 = getTickCount();
+</span><span style="color:#aaa;font-style:italic"></span>  }
   IndependentTickRun(frameTime);
 
-  // If playing solo and game logic takes way too long, discard pending
-time.
-  if (!bNetworkGame &amp;&amp; (time1 - time0) &gt; TICK_TIME)
+  <span style="color:#aaa;font-style:italic">// If playing solo and game logic takes way too long, discard pending
+</span><span style="color:#aaa;font-style:italic"></span>time.
+  <span style="color:#00a">if</span> (!bNetworkGame &amp;&amp; (time1 - time0) &gt; TICK_TIME)
     time0 = time1 - TICK_TIME;
 
-  if (canRender)
+  <span style="color:#00a">if</span> (canRender)
   {
-    // Account for numLoops overflow causing percent &gt; 1.
-
-    float percentWithinTick = Min(1.f, float(time1 - time0)/TICK_TIME);
+    <span style="color:#aaa;font-style:italic">// Account for numLoops overflow causing percent &gt; 1.
+</span><span style="color:#aaa;font-style:italic"></span>
+    <span style="color:#0aa">float</span> percentWithinTick = Min(<span style="color:#099">1.f</span>, <span style="color:#0aa">float</span>(time1 - time0)/TICK_TIME);
     GameDrawWithInterpolation(percentWithinTick);
   }
 }
-while (!bGameDone);
-</code></pre>
-
+<span style="color:#00a">while</span> (!bGameDone);</code></pre></div>
 <p>Let&#8217;s examine the main parts:</p>
-
-<pre><code class="language-c">while ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a">while</span> ((time1 - time0) &gt; TICK_TIME &amp;&amp; numLoops &lt; MAX_LOOPS)
 {
   GameTickRun();
   time0 += TICK_TIME;
   frameTime += TICK_TIME;
   numLoops++;
   time1 = getTickCount();
-}
-</code></pre>
-
+}</code></pre></div>
 <p>The concept behind this is forcing every game logic tick to represent a fixed amount of real-time (real-time is the time shown on your wristwatch). Of course, ticks better take less CPU time to execute, than the real-time it represents. For the record, a variable timestep model would look more like this:</p>
-
-<pre><code class="language-c">GameTickRun(m1-m0); // Each tick represents a varying amount of time.
-time0 = time1;
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">GameTickRun(m1-m0); <span style="color:#aaa;font-style:italic">// Each tick represents a varying amount of time.
+</span><span style="color:#aaa;font-style:italic"></span>time0 = time1;</code></pre></div>
 <p>I won&#8217;t go in the details &amp; issues of a variable timestep model, although it would make another great TOTD (hint, hint).</p>
 
 <p>Imagine the following situation: You want to have a ball rolling at a speed of 10 pixels per second (real-time seconds). You have a TICK_TIME of 50 milliseconds (20 ticks per second), which means that every tick, or call to GameTickRun(), the ball should move 0.5 pixels per tick. That&#8217;s the internal speed the game should use for each time it updates the ball&#8217;s position inside the GameTickRun() function.</p>
@@ -179,16 +169,10 @@ time0 = time1;
 <p>As for the concern that a series of game logic ticks would take more time to execute, than time they represent, that&#8217;s what MAX_LOOPS is for, to limit the amount of ticks executed before rendering. Yes I have seen this happen many times, that&#8217;s why I have added it. If you&#8217;re playing a network game you usually can&#8217;t just slow down the &#8220;game time&#8221; unless all machines do the same, so you can&#8217;t use the MAX_LOOPS guard. (I&#8217;m assuming a lockstep network model)</p>
 
 <p>I love the separation between frames (visual updates) and ticks (game logic updates), makes everything so simple.</p>
-
-<pre><code class="language-c">IndependentTickRun(frameTime);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">IndependentTickRun(frameTime);</code></pre></div>
 <p>This is where we gather user input and update the whole user interface and perform general housekeeping. 🙂 Things that don&#8217;t need to be run at a precise real-time speed. Since we want our game logic to be perfectly deterministic, the things executed here (or during rendering) must <strong>not</strong> affect the fixed-step game logic, in any way. In fact we have a run mode where we record the user commands to a file, and we can play back these commands entirely within the timestep loop above. This is an <strong>invaluable</strong> aid for debugging, and is the basis for the lockstep network model we employ.</p>
-
-<pre><code class="language-c">float percentWithinTick = Min(1.f, float(time1 - time0)/TICK_TIME);
-GameDrawWithInterpolation(percentWithinTick);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#0aa">float</span> percentWithinTick = Min(<span style="color:#099">1.f</span>, <span style="color:#0aa">float</span>(time1 - time0)/TICK_TIME);
+GameDrawWithInterpolation(percentWithinTick);</code></pre></div>
 <p>This litte thing allows us to interpolate the positions, orientations, etc of the visuals, in between game ticks. It smooths the visual aliasing caused by a non-constant framerate. Which is the case, because we run a game logic tick 15 times per second (TICK_TIME = <sup>1000</sup>&frasl;<sub>15</sub>), while displaying at framerates in the range 20-60 frames per second (fingers crossed).</p>
 
                     </div>

@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Rectangle Packing Code &middot; Jare&#39;s Blog">
@@ -120,436 +119,429 @@
 <p>I&rsquo;d be interested in hearing of other approaches to this problem. Make sure to post them on <a href="http://www.flipcode.com">http://www.flipcode.com</a>.</p>
 
 <p>File: RectPlacement.h</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : RectPlacement.h
+</span><span style="color:#aaa;font-style:italic">// Description : A class that allocates subrectangles into power-of-2 rectangles
+</span><span style="color:#aaa;font-style:italic">//               (C) Copyright 2000-2002 by Javier Arevalo
+</span><span style="color:#aaa;font-style:italic">//               This code is free to use and modify for all purposes
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#ifndef _RECT_PLACEMENT_H_
+</span><span style="color:#4c8317">#define _RECT_PLACEMENT_H_
+</span><span style="color:#4c8317"></span>
 
-<pre><code class="language-c">// --------------------------------------------------------------------------------
-// Name        : RectPlacement.h
-// Description : A class that allocates subrectangles into power-of-2 rectangles
-//               (C) Copyright 2000-2002 by Javier Arevalo
-//               This code is free to use and modify for all purposes
-// --------------------------------------------------------------------------------
-
-#ifndef _RECT_PLACEMENT_H_
-#define _RECT_PLACEMENT_H_
-
-
-#include &lt;vector&gt;
-
-// --------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------
-
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;vector&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
 class CRectPlacement
 {
   public:
 
-    // Helper classes
-    struct TPos
+    <span style="color:#aaa;font-style:italic">// Helper classes
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">struct</span> TPos
     {
-      int x, y;
+      <span style="color:#0aa">int</span> x, y;
 
       TPos() { }
-      TPos(int _x, int _y): x(_x), y(_y) { }
+      TPos(<span style="color:#0aa">int</span> _x, <span style="color:#0aa">int</span> _y): x(_x), y(_y) { }
 
-      bool operator ==(const TPos &amp;p) const { return x == p.x &amp;&amp; y == p.y; }
+      <span style="color:#0aa">bool</span> operator ==(<span style="color:#00a">const</span> TPos &amp;p) <span style="color:#00a">const</span> { <span style="color:#00a">return</span> x == p.x &amp;&amp; y == p.y; }
     };
 
-    struct TRect: public TPos
+    <span style="color:#00a">struct</span> TRect: public TPos
     {
-      int w, h;
+      <span style="color:#0aa">int</span> w, h;
 
       TRect() { }
-      TRect(int _x, int _y, int _w, int _h): TPos(_x, _y), w(_w &gt; 0? _w : 0), h(_h &gt; 0? _h : 0) { }
+      TRect(<span style="color:#0aa">int</span> _x, <span style="color:#0aa">int</span> _y, <span style="color:#0aa">int</span> _w, <span style="color:#0aa">int</span> _h): TPos(_x, _y), w(_w &gt; <span style="color:#099">0</span>? _w : <span style="color:#099">0</span>), h(_h &gt; <span style="color:#099">0</span>? _h : <span style="color:#099">0</span>) { }
 
-      bool Contains   (const TPos &amp;p)  const { return (p.x &gt;= x &amp;&amp; p.y &gt;= y &amp;&amp;
+      <span style="color:#0aa">bool</span> Contains   (<span style="color:#00a">const</span> TPos &amp;p)  <span style="color:#00a">const</span> { <span style="color:#00a">return</span> (p.x &gt;= x &amp;&amp; p.y &gt;= y &amp;&amp;
                                                        p.x &lt; (x+w) &amp;&amp; p.y &lt; (y+h)); }
-      bool Contains   (const TRect &amp;r) const { return (r.x &gt;= x &amp;&amp; r.y &gt;= y &amp;&amp;
+      <span style="color:#0aa">bool</span> Contains   (<span style="color:#00a">const</span> TRect &amp;r) <span style="color:#00a">const</span> { <span style="color:#00a">return</span> (r.x &gt;= x &amp;&amp; r.y &gt;= y &amp;&amp;
                                                        (r.x+r.w) &lt;= (x+w) &amp;&amp; (r.y+r.h) &lt;= (y+h)); }
-      bool Intersects (const TRect &amp;r) const { return w &gt; 0 &amp;&amp; h &gt; 0 &amp;&amp; r.w &gt; 0 &amp;&amp; r.h &gt; 0 &amp;&amp;
+      <span style="color:#0aa">bool</span> Intersects (<span style="color:#00a">const</span> TRect &amp;r) <span style="color:#00a">const</span> { <span style="color:#00a">return</span> w &gt; <span style="color:#099">0</span> &amp;&amp; h &gt; <span style="color:#099">0</span> &amp;&amp; r.w &gt; <span style="color:#099">0</span> &amp;&amp; r.h &gt; <span style="color:#099">0</span> &amp;&amp;
                                                       ((r.x+r.w) &gt; x &amp;&amp; r.x &lt; (x+w) &amp;&amp;
                                                        (r.y+r.h) &gt; y &amp;&amp; r.y &lt; (y+h)); }
 
-    //  Greater rect area. Not as good as the next heuristic
-    //  static bool Greater(const TRect &amp;a, const TRect &amp;b) { return a.w*a.h &gt; b.w*b.h; }
-
-      // Greater size in at least one dim.
-      static bool Greater(const TRect &amp;a, const TRect &amp;b) { return (a.w &gt; b.w &amp;&amp; a.w &gt; b.h) ||
+    <span style="color:#aaa;font-style:italic">//  Greater rect area. Not as good as the next heuristic
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">//  static bool Greater(const TRect &amp;a, const TRect &amp;b) { return a.w*a.h &gt; b.w*b.h; }
+</span><span style="color:#aaa;font-style:italic"></span>
+      <span style="color:#aaa;font-style:italic">// Greater size in at least one dim.
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#00a">static</span> <span style="color:#0aa">bool</span> Greater(<span style="color:#00a">const</span> TRect &amp;a, <span style="color:#00a">const</span> TRect &amp;b) { <span style="color:#00a">return</span> (a.w &gt; b.w &amp;&amp; a.w &gt; b.h) ||
                                                                    (a.h &gt; b.w &amp;&amp; a.h &gt; b.h); }
     };
 
-    // ---------------------
+    <span style="color:#aaa;font-style:italic">// ---------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+    <span style="color:#00a">typedef</span> std::vector&lt;TPos&gt;  CPosArray;
+    <span style="color:#00a">typedef</span> std::vector&lt;TRect&gt; CRectArray;
 
-    typedef std::vector&lt;TPos&gt;  CPosArray;
-    typedef std::vector&lt;TRect&gt; CRectArray;
-
-    // ---------------------
-
+    <span style="color:#aaa;font-style:italic">// ---------------------
+</span><span style="color:#aaa;font-style:italic"></span>
     CRectPlacement()                    { Init(); }
     ~CRectPlacement()                   { End(); }
 
-    void      Init    (int w = 1, int h = 1);
-    void      End     ();
-    bool      IsOk    ()                      const { return m_size.w &gt; 0; }
+    <span style="color:#0aa">void</span>      Init    (<span style="color:#0aa">int</span> w = <span style="color:#099">1</span>, <span style="color:#0aa">int</span> h = <span style="color:#099">1</span>);
+    <span style="color:#0aa">void</span>      <span style="color:#0a0">End</span>     ();
+    <span style="color:#0aa">bool</span>      <span style="color:#0a0">IsOk</span>    ()                      <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_size.w &gt; <span style="color:#099">0</span>; }
 
-    int       GetW    ()                      const { return m_size.w; }
-    int       GetH    ()                      const { return m_size.h; }
-    long      GetArea ()                      const { return m_area; }
-    long      GetTotalArea ()                 const { return m_size.w*m_size.h; }
+    <span style="color:#0aa">int</span>       <span style="color:#0a0">GetW</span>    ()                      <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_size.w; }
+    <span style="color:#0aa">int</span>       <span style="color:#0a0">GetH</span>    ()                      <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_size.h; }
+    <span style="color:#0aa">long</span>      <span style="color:#0a0">GetArea</span> ()                      <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_area; }
+    <span style="color:#0aa">long</span>      <span style="color:#0a0">GetTotalArea</span> ()                 <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_size.w*m_size.h; }
 
-    bool AddAtEmptySpotAutoGrow (TRect *pRect, int maxW, int maxH);
+    <span style="color:#0aa">bool</span> <span style="color:#0a0">AddAtEmptySpotAutoGrow</span> (TRect *pRect, <span style="color:#0aa">int</span> maxW, <span style="color:#0aa">int</span> maxH);
 
   private:
     TRect       m_size;
     CRectArray  m_vRects;
     CPosArray   m_vPositions;
-    long        m_area;
+    <span style="color:#0aa">long</span>        m_area;
 
-    // ---------------------
-
-    bool IsFree                 (const TRect &amp;r) const;
-    void AddPosition            (const TPos &amp;p);
-    void AddRect                (const TRect &amp;r);
-    bool AddAtEmptySpot         (TRect &amp;r);
+    <span style="color:#aaa;font-style:italic">// ---------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+    <span style="color:#0aa">bool</span> <span style="color:#0a0">IsFree</span>                 (<span style="color:#00a">const</span> TRect &amp;r) <span style="color:#00a">const</span>;
+    <span style="color:#0aa">void</span> <span style="color:#0a0">AddPosition</span>            (<span style="color:#00a">const</span> TPos &amp;p);
+    <span style="color:#0aa">void</span> <span style="color:#0a0">AddRect</span>                (<span style="color:#00a">const</span> TRect &amp;r);
+    <span style="color:#0aa">bool</span> <span style="color:#0a0">AddAtEmptySpot</span>         (TRect &amp;r);
 };
 
 
-#endif //_RECT_PLACEMENT_H_
-</code></pre>
-
+<span style="color:#4c8317">#endif //_RECT_PLACEMENT_H_</span></code></pre></div>
 <p>File: RectPlacement.cpp</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// ----------------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : RectPlacement.cpp
+</span><span style="color:#aaa;font-style:italic">// Description : A class that fits subrectangles into a power-of-2 rectangle
+</span><span style="color:#aaa;font-style:italic">//               (C) Copyright 2000-2002 by Javier Arevalo
+</span><span style="color:#aaa;font-style:italic">//               This code is free to use and modify for all purposes
+</span><span style="color:#aaa;font-style:italic">// ----------------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#aaa;font-style:italic">/*
+</span><span style="color:#aaa;font-style:italic">  You have a bunch of rectangular pieces. You need to arrange them in a 
+</span><span style="color:#aaa;font-style:italic">  rectangular surface so that they don&#39;t overlap, keeping the total area of the 
+</span><span style="color:#aaa;font-style:italic">  rectangle as small as possible. This is fairly common when arranging characters 
+</span><span style="color:#aaa;font-style:italic">  in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as 
+</span><span style="color:#aaa;font-style:italic">  well.
+</span><span style="color:#aaa;font-style:italic">
+</span><span style="color:#aaa;font-style:italic">  The idea of this algorithm is that, as we add rectangles, we can pre-select 
+</span><span style="color:#aaa;font-style:italic">  &#34;interesting&#34; places where we can try to add the next rectangles. For optimal 
+</span><span style="color:#aaa;font-style:italic">  results, the rectangles should be added in order. I initially tried using area 
+</span><span style="color:#aaa;font-style:italic">  as a sorting criteria, but it didn&#39;t work well with very tall or very flat 
+</span><span style="color:#aaa;font-style:italic">  rectangles. I then tried using the longest dimension as a selector, and it 
+</span><span style="color:#aaa;font-style:italic">  worked much better. So much for intuition...
+</span><span style="color:#aaa;font-style:italic">
+</span><span style="color:#aaa;font-style:italic">  These &#34;interesting&#34; places are just to the right and just below the currently 
+</span><span style="color:#aaa;font-style:italic">  added rectangle. The first rectangle, obviously, goes at the top left, the next 
+</span><span style="color:#aaa;font-style:italic">  one would go either to the right or below this one, and so on. It is a weird way 
+</span><span style="color:#aaa;font-style:italic">  to do it, but it seems to work very nicely.
+</span><span style="color:#aaa;font-style:italic">
+</span><span style="color:#aaa;font-style:italic">  The way we search here is fairly brute-force, the fact being that for most off-
+</span><span style="color:#aaa;font-style:italic">  line purposes the performance seems more than adequate. I have generated a 
+</span><span style="color:#aaa;font-style:italic">  japanese font with around 8500 characters and all the time was spent generating 
+</span><span style="color:#aaa;font-style:italic">  the bitmaps.
+</span><span style="color:#aaa;font-style:italic">
+</span><span style="color:#aaa;font-style:italic">  Also, for all we care, we could grow the parent rectangle in a different way 
+</span><span style="color:#aaa;font-style:italic">  than power of two. It just happens that power of 2 is very convenient for 
+</span><span style="color:#aaa;font-style:italic">  graphics hardware textures.
+</span><span style="color:#aaa;font-style:italic">
+</span><span style="color:#aaa;font-style:italic">  I&#39;d be interested in hearing of other approaches to this problem. Make sure
+</span><span style="color:#aaa;font-style:italic">  to post them on http://www.flipcode.com
+</span><span style="color:#aaa;font-style:italic">*/</span>
 
-<pre><code class="language-c">// ----------------------------------------------------------------------------------------
-// Name        : RectPlacement.cpp
-// Description : A class that fits subrectangles into a power-of-2 rectangle
-//               (C) Copyright 2000-2002 by Javier Arevalo
-//               This code is free to use and modify for all purposes
-// ----------------------------------------------------------------------------------------
-
-/*
-  You have a bunch of rectangular pieces. You need to arrange them in a 
-  rectangular surface so that they don't overlap, keeping the total area of the 
-  rectangle as small as possible. This is fairly common when arranging characters 
-  in a bitmapped font, lightmaps for a 3D engine, and I guess other situations as 
-  well.
-
-  The idea of this algorithm is that, as we add rectangles, we can pre-select 
-  &quot;interesting&quot; places where we can try to add the next rectangles. For optimal 
-  results, the rectangles should be added in order. I initially tried using area 
-  as a sorting criteria, but it didn't work well with very tall or very flat 
-  rectangles. I then tried using the longest dimension as a selector, and it 
-  worked much better. So much for intuition...
-
-  These &quot;interesting&quot; places are just to the right and just below the currently 
-  added rectangle. The first rectangle, obviously, goes at the top left, the next 
-  one would go either to the right or below this one, and so on. It is a weird way 
-  to do it, but it seems to work very nicely.
-
-  The way we search here is fairly brute-force, the fact being that for most off-
-  line purposes the performance seems more than adequate. I have generated a 
-  japanese font with around 8500 characters and all the time was spent generating 
-  the bitmaps.
-
-  Also, for all we care, we could grow the parent rectangle in a different way 
-  than power of two. It just happens that power of 2 is very convenient for 
-  graphics hardware textures.
-
-  I'd be interested in hearing of other approaches to this problem. Make sure
-  to post them on http://www.flipcode.com
-*/
-
-#include &quot;RectPlacement.h&quot;
-
-// --------------------------------------------------------------------------------
-// Name        : 
-// Description : 
-// --------------------------------------------------------------------------------
-void CRectPlacement::Init    (int w, int h)
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;RectPlacement.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : 
+</span><span style="color:#aaa;font-style:italic">// Description : 
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> CRectPlacement::Init    (<span style="color:#0aa">int</span> w, <span style="color:#0aa">int</span> h)
 {
   End();
-  m_size = TRect(0, 0, w, h);
-  m_vPositions.push_back(TPos(0,0));
-  m_area = 0;
+  m_size = TRect(<span style="color:#099">0</span>, <span style="color:#099">0</span>, w, h);
+  m_vPositions.push_back(TPos(<span style="color:#099">0</span>,<span style="color:#099">0</span>));
+  m_area = <span style="color:#099">0</span>;
 }
 
 
-// --------------------------------------------------------------------------------
-// Name        : 
-// Description : 
-// --------------------------------------------------------------------------------
-void CRectPlacement::End     ()
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : 
+</span><span style="color:#aaa;font-style:italic">// Description : 
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> CRectPlacement::End     ()
 {
   m_vPositions.clear();
   m_vRects.clear();
-  m_size.w = 0;
+  m_size.w = <span style="color:#099">0</span>;
 }
 
-// --------------------------------------------------------------------------------
-// Name        : IsFree
-// Description : Check if the given rectangle is partially or totally used
-// --------------------------------------------------------------------------------
-bool CRectPlacement::IsFree (const TRect &amp;r) const
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : IsFree
+</span><span style="color:#aaa;font-style:italic">// Description : Check if the given rectangle is partially or totally used
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">bool</span> CRectPlacement::IsFree (<span style="color:#00a">const</span> TRect &amp;r) <span style="color:#00a">const</span>
 {
-  if (!m_size.Contains(r))
-    return false;
-  for (CRectArray::const_iterator it = m_vRects.begin();
+  <span style="color:#00a">if</span> (!m_size.Contains(r))
+    <span style="color:#00a">return</span> <span style="color:#0aa">false</span>;
+  <span style="color:#00a">for</span> (CRectArray::const_iterator it = m_vRects.begin();
        it != m_vRects.end();
        ++it)
-    if (it-&gt;Intersects(r))
-      return false;
-  return true;
+    <span style="color:#00a">if</span> (it-&gt;Intersects(r))
+      <span style="color:#00a">return</span> <span style="color:#0aa">false</span>;
+  <span style="color:#00a">return</span> <span style="color:#0aa">true</span>;
 }
 
 
-// --------------------------------------------------------------------------------
-// Name        : AddPosition
-// Description : Add new anchor point
-// --------------------------------------------------------------------------------
-void CRectPlacement::AddPosition    (const TPos &amp;p)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : AddPosition
+</span><span style="color:#aaa;font-style:italic">// Description : Add new anchor point
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> CRectPlacement::AddPosition    (<span style="color:#00a">const</span> TPos &amp;p)
 {
-  // Try to insert anchor as close as possible to the top left corner
-  // So it will be tried first
-  bool bFound = false;
+  <span style="color:#aaa;font-style:italic">// Try to insert anchor as close as possible to the top left corner
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#aaa;font-style:italic">// So it will be tried first
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#0aa">bool</span> bFound = <span style="color:#0aa">false</span>;
   CPosArray::iterator it;
-  for (it = m_vPositions.begin();
+  <span style="color:#00a">for</span> (it = m_vPositions.begin();
        !bFound &amp;&amp; it != m_vPositions.end();
        ++it)
   {
-    if (p.x+p.y &lt; it-&gt;x+it-&gt;y)
-      bFound = true;
+    <span style="color:#00a">if</span> (p.x+p.y &lt; it-&gt;x+it-&gt;y)
+      bFound = <span style="color:#0aa">true</span>;
   }
-  if (bFound)
+  <span style="color:#00a">if</span> (bFound)
     m_vPositions.insert(it, p);
-  else
+  <span style="color:#00a">else</span>
 
     m_vPositions.push_back(p);
 }
 
-// --------------------------------------------------------------------------------
-// Name        : AddRect
-// Description : Add the given rect and updates anchor points
-// --------------------------------------------------------------------------------
-void CRectPlacement::AddRect  (const TRect &amp;r)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : AddRect
+</span><span style="color:#aaa;font-style:italic">// Description : Add the given rect and updates anchor points
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> CRectPlacement::AddRect  (<span style="color:#00a">const</span> TRect &amp;r)
 {
   m_vRects.push_back(r);
   m_area += r.w*r.h;
 
-  // Add two new anchor points
-  AddPosition(TPos(r.x, r.y+r.h));
+  <span style="color:#aaa;font-style:italic">// Add two new anchor points
+</span><span style="color:#aaa;font-style:italic"></span>  AddPosition(TPos(r.x, r.y+r.h));
   AddPosition(TPos(r.x+r.w, r.y));
 }
 
-// --------------------------------------------------------------------------------
-// Name        : AddAtEmptySpot
-// Description : Add the given rectangle
-// --------------------------------------------------------------------------------
-bool CRectPlacement::AddAtEmptySpot   (TRect &amp;r)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : AddAtEmptySpot
+</span><span style="color:#aaa;font-style:italic">// Description : Add the given rectangle
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">bool</span> CRectPlacement::AddAtEmptySpot   (TRect &amp;r)
 {
-  // Find a valid spot among available anchors.
-
-  bool bFound = false;
+  <span style="color:#aaa;font-style:italic">// Find a valid spot among available anchors.
+</span><span style="color:#aaa;font-style:italic"></span>
+  <span style="color:#0aa">bool</span> bFound = <span style="color:#0aa">false</span>;
   CPosArray::iterator it;
-  for (it = m_vPositions.begin();
+  <span style="color:#00a">for</span> (it = m_vPositions.begin();
        !bFound &amp;&amp; it != m_vPositions.end();
        ++it)
   {
     TRect Rect(it-&gt;x, it-&gt;y, r.w, r.h);
 
-    if (IsFree(Rect))
+    <span style="color:#00a">if</span> (IsFree(Rect))
     {
       r = Rect;
-      bFound = true;
-      break; // Don't let the loop increase the iterator.
-    }
+      bFound = <span style="color:#0aa">true</span>;
+      <span style="color:#00a">break</span>; <span style="color:#aaa;font-style:italic">// Don&#39;t let the loop increase the iterator.
+</span><span style="color:#aaa;font-style:italic"></span>    }
   }
-  if (bFound)
+  <span style="color:#00a">if</span> (bFound)
   {
-    // Remove the used anchor point
-    m_vPositions.erase(it);
+    <span style="color:#aaa;font-style:italic">// Remove the used anchor point
+</span><span style="color:#aaa;font-style:italic"></span>    m_vPositions.erase(it);
 
-    // Sometimes, anchors end up displaced from the optimal position
-    // due to irregular sizes of the subrects.
-    // So, try to adjut it up &amp; left as much as possible.
-    for (int x = 1; x &lt;= r.x; x++)
-      if (!IsFree(TRect(r.x - x, r.y, r.w, r.h)))
-        break;
-    for (int y = 1; y &lt;= r.y; y++)
-      if (!IsFree(TRect(r.x, r.y - y, r.w, r.h)))
-        break;
-    if (y &gt; x)
-      r.y -= y-1;
-    else
+    <span style="color:#aaa;font-style:italic">// Sometimes, anchors end up displaced from the optimal position
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">// due to irregular sizes of the subrects.
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">// So, try to adjut it up &amp; left as much as possible.
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> x = <span style="color:#099">1</span>; x &lt;= r.x; x++)
+      <span style="color:#00a">if</span> (!IsFree(TRect(r.x - x, r.y, r.w, r.h)))
+        <span style="color:#00a">break</span>;
+    <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> y = <span style="color:#099">1</span>; y &lt;= r.y; y++)
+      <span style="color:#00a">if</span> (!IsFree(TRect(r.x, r.y - y, r.w, r.h)))
+        <span style="color:#00a">break</span>;
+    <span style="color:#00a">if</span> (y &gt; x)
+      r.y -= y-<span style="color:#099">1</span>;
+    <span style="color:#00a">else</span>
 
-      r.x -= x-1;
+      r.x -= x-<span style="color:#099">1</span>;
     AddRect(r);
   }
-  return bFound;
+  <span style="color:#00a">return</span> bFound;
 }
 
 
-// --------------------------------------------------------------------------------
-// Name        : AddAtEmptySpotAutoGrow
-// Description : Add a rectangle of the given size, growing our area if needed
-//               Area grows only until the max given.
-//               Returns the placement of the rect in the rect's x,y coords
-// --------------------------------------------------------------------------------
-
-bool CRectPlacement::AddAtEmptySpotAutoGrow   (TRect *pRect, int maxW, int maxH)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : AddAtEmptySpotAutoGrow
+</span><span style="color:#aaa;font-style:italic">// Description : Add a rectangle of the given size, growing our area if needed
+</span><span style="color:#aaa;font-style:italic">//               Area grows only until the max given.
+</span><span style="color:#aaa;font-style:italic">//               Returns the placement of the rect in the rect&#39;s x,y coords
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#0aa">bool</span> CRectPlacement::AddAtEmptySpotAutoGrow   (TRect *pRect, <span style="color:#0aa">int</span> maxW, <span style="color:#0aa">int</span> maxH)
 {
-  if (pRect-&gt;w &lt;= 0)
-    return true;
+  <span style="color:#00a">if</span> (pRect-&gt;w &lt;= <span style="color:#099">0</span>)
+    <span style="color:#00a">return</span> <span style="color:#0aa">true</span>;
 
-  int orgW = m_size.w;
-  int orgH = m_size.h;
+  <span style="color:#0aa">int</span> orgW = m_size.w;
+  <span style="color:#0aa">int</span> orgH = m_size.h;
 
-  // Try to add it in the existing space
-  while (!AddAtEmptySpot(*pRect))
+  <span style="color:#aaa;font-style:italic">// Try to add it in the existing space
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">while</span> (!AddAtEmptySpot(*pRect))
   {
-    int pw = m_size.w;
-    int ph = m_size.h;
+    <span style="color:#0aa">int</span> pw = m_size.w;
+    <span style="color:#0aa">int</span> ph = m_size.h;
 
-    // Sanity check - if area is complete.
-    if (pw &gt;= maxW &amp;&amp; ph &gt;= maxH)
+    <span style="color:#aaa;font-style:italic">// Sanity check - if area is complete.
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">if</span> (pw &gt;= maxW &amp;&amp; ph &gt;= maxH)
     {
       m_size.w = orgW;
       m_size.h = orgH;
-      return false;
+      <span style="color:#00a">return</span> <span style="color:#0aa">false</span>;
     }
 
-    // Try growing the smallest dim
-    if (pw &lt; maxW &amp;&amp; (pw &lt; ph || ((pw == ph) &amp;&amp; (pRect-&gt;w &gt;= pRect-&gt;h))))
-      m_size.w = pw*2;
-    else
-      m_size.h = ph*2;
-    if (AddAtEmptySpot(*pRect))
-      break;
+    <span style="color:#aaa;font-style:italic">// Try growing the smallest dim
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">if</span> (pw &lt; maxW &amp;&amp; (pw &lt; ph || ((pw == ph) &amp;&amp; (pRect-&gt;w &gt;= pRect-&gt;h))))
+      m_size.w = pw*<span style="color:#099">2</span>;
+    <span style="color:#00a">else</span>
+      m_size.h = ph*<span style="color:#099">2</span>;
+    <span style="color:#00a">if</span> (AddAtEmptySpot(*pRect))
+      <span style="color:#00a">break</span>;
 
-    // Try growing the other dim instead
-    if (pw != m_size.w)
+    <span style="color:#aaa;font-style:italic">// Try growing the other dim instead
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">if</span> (pw != m_size.w)
     {
       m_size.w = pw;
-      if (ph &lt; maxW)
-        m_size.h = ph*2;
+      <span style="color:#00a">if</span> (ph &lt; maxW)
+        m_size.h = ph*<span style="color:#099">2</span>;
     }
-    else
+    <span style="color:#00a">else</span>
     {
       m_size.h = ph;
-      if (pw &lt; maxW)
-        m_size.w = pw*2;
+      <span style="color:#00a">if</span> (pw &lt; maxW)
+        m_size.w = pw*<span style="color:#099">2</span>;
     }
 
-    if (pw != m_size.w || ph != m_size.h)
-      if (AddAtEmptySpot(*pRect))
-        break;
+    <span style="color:#00a">if</span> (pw != m_size.w || ph != m_size.h)
+      <span style="color:#00a">if</span> (AddAtEmptySpot(*pRect))
+        <span style="color:#00a">break</span>;
 
-    // Grow both if possible, and reloop.
-    m_size.w = pw;
+    <span style="color:#aaa;font-style:italic">// Grow both if possible, and reloop.
+</span><span style="color:#aaa;font-style:italic"></span>    m_size.w = pw;
     m_size.h = ph;
-    if (pw &lt; maxW)
-      m_size.w = pw*2;
-    if (ph &lt; maxH)
-      m_size.h = ph*2;
+    <span style="color:#00a">if</span> (pw &lt; maxW)
+      m_size.w = pw*<span style="color:#099">2</span>;
+    <span style="color:#00a">if</span> (ph &lt; maxH)
+      m_size.h = ph*<span style="color:#099">2</span>;
   }
-  return true;
-}
-</code></pre>
-
+  <span style="color:#00a">return</span> <span style="color:#0aa">true</span>;
+}</code></pre></div>
 <p>File: Test.cpp</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// ----------------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : Test.cpp
+</span><span style="color:#aaa;font-style:italic">// Description : Test the RectPlacement class
+</span><span style="color:#aaa;font-style:italic">//               (C) Copyright 2000-2002 by Javier Arevalo
+</span><span style="color:#aaa;font-style:italic">//               This code is free to use and modify for all purposes
+</span><span style="color:#aaa;font-style:italic">// ----------------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdio.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;algorithm&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;RectPlacement.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#define MAX_TEXTURE_W 256
+</span><span style="color:#4c8317">#define MAX_TEXTURE_H 256
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#define NUM_SUBRECTS  500
+</span><span style="color:#4c8317">#define MIN_SUBRECT    15
+</span><span style="color:#4c8317">#define MAX_SUBRECT    50
+</span><span style="color:#4c8317"></span>
 
-<pre><code class="language-c">// ----------------------------------------------------------------------------------------
-// Name        : Test.cpp
-// Description : Test the RectPlacement class
-//               (C) Copyright 2000-2002 by Javier Arevalo
-//               This code is free to use and modify for all purposes
-// ----------------------------------------------------------------------------------------
-
-#include &lt;stdio.h&gt;
-#include &lt;algorithm&gt;
-
-#include &quot;RectPlacement.h&quot;
-
-#define MAX_TEXTURE_W 256
-#define MAX_TEXTURE_H 256
-
-#define NUM_SUBRECTS  500
-#define MIN_SUBRECT    15
-#define MAX_SUBRECT    50
-
-
-// --------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------
-
-struct TSubRect: public CRectPlacement::TRect
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#00a">struct</span> TSubRect: public CRectPlacement::TRect
 {
-  int n;      // Original index of this subrect, before sorting
-  int nTex;   // Texture in which this subrect will be placed.
-
+  <span style="color:#0aa">int</span> n;      <span style="color:#aaa;font-style:italic">// Original index of this subrect, before sorting
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#0aa">int</span> nTex;   <span style="color:#aaa;font-style:italic">// Texture in which this subrect will be placed.
+</span><span style="color:#aaa;font-style:italic"></span>
   TSubRect() { }
-  TSubRect(int _w, int _h, int _n): TRect(0, 0, _w, _h), n(_n), nTex(0) { }
+  TSubRect(<span style="color:#0aa">int</span> _w, <span style="color:#0aa">int</span> _h, <span style="color:#0aa">int</span> _n): TRect(<span style="color:#099">0</span>, <span style="color:#099">0</span>, _w, _h), n(_n), nTex(<span style="color:#099">0</span>) { }
 };
 
-// --------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#00a">typedef</span> std::vector&lt;TSubRect&gt;       CSubRectArray;
+<span style="color:#00a">typedef</span> std::vector&lt;CRectPlacement&gt; CTextureArray;
 
-typedef std::vector&lt;TSubRect&gt;       CSubRectArray;
-typedef std::vector&lt;CRectPlacement&gt; CTextureArray;
-
-// --------------------------------------------------------------------------------
-// Name        : CreateLetters
-// Description : Here's where you calculate your rectangles,
-// --------------------------------------------------------------------------------
-
-void CreateLetters  (CSubRectArray &amp;vecSubRects)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : CreateLetters
+</span><span style="color:#aaa;font-style:italic">// Description : Here&#39;s where you calculate your rectangles,
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#0aa">void</span> <span style="color:#0a0">CreateLetters</span>  (CSubRectArray &amp;vecSubRects)
 {
   vecSubRects.clear();
 
-  // Let's just fill this with random stuff
-  for (int i = 0; i &lt; NUM_SUBRECTS; i++)
+  <span style="color:#aaa;font-style:italic">// Let&#39;s just fill this with random stuff
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; i &lt; NUM_SUBRECTS; i++)
     vecSubRects.push_back(TSubRect((rand() % MAX_SUBRECT) + MIN_SUBRECT,
                                    (rand() % MAX_SUBRECT) + MIN_SUBRECT, i));
 }
 
-// --------------------------------------------------------------------------------
-// Name        : CreateTextures
-// Description : Create array of textures containing all subrects
-// --------------------------------------------------------------------------------
-void CreateTextures (CTextureArray &amp;vecTextures, CSubRectArray &amp;vecSubRects, int maxTexW, int maxTexH)
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : CreateTextures
+</span><span style="color:#aaa;font-style:italic">// Description : Create array of textures containing all subrects
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> <span style="color:#0a0">CreateTextures</span> (CTextureArray &amp;vecTextures, CSubRectArray &amp;vecSubRects, <span style="color:#0aa">int</span> maxTexW, <span style="color:#0aa">int</span> maxTexH)
 {
-  // Sort the subRects based on dimensions, larger dimension goes first.
-  std::sort(vecSubRects.begin(), vecSubRects.end(), CRectPlacement::TRect::Greater);
+  <span style="color:#aaa;font-style:italic">// Sort the subRects based on dimensions, larger dimension goes first.
+</span><span style="color:#aaa;font-style:italic"></span>  std::sort(vecSubRects.begin(), vecSubRects.end(), CRectPlacement::TRect::Greater);
 
-  // Generate the first texture
-  vecTextures.clear();
+  <span style="color:#aaa;font-style:italic">// Generate the first texture
+</span><span style="color:#aaa;font-style:italic"></span>  vecTextures.clear();
   vecTextures.push_back(CRectPlacement());
 
-  // Add all subrects
-  for (CSubRectArray::iterator it = vecSubRects.begin();
+  <span style="color:#aaa;font-style:italic">// Add all subrects
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">for</span> (CSubRectArray::iterator it = vecSubRects.begin();
        it != vecSubRects.end();
        ++it)
   {
-    // We make sure we leave one pixel between subrects, so texels don't bleed with bilinear.
-    CRectPlacement::TRect r(0, 0, it-&gt;w+1, it-&gt;h+1);
+    <span style="color:#aaa;font-style:italic">// We make sure we leave one pixel between subrects, so texels don&#39;t bleed with bilinear.
+</span><span style="color:#aaa;font-style:italic"></span>    CRectPlacement::TRect r(<span style="color:#099">0</span>, <span style="color:#099">0</span>, it-&gt;w+<span style="color:#099">1</span>, it-&gt;h+<span style="color:#099">1</span>);
 
-    // If an existing texture has actual space
-    bool bPlaced = false;
-    for (int i = 0; !bPlaced &amp;&amp; i &lt; vecTextures.size(); i++)
+    <span style="color:#aaa;font-style:italic">// If an existing texture has actual space
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#0aa">bool</span> bPlaced = <span style="color:#0aa">false</span>;
+    <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; !bPlaced &amp;&amp; i &lt; vecTextures.size(); i++)
     {
       bPlaced = vecTextures[i].AddAtEmptySpotAutoGrow(&amp;r, maxTexW, maxTexH);
-      if (bPlaced)
+      <span style="color:#00a">if</span> (bPlaced)
         it-&gt;nTex = i;
     }
 
-    // Try starting a new texture and fit the rect in there
-    if (!bPlaced)
+    <span style="color:#aaa;font-style:italic">// Try starting a new texture and fit the rect in there
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">if</span> (!bPlaced)
     {
       vecTextures.push_back(CRectPlacement());
-      bPlaced = vecTextures[vecTextures.size()-1].AddAtEmptySpotAutoGrow(&amp;r, maxTexW, maxTexH);
-      if (bPlaced)
-        it-&gt;nTex = vecTextures.size()-1;
-      else
-        printf(&quot;ERROR: Subrect is too big to fit in texture!&quot;, it-&gt;w, it-&gt;h);
+      bPlaced = vecTextures[vecTextures.size()-<span style="color:#099">1</span>].AddAtEmptySpotAutoGrow(&amp;r, maxTexW, maxTexH);
+      <span style="color:#00a">if</span> (bPlaced)
+        it-&gt;nTex = vecTextures.size()-<span style="color:#099">1</span>;
+      <span style="color:#00a">else</span>
+        printf(<span style="color:#a50"></span><span style="color:#a50">&#34;ERROR: Subrect is too big to fit in texture!&#34;</span>, it-&gt;w, it-&gt;h);
     }
 
-    // If correctly placed in a texture, the coords are returned in r.x and r.y
-    // Store them.
-    if (bPlaced)
+    <span style="color:#aaa;font-style:italic">// If correctly placed in a texture, the coords are returned in r.x and r.y
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">// Store them.
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#00a">if</span> (bPlaced)
     {
       it-&gt;x = r.x;
       it-&gt;y = r.y;
@@ -557,11 +549,11 @@ void CreateTextures (CTextureArray &amp;vecTextures, CSubRectArray &amp;vecSubRe
   }
 }
 
-// --------------------------------------------------------------------------------
-// Name        : main
-// Description : heh
-// --------------------------------------------------------------------------------
-int main()
+<span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// Name        : main
+</span><span style="color:#aaa;font-style:italic">// Description : heh
+</span><span style="color:#aaa;font-style:italic">// --------------------------------------------------------------------------------
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">int</span> <span style="color:#0a0">main</span>()
 {
   CTextureArray vecTextures;
   CSubRectArray vecSubRects;
@@ -570,30 +562,28 @@ int main()
   CreateTextures(vecTextures, vecSubRects, MAX_TEXTURE_W, MAX_TEXTURE_H);
 
   {
-    for (CSubRectArray::const_iterator it = vecSubRects.begin();
+    <span style="color:#00a">for</span> (CSubRectArray::const_iterator it = vecSubRects.begin();
          it != vecSubRects.end();
          ++it)
     {
-      printf(&quot;Subrect %d (originally %d), size %dx%d, goes into texture %d at pos %d,%d\n&quot;,
+      printf(<span style="color:#a50"></span><span style="color:#a50">&#34;Subrect %d (originally %d), size %dx%d, goes into texture %d at pos %d,%d</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>,
              it - vecSubRects.begin(), it-&gt;n, it-&gt;w, it-&gt;h, it-&gt;nTex, it-&gt;x, it-&gt;y);
     }
   }
 
-  printf(&quot;Created a total of %d textures\n&quot;, vecTextures.size());
+  printf(<span style="color:#a50"></span><span style="color:#a50">&#34;Created a total of %d textures</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, vecTextures.size());
   {
-    for (CTextureArray::const_iterator it = vecTextures.begin();
+    <span style="color:#00a">for</span> (CTextureArray::const_iterator it = vecTextures.begin();
          it != vecTextures.end();
          ++it)
     {
-      printf(&quot;  Texture %d, size %dx%d, Coverage %d / %d (%d%%)\n&quot;,
+      printf(<span style="color:#a50"></span><span style="color:#a50">&#34;  Texture %d, size %dx%d, Coverage %d / %d (%d%%)</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>,
              it - vecTextures.begin(), it-&gt;GetW(), it-&gt;GetH(),
-             it-&gt;GetArea(), it-&gt;GetTotalArea(), it-&gt;GetArea()*100/it-&gt;GetTotalArea());
+             it-&gt;GetArea(), it-&gt;GetTotalArea(), it-&gt;GetArea()*<span style="color:#099">100</span>/it-&gt;GetTotalArea());
     }
   }
-  return 0;
-}
-</code></pre>
-
+  <span style="color:#00a">return</span> <span style="color:#099">0</span>;
+}</code></pre></div>
                     </div>
                     
                 </section>

@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="C&#43;&#43; Object Initialization and Finalization Protocol &middot; Jare&#39;s Blog">
@@ -115,13 +114,10 @@
 Constructor: Does not receive parameters, and its body simply assigns a specific value to one member field.
 Destructor: Simply calls the End() member funcion
 It will have at least the following member functions:</p>
-
-<pre><code class="language-c">bool Init(...);     // Whatever initialization parameters actually needed.
-void End();         // No parameters and no return value for finalization.
-
-bool IsOk() const;  // Typically will be inlined.
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#0aa">bool</span> <span style="color:#0a0">Init</span>(...);     <span style="color:#aaa;font-style:italic">// Whatever initialization parameters actually needed.
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">void</span> <span style="color:#0a0">End</span>();         <span style="color:#aaa;font-style:italic">// No parameters and no return value for finalization.
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#0aa">bool</span> <span style="color:#0a0">IsOk</span>() <span style="color:#00a">const</span>;  // Typically will be inlined.</code></pre></div>
 <p>The Init() funcion may have parameters, and the return value is some sort of error code indicating whether the object was properly initialized (error codes are a whole separate topic worth its own tip of the day).</p>
 
 <p>The End() funcion never gets parameters, which means that the object must remember any potential piece of data necessary for freeing its resources.</p>
@@ -133,103 +129,91 @@ bool IsOk() const;  // Typically will be inlined.
 <p>Any other member functions may check the IsOk() state before going to perform their operations. In many cases you will want to use assert() to flag as a programming error any attempts to use an object which failed to initialize properly.</p>
 
 <p>This is a typical implementation:</p>
-
-<pre><code class="language-c">---- File InitEndTest.h ----
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">---- File InitEndTest.h ----
 
 class CInitEndTest
 {
   public:
-    CInitEndTest    (): m_bOk(false)   { }
+    CInitEndTest    (): m_bOk(<span style="color:#0aa">false</span>)   { }
     ~CInitEndTest   ()                 { End(); }
 
-    bool    Init    (parameters);
-    void    End     ();
-    bool    IsOk    ()           const { return m_bOk; }
+    <span style="color:#0aa">bool</span>    Init    (parameters);
+    <span style="color:#0aa">void</span>    <span style="color:#0a0">End</span>     ();
+    <span style="color:#0aa">bool</span>    <span style="color:#0a0">IsOk</span>    ()           <span style="color:#00a">const</span> { <span style="color:#00a">return</span> m_bOk; }
 
-    void    DoStuff ();
+    <span style="color:#0aa">void</span>    <span style="color:#0a0">DoStuff</span> ();
 
   private:
-    bool    m_bOk;
-};
-</code></pre>
+    <span style="color:#0aa">bool</span>    m_bOk;
+};</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">---- File InitEndTest.cpp ----
 
-<pre><code class="language-c">---- File InitEndTest.cpp ----
-
-#include &quot;InitEndTest.h&quot;
-
-bool CInitEndTest::Init(parameters)
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;InitEndTest.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#0aa">bool</span> CInitEndTest::Init(parameters)
 {
   End();
-  // ... perform initializations
-  // ... set m_bOk to true if everything goes right.
-  return m_bOk;
+  <span style="color:#aaa;font-style:italic">// ... perform initializations
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#aaa;font-style:italic">// ... set m_bOk to true if everything goes right.
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">return</span> m_bOk;
 }
 
-void CInitEndTest::End()
+<span style="color:#0aa">void</span> CInitEndTest::End()
 {
-  if (m_bOk)
+  <span style="color:#00a">if</span> (m_bOk)
   {
-    // Free resources.
-    m_bOk = false;
+    <span style="color:#aaa;font-style:italic">// Free resources.
+</span><span style="color:#aaa;font-style:italic"></span>    m_bOk = <span style="color:#0aa">false</span>;
   }
 }
 
-void CInitEndTest::DoStuff()
+<span style="color:#0aa">void</span> CInitEndTest::DoStuff()
 {
   ASSERT(IsOk());
-  // Actually do the stuff
-}
-</code></pre>
-
+  <span style="color:#aaa;font-style:italic">// Actually do the stuff
+</span><span style="color:#aaa;font-style:italic"></span>}</code></pre></div>
 <p>When you derive a new class from one that uses this protocol, you should be calling the base&rsquo;s Init() and End() functions at the right places, instead of messing around with the m_bOk member. If you use virtual functions and polymorphic behaviour, then both the destructor and the End() function must be virtual as well (in the base and the derived classes). Supposing the previous example had them properly virtualized, here&rsquo;s an example of derivation:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">---- File VirtualTest.h ----
 
-<pre><code class="language-c">---- File VirtualTest.h ----
-
-#include &quot;InitEndTest.h&quot;
-
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;InitEndTest.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
 class CVirtualTest: public CInitEndTest
 {
-    typedef CInitEndTest inherited;  // To avoid the actual base's name.
-
+    <span style="color:#00a">typedef</span> CInitEndTest inherited;  <span style="color:#aaa;font-style:italic">// To avoid the actual base&#39;s name.
+</span><span style="color:#aaa;font-style:italic"></span>
   public:
             CVirtualTest    ()                 { }
     virtual ~CVirtualTest   ()                 { End(); }
 
-            bool    Init    (parameters);
-    virtual void    End     ();
+            <span style="color:#0aa">bool</span>    Init    (parameters);
+    virtual <span style="color:#0aa">void</span>    <span style="color:#0a0">End</span>     ();
 
   private:
-};
-</code></pre>
+};</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">---- File VirtualTest.cpp ----
 
-<pre><code class="language-c">---- File VirtualTest.cpp ----
-
-#include &quot;VirtualTest.h&quot;
-
-bool CVirtualTest::Init(parameters)
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;VirtualTest.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#0aa">bool</span> CVirtualTest::Init(parameters)
 {
   End();
 
-  // Initialize the base first.  
-  if (inherited::Init())
+  <span style="color:#aaa;font-style:italic">// Initialize the base first.  
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">if</span> (inherited::Init())
   {
-    // ... perform my own initializations
-    // ... call inherited::End() if they fail.
-  }
-  return IsOk();
+    <span style="color:#aaa;font-style:italic">// ... perform my own initializations
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">// ... call inherited::End() if they fail.
+</span><span style="color:#aaa;font-style:italic"></span>  }
+  <span style="color:#00a">return</span> IsOk();
 }
 
-/*virtual*/ void CVirtualTest::End()
+<span style="color:#aaa;font-style:italic">/*virtual*/</span> <span style="color:#0aa">void</span> CVirtualTest::End()
 {
-  if (IsOk())
+  <span style="color:#00a">if</span> (IsOk())
   {
-    // Free my own resources
-    // Free the base's at the end.
-    inherited::End();
+    <span style="color:#aaa;font-style:italic">// Free my own resources
+</span><span style="color:#aaa;font-style:italic"></span>    <span style="color:#aaa;font-style:italic">// Free the base&#39;s at the end.
+</span><span style="color:#aaa;font-style:italic"></span>    inherited::End();
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>So what&rsquo;s the advantage of limiting the use of the powerful C++ constructor / destructor syntax? Simply, that the initialization and lifespan of an instance are not tied together. This can be useful in many situations when you want to reinitialize a set of objects that are pointed to from many different places in the system, for example textures and lost surfaces in a 3D engine after the user Alt-TABs out and back into your app.</p>
 
 <p>Thanks to the ASSERT sentences you quickly catch any initializations when a return code was not properly checked. With correct inlining, there is no speed penalty to IsOk() calls. And the construction doesn&rsquo;t fill in any unnecessary fields, making array allocations faster to execute.</p>

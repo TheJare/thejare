@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 09 Jul 2012 00:35:38 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/spainjs/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/spainjs/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>SpainJS</title>
@@ -15,8 +17,8 @@
       <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/07/spainjs/</guid>
-      <description>&lt;p&gt;Yesterday I had the honor to give a presentation at the &lt;a href=&#34;http://spainjs.org/&#34; target=&#34;_blank&#34;&gt;SpainJS&lt;/a&gt; Javascript conference in Madrid, on the topic of Videogames and Javascript. I wasted a lot of time preparing a dynamic HTML5 page for my deck of slides, which was my excuse to play with CSS 3d transitions and fancy formatting. You can see the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/&#34; target=&#34;_blank&#34;&gt;dynamic deck&lt;/a&gt; (which needs Chrome/Firefox or a similarly decent browser), the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/#all&#34; target=&#34;_blank&#34;&gt;static deck&lt;/a&gt; (should work everywhere), a &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/spainjs.pdf&#34;&gt;PDF&lt;/a&gt; I converted using &lt;a href=&#34;http://code.google.com/p/wkhtmltopdf/&#34; target=&#34;_blank&#34;&gt;wkhtmltopdf&lt;/a&gt;, the &lt;a href=&#34;https://speakerdeck.com/u/thejare/p/overview-of-javascript-in-games&#34; target=&#34;_blank&#34;&gt;Speakerdeck&lt;/a&gt;, or the &lt;a href=&#34;http://www.youtube.com/watch?v=j4JmYAVjm1c&#34; target=&#34;_blank&#34;&gt;video&lt;/a&gt;. Enjoy!&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;Yesterday I had the honor to give a presentation at the &lt;a href=&#34;http://spainjs.org/&#34; target=&#34;_blank&#34;&gt;SpainJS&lt;/a&gt; Javascript conference in Madrid, on the topic of Videogames and Javascript. I wasted a lot of time preparing a dynamic HTML5 page for my deck of slides, which was my excuse to play with CSS 3d transitions and fancy formatting. You can see the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/&#34; target=&#34;_blank&#34;&gt;dynamic deck&lt;/a&gt; (which needs Chrome/Firefox or a similarly decent browser), the &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/#all&#34; target=&#34;_blank&#34;&gt;static deck&lt;/a&gt; (should work everywhere), a &lt;a href=&#34;http://iguanademos.com/Jare/docs/html5/SpainJS2012/spainjs.pdf&#34;&gt;PDF&lt;/a&gt; I converted using &lt;a href=&#34;http://code.google.com/p/wkhtmltopdf/&#34; target=&#34;_blank&#34;&gt;wkhtmltopdf&lt;/a&gt;, the &lt;a href=&#34;https://speakerdeck.com/u/thejare/p/overview-of-javascript-in-games&#34; target=&#34;_blank&#34;&gt;Speakerdeck&lt;/a&gt;, or the &lt;a href=&#34;http://www.youtube.com/watch?v=j4JmYAVjm1c&#34; target=&#34;_blank&#34;&gt;video&lt;/a&gt;. Enjoy!
+&lt;/p&gt;</description>
     </item>
     
   </channel>

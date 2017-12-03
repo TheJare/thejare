@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Idle Icon</title>
+    <style>
+        html, body { width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
+        #playarea { width: 96%; height: auto; margin: 1em 2%; position: relative; }
+        #canvas { width: 100%; height: auto; background: #F0F; margin: 0; }
+        #inventory { display: block; width: 100%; margin: 0; }
+        .invitem { padding: 2; border: black solid 1px; box-sizing: border-box; }
+        #score { font-family: Arial, Helvetica, sans-serif; font-size: 3vw; color: yellow; position:absolute; top: 1vw; left: 3vw; text-shadow: 0.1vw 0.1vw 0.4vw #000000; }
+        #enemyweak { position: absolute; top: 6vw; left: 35%; width: 4vw; height: auto; }
+        #prose { margin: 1em; }
+    </style>
+</head>
+<body>
+    <div id="playarea">
+        <canvas id="canvas" width="640" height="128"></canvas>
+        <div id="score">0</div> 
+        <img id="enemyweak" class="invitem" style="display:none">
+        <div id="inventory"></div>
+    </div>
+    <div id="prose">
+        <h2>Idle Icon</h2>
+        <p>A Ludum Dare 40 entry by Javier Arevalo.</p>
+        <p>The theme is "the more you have, the worse it is". I only had a couple hours to do something, so I decided
+            to go for a 10000000-inspired idle runner game, where the enemy shows a weakness icon and you can click on the equivalent item from your inventory to hit harder. Eventually you will have too many items and it will be pretty hard to figure out what to click. There is no death.
+        </p>
+        <p>You can find the project in its <a href="https://github.com/TheJare/ld40">Github repo</a>.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        function randomColor() {
+            let r = Math.floor(Math.random()*256);
+            let g = Math.floor(Math.random()*256);
+            let b = Math.floor(Math.random()*256);
+            return `rgb(${r},${g},${b})`;
+        }
+
+        var player = {
+            inventory: [],
+            animpos: 0,
+            fighting: false,
+            hitCD: 0,
+            inventoryElSize: -1,
+            xp: 0,
+            score: 0,
+            health: 100,
+            maxHealth: 100,
+            itemUse: -1,
+        };
+
+        var enemy = {
+            timeToShow: 5,
+            pos: 640,
+            health: 0,
+            maxHealth: 0,
+        };
+
+        var itemImages = buildItemImages();
+        const invdomel = document.getElementById("inventory");
+        const scoredomel = document.getElementById("score");
+        const enemyweakdomel = document.getElementById("enemyweak");
+        
+        const clrMountains = "#AFA";
+        var props = [
+            {
+                rand: 100, offs: 640,
+                props: [{x:140, y:22, w:30, h:20, color: "#FFF"}, {x:340, y:13, w:35, h:17, color: "#FFF"}, {x:540, y:19, w:40, h:22, color: "#FFF"}]
+            },
+            {
+                rand: 0, offs: 870,
+                props: [{x:0, y:32, w:230, h:64-32, color: clrMountains},{x:230, y:42, w:200, h:64-42, color: clrMountains},{x:430, y:25, w:210, h:64-25, color: clrMountains},{x:640, y:45, w:230, h:64-45, color: clrMountains},]
+            },
+            {
+                rand: 200, offs: 640,
+                props: [{x:140, y:0, w:5, h:85, color: "#830"}, {x:400, y:0, w:5, h:85, color: "#830"}, {x:590, y:0, w:5, h:85, color: "#830"}]
+            },
+            {
+                rand: 400, offs: 640,
+                props: [{x:140, y:100, w:30, h:28, color: "#310"},{x:440, y:95, w:30, h:33, color: "#310"},{x:650, y:105, w:30, h:23, color: "#310"},]
+            },
+        ];
+
+        function drawProps(layer) {
+            for (let a of layer.props) {
+                ctx.fillStyle = a.color;
+                ctx.fillRect(Math.floor(a.x), a.y, a.w, a.h);
+            }
+        }
+
+        function renderCanvas(dt) {
+            let gradient = ctx.createLinearGradient(0, 0, 00, 64);
+            gradient.addColorStop(0, '#55F');
+            gradient.addColorStop(1, '#DDF');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 640, 64);
+            gradient = ctx.createLinearGradient(0, 64, 0, 128);
+            gradient.addColorStop(0, '#FA7');
+            gradient.addColorStop(1, '#930');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 64, 640, 64);
+
+            drawProps(props[0]);
+            drawProps(props[1]);
+            drawProps(props[2]);
+            
+            if (enemy.timeToShow <= 0) {
+                let enemywob = 0;
+                let enemyattack = 6*Math.pow(enemy.hitCD, 5);
+                ctx.fillStyle = "#F80";
+                ctx.fillRect(enemy.pos-enemyattack, 30+enemywob, 30, 80-enemywob);
+                if (enemy.fighting) {
+                    ctx.fillStyle = "#000";
+                    ctx.fillRect(enemy.pos, 18, 30, 4);
+                    ctx.fillStyle = "#F00";
+                    ctx.fillRect(enemy.pos, 18, 30*(enemy.health/enemy.maxHealth), 4);
+                }
+            }
+            
+            let playerwob = Math.cos(player.animpos)*5;
+            let playerattack = 10*Math.pow(player.hitCD, 5);
+            ctx.fillStyle = "#0F0";
+            ctx.fillRect(200+playerattack, 30+playerwob, 30, 80-playerwob);
+            drawProps(props[3]);
+        }
+        function updateInventory() {
+            const w = "" + player.inventoryElSize + "%";
+            for (let i of player.inventory) {
+                i.domel.style.width = w;
+            }
+        }
+
+        function addToInventory(items) {
+            
+            for (let i of player.inventory) {
+                if (items.length == 0) {
+                    return;
+                }
+                if (i.item === null) {
+                    i.item = items.shift();
+                    i.domel.src = i.item.img;
+                }
+            }
+            
+            const newElSize = Math.max(1, Math.floor(100/Math.max(8, player.inventory.length+items.length)));
+            for (var i of items) {
+                let domel = document.createElement("img");
+                domel.className = "invitem";
+                domel.src = i.img;
+                domel.style.width = "" + newElSize + "%";
+                let idx = player.inventory.length;
+                domel.onclick = () => { if (player.fighting && player.inventory[idx].item != null) player.itemUse = idx; }
+                invdomel.appendChild(domel);
+                player.inventory.push({
+                    item: i,
+                    domel
+                });
+            }
+            
+            if (newElSize != player.inventoryElSize) {
+                player.inventoryElSize = newElSize;
+                updateInventory();
+            }
+        }
+
+        function backgroundUpdate(dt) {
+            if (player.fighting) {
+                return;
+            }
+            let speed = 20;
+            for (let layer of props) {
+                for (let p of layer.props) {
+                    p.x -= speed * dt;
+                    if (p.x < -p.w) {
+                        p.x += layer.offs + Math.random()*layer.rand;
+                    }
+                }
+                speed = speed * 3;
+            }
+        }
+        function playerControl(dt) {
+            player.fighting = (enemy.pos <= 235 && enemy.health > 0);
+            player.hitCD = Math.max(player.hitCD-dt, 0);
+            if (player.fighting) {
+                enemy.fighting = true;
+                
+                if (player.hitCD <= 0) {
+                    let hitAmount = 20;
+                    
+                    if (player.itemUse >= 0) {
+                        let id = player.inventory[player.itemUse].item.id;
+                        player.inventory[player.itemUse].item = null;
+                        player.inventory[player.itemUse].domel.src = itemImages[0];
+                        if (id == enemy.itemWeak) {
+                            hitAmount += enemy.maxHealth/4;
+                        } else {
+                            
+                            player.health -= 20;
+                            hitAmount /= 2;
+                        }
+                        enemy.itemWeak = -1;
+                        enemyweakdomel.style.display="none";
+                    }
+                    enemy.health -= hitAmount;
+                    player.hitCD = 1;
+                    player.itemUse = -1;
+                    
+                    if (enemy.health <= 0) {
+                        player.score += Math.round(Math.pow(100, 1+player.xp/1000));
+                        scoredomel.textContent = ""+player.score;
+                        player.xp += Math.round(Math.pow(10, 1+player.xp/1000));
+                        let rewards = [];
+                        const numRewards = Math.round(Math.pow(3.2, 1+player.xp/1000));
+                        for (let i = 0; i < numRewards; i++ ) {
+                            const itemId = Math.floor(1+Math.random()*(itemImages.length-1));
+                            rewards.push({img: itemImages[itemId], id:itemId});
+                        }
+                        addToInventory(rewards);
+                    }
+                }
+                return;
+            }
+            player.animpos = (player.animpos + dt*10) % (Math.PI*2);
+        }
+        function enemyUpdate(dt) {
+            
+            if (enemy.timeToShow > 0) {
+                enemy.timeToShow -= dt;
+                if (enemy.timeToShow > 0) {
+                    return;
+                }
+                enemy.pos = 640;
+                enemy.maxHealth = Math.round(Math.pow(100, 1+player.xp/1000));
+                enemy.health = enemy.maxHealth;
+                enemy.animpos = 0;
+                enemy.fighting = false;
+                enemy.hitCD = 1;
+                enemy.itemWeak = -1;
+            }
+            if (enemy.fighting) {
+                
+                if (enemy.health > 0 && enemy.itemWeak == -1) {
+                    
+                    let itemdict = {};
+                    for (let i of player.inventory) {
+                        if (i.item != null) {
+                            itemdict[i.item.id] = true;
+                        }
+                    }
+                    let validitems = [];
+                    for (let i in itemdict) {
+                        validitems.push(i);
+                    }
+                    if (validitems.length > 0) {
+                        enemy.itemWeak = validitems[Math.floor(Math.random()*validitems.length)];
+                        enemyweakdomel.style.display=null;
+                        enemyweakdomel.src = itemImages[enemy.itemWeak];
+                    }
+                }
+                
+                enemy.hitCD = Math.max(enemy.hitCD-dt*0.77, 0);
+                enemy.animpos = (enemy.animpos + dt*10) % (Math.PI*2);
+                
+                if (enemy.health <= 0) {
+                    enemy.timeToShow = Math.random()*3+1;
+                    enemyweakdomel.style.display="none";
+                }
+                
+                if (enemy.hitCD <= 0) {
+                    player.health -= 10;
+                    enemy.hitCD = 1;
+                }
+            } else {
+                enemy.pos -= dt*270;
+            }
+        }
+
+        function buildItemImages() {
+            const c = document.createElement("canvas");
+            c.width=64;
+            c.height=64;
+            const ctx = c.getContext("2d");
+            let images = [c.toDataURL()];
+            for (let i = 0; i < 10; i++) {
+                ctx.clearRect(0, 0, 64, 64);
+                for (let j = 0; j < 7; j++) {
+                    let c = randomColor();
+                    ctx.fillStyle = c;
+                    let x = Math.floor(Math.random()*64);
+                    let y = Math.floor(Math.random()*64);
+                    let w = Math.floor(Math.random()*25+10);
+                    let h = Math.floor(Math.random()*25+10);
+                    ctx.fillRect(x, y, w, h);
+                    ctx.fillRect((64-x-w), y, w, h);
+                }
+                images.push(c.toDataURL());
+            }
+            return images;
+        }
+
+        addToInventory([{img: itemImages[1], id:1}]);
+
+        function tick() {
+            dt = 0.016;
+            playerControl(dt);
+            enemyUpdate(dt);
+            backgroundUpdate(dt);
+            renderCanvas(dt);
+            requestAnimationFrame(tick);
+        }
+        tick();
+    </script>
+</body>
+</html>

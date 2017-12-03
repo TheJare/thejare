@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Text Editors &middot; Jare&#39;s Blog">
@@ -129,6 +128,8 @@
 
 <p>Then someone pointed me to <a title="Sublime Text 2" href="http://www.sublimetext.com/" target="_blank">Sublime Text 2</a>. Great editor, lots of tools, features, and neat details. Works on Windows, Mac and Linux. Supports the notion of projects. Scriptable in Python, awesome! I have been using it on and off for a while to see if I really want to switch to it. It is a commercial product, and I suspect that some of the old ghosts with rectangular block selections and Find in Files will come back and deter me from ST2, but for now I&#8217;m enjoying it. I wrote a little plugin to add basic Perforce integration:</p>
 
+<!--more-->
+
 <pre># Simple Perforce plugin for Sublime Text 2
 # (C) 2011 by Javier Arevalo
 # Free for anyone to use, distribute and modify
@@ -210,7 +211,6 @@ class P4AddCommand(sublime_plugin.TextCommand):
 
     def is_enabled(self):
         return IsWriteable(self.view)</pre>
-
                     </div>
                     
                 </section>

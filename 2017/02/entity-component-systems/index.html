@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity Component Systems &middot; Jare&#39;s Blog</title>
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Entity Component Systems &middot; Jare&#39;s Blog">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Entity Component Systems &middot; Jare&#39;s Blog">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://thejare.github.io//css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Jare&#39;s Blog" href="https://thejare.github.io//index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://thejare.github.io/">Jare&#39;s Blog</a></h1>
+            <h2 class="brand-tagline"> Stuff I write </h2>
+        </hgroup>
+
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/TheJare"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/TheJare "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://thejare.github.io//index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+        <p></p>
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="menu-item">
+                    <a href="../../../">Home</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../about-me/">About Me</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../articles/">Articles</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="../../../downloads/">Downloads</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">27 Feb 2017, 03:14</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://thejare.github.io/2017/02/entity-component-systems/" class="post-title">Entity Component Systems</a>
+
+                        <p class="post-meta">
+                            
+                                By <strong class="post-author">Jare</strong>
+                            
+                            
+                                
+                                    under 
+                                    
+                                    
+                                        <a class="post-category post-category-development" href="https://thejare.github.io/categories/development">Development</a>
+                                    
+                                
+                            
+                        </p>
+                    </header>
+                    
+                    <div class="post-description">
+                        <p>A <a href="http://www.randygaul.net/2017/02/24/writing-a-game-engine-in-2017/">recent post by Randy Gaul</a> on Entity Component Systems in game development sparked a number of conversations on Twitter and other forums. While the post is a bit confusing in a number of places, the topic is extremely interesting. In particular, I got interested in recent formalizations of game logic / entity architecture.</p>
+
+<p>In short, the evolution of game entities (the &ldquo;stuff that moves&rdquo; in a game) has followed roughly this path:</p>
+
+<ul>
+<li><p><em>Ad-hoc</em>: simpler games can get away with just using some global objects or variables to keep the entire game state. For example, a Pong game could just have a few global variables holding the Y coordinates for the left and right pads; the X and Y coordinates and X direction and Y velocity for the ball; as additional game state, the left and right player&rsquo;s respective scores are all that&rsquo;s needed.</p></li>
+
+<li><p><em>Fat objects</em>: as soon as game contain a variety of entities (in type and amount), the above gave away to creating a data structure that contains all the information for each entity. Initially, most games might implement just a handful of different objects at most. For example, in Space Invaders you could have the player, the defenses, the bullets and the aliens. Often, entities that might have minor differences in behaviour would reuse the same data structure, with some fields just being ignored. This was probably the most common approach well into the 16-bit era and not rare for relatively simple games throughout the 90&rsquo;s.</p></li>
+
+<li><p><em>Class hierarchy</em>: with the advent of OOP, classes and inheritance, many developers moved to a model where different classes (in C++ usually) modeled the different types of entities in the game. For example, a strategy game could have an Entity root class, from which derived classes such as Soldier, Vehicle, Resource and Building. These would in turn be subclassed into classes such as Grenadier, Sniper, Tank, Airplane, RockNode, GoldNode, Laboratory, Barracks, etc. These hierarchies would easily become large trees with up to a dozen levels specializing certain aspects of the entities, like Moveable vs Static, Air vs Ground vehicles, Production vs Research buildings, etc. This quickly caused a combinatorial explosion of specializations, diamonds in the inheritance tree, and is a well know gotcha of &ldquo;classic&rdquo; OOP software design.</p></li>
+
+<li><p><em>Composition</em>:</p></li>
+</ul>
+
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a>. Theme is based on <a class="hugo" href="https://github.com/dplesca/purehugo">Purehugo</a> by Dragos Plesca</li>
+        </ul>
+    </div>
+</div>
+<script src="https://thejare.github.io//js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

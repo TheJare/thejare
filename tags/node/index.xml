@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Jan 2012 03:47:06 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>node.js</title>
@@ -25,35 +27,7 @@
 &lt;p&gt;node app.js&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Your JavaScript program can use the standard JavaScript libraries (Math, etc) and a bunch of node-specific libraries. In most cases, your program will enter an infinite event loop and start receiving, processing and responding to network requests.&lt;/p&gt;
-
-&lt;p&gt;Pros:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Uses JavaScript, the same language you are likely using (in part or in full) on the client side of web sites and applications. This is a great opportunity to reuse code and expertise across both sides.&lt;/li&gt;
-&lt;li&gt;It&amp;#8217;s based on Google&amp;#8217;s &lt;a href=&#34;http://code.google.com/p/v8/&#34; target=&#34;_blank&#34;&gt;V8 engine&lt;/a&gt;, which is being actively developed and keeps getting better, faster and more robust with each release.&lt;/li&gt;
-&lt;li&gt;Its asynchronous, event-based nature makes it &lt;strong&gt;easy&lt;/strong&gt; for node applications to support hundreds or thousands of simultaneous connections with great performance and low resource consumption, compared to thread- or process-based solutions. Many modern servers, both standalone servers (&lt;a href=&#34;http://nginx.org/en/&#34; target=&#34;_blank&#34;&gt;nginx&lt;/a&gt;) as well as server application frameworks (&lt;a href=&#34;https://github.com/williame/hellepoll&#34; target=&#34;_blank&#34;&gt;Hellepoll&lt;/a&gt;, &lt;a href=&#34;http://www.tornadoweb.org/&#34; target=&#34;_blank&#34;&gt;Tornado&lt;/a&gt;), have gone this route.&lt;/li&gt;
-&lt;li&gt;Node libraries and extensions use a standard distribution method called the &lt;a href=&#34;http://npmjs.org/doc/README.html&#34; target=&#34;_blank&#34;&gt;node package manager&lt;/a&gt;. It&amp;#8217;s incredibly easy to use and makes managing your external dependencies a breeze.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Cons:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;All I/O in node programs (files, databases, other servers, etc) is asynchronous and usually offered in &lt;a href=&#34;http://en.wikipedia.org/wiki/Continuation-passing_style&#34; target=&#34;_blank&#34;&gt;continuation-passing style&lt;/a&gt;. If you are not careful with the way you write your code, you may end up in callback hell. Some libraries like &lt;a href=&#34;https://github.com/caolan/async&#34; target=&#34;_blank&#34;&gt;async&lt;/a&gt; will help a lot there, but do not underestimate the cost of getting used to code with this paradigm.&lt;/li&gt;
-&lt;li&gt;node is event-based, and that&amp;#8217;s it. It&amp;#8217;s easy to get great performance, but sometimes you need huge performance or scaling even if it&amp;#8217;s not easy (note &amp;#8211; it never is!). If your concurrency or scaling needs change in the future and other approaches (multithreaded, distributed) would serve you better, you will have to engineer around node (balancers, proxies, routers, hybrid services), or entirely rewrite your code using another technology that allows other solutions (C++, Erlang).&lt;/li&gt;
-&lt;li&gt;Many classic hosting providers do not support node.js out of the box, and require renting a virtual server. Recent contenders in the platform-as-a-service space like &lt;a href=&#34;http://devcenter.heroku.com/articles/node-js&#34; target=&#34;_blank&#34;&gt;heroku&lt;/a&gt; do offer node.js support out of the box.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Node.js really is an application platform, not a plain web server &amp;#8211; you can use one of the popular node frameworks like &lt;a href=&#34;http://expressjs.com/&#34; target=&#34;_blank&#34;&gt;express &lt;/a&gt;to build a fully featured web server, and it will have almost the same throughput as dedicated servers like nginx or lighttpd. In broad terms, I look at them like this:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Node.js if you&amp;#8217;re developing a web application (and its pros/cons are ok for you). Node may also serve the client web site, but its strength is in handling the server-side logic.&lt;/li&gt;
-&lt;li&gt;Nginx if you are serving a single, custom web site that includes an application backend. Nginx configuration is simple but powerful for both static files and cgi modules, and it can also fill other roles (reverse proxy/load balancer or mail proxy) in your infrastructure.&lt;/li&gt;
-&lt;li&gt;Apache if you are serving multiple sites, each may be built using different technologies (PHP, uwsgi, etc), and/or each may be managed by different people or clients. &lt;em&gt;Everyone&lt;/em&gt; and &lt;em&gt;everything&lt;/em&gt; knows, understands and/or is compatible with Apache configuration files.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I hope to be able to talk more about node.js in the future.&lt;/p&gt;
-</description>
+&lt;p&gt;Your JavaScript program can use the standard JavaScript libraries (Math, etc) and a bunch of node-specific libraries. In most cases, your program will enter an infinite event loop and start receiving, processing and responding to network requests.&lt;/p&gt;</description>
     </item>
     
   </channel>

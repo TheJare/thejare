@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 12 May 2011 12:44:33 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Relinuxed</title>
@@ -15,42 +17,10 @@
       <pubDate>Thu, 12 May 2011 12:44:33 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/05/relinuxed/</guid>
-      <description>&lt;p&gt;Time for that old laptop to receive Ubuntu 11.04!&lt;/p&gt;
-
-&lt;p&gt;Er&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.&lt;/p&gt;
-
-&lt;p&gt;Then, the &lt;a href=&#34;http://www.iguanademos.com/Jare/jblog_viewtopic.php?topicid=1381&#34;&gt;same problem as before&lt;/a&gt;. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable. So here it goes this time (DISCLAIMER: I don&amp;#8217;t really know what I&amp;#8217;m doing and I don&amp;#8217;t care if I destroy the hard drive and its contents):&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; See &lt;a href=&#34;http://fenidik.blogspot.com/2010/03/ext4-disable-journal.html&#34; target=&#34;_blank&#34;&gt;this link&lt;/a&gt; for instructions.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; The problem is that I can&amp;#8217;t do these things on a boot partition while happily running the full system on the Gnome desktop.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Reboot in recovery mode (keep SHIFT pressed while booting), drop down to the recovery terminal.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;mount -no remount,ro /&lt;/strong&gt;&amp;#8216; to remount the file system in read only mode with. Ooops! can&amp;#8217;t do that while running services that have files open for writing.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;fuser -v -m /&lt;/strong&gt;&amp;#8216; lists which services have files open (look for a &amp;#8216;F&amp;#8217; or &amp;#8216;f&amp;#8217; in the flags) and get ready to kill some of these processes. Note that not all of them will need to be killed, so use some judgement and go one by one. Start with the &amp;#8216;F&amp;#8217; ones.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Try to kill them nicely first with &amp;#8216;&lt;strong&gt;stop &lt;em&gt;servicename&lt;/em&gt;&lt;/strong&gt;&amp;#8216;. In my case, I just did &amp;#8216;&lt;strong&gt;stop rsyslog&lt;/strong&gt;&amp;#8216; and tried to remount, it worked even though there were other services (&lt;strong&gt;recovery-menu&lt;/strong&gt; and &lt;strong&gt;root&lt;/strong&gt;) with &amp;#8216;f&amp;#8217; flags. We have a read only filesystem!&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;tune2fs -o journal_data_writeback /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;tune2fs -O ^has_journal /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;e2fsck -f /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;reboot&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Upon reboot, I see that the system is now complaining about a missing disk but it then proceeds. Looking at the /etc/fstab file, the missing disk was used as swap during installation.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; In the &lt;strong&gt;/etc/fstab&lt;/strong&gt; file, add the options &amp;#8216;&lt;strong&gt;data=writeback,noatime,nodiratime&lt;/strong&gt;&amp;#8216; for your / drive. Reboot.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Go to the Synaptyc Package Manager to continue updating the system. Mine complained about broken files, and asked me to do &amp;#8216;&lt;strong&gt;sudo dpkg &amp;#8211;configure -a&lt;/strong&gt;&amp;#8216;. That&amp;#8217;s all for now!&lt;/p&gt;
-
-&lt;p&gt;Well, I dunno what will be different for you.&lt;/p&gt;
-</description>
+      <description>Time for that old laptop to receive Ubuntu 11.04!
+Er&amp;#8230;
+Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.
+Then, the same problem as before. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable.</description>
     </item>
     
   </channel>

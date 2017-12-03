@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Positional Printf &middot; Jare&#39;s Blog">
@@ -124,64 +123,57 @@
 <li>It only supports &ldquo;%c&rdquo;, &ldquo;%d&rdquo;, &ldquo;%g&rdquo; and &ldquo;%s&rdquo; format strings (but will work with all format modifiers except the mentioned asterisk). Extending this support is trivial.</li>
 <li>Portions of the code are system-dependent. This example currently works in Microsoft&rsquo;s .NET compiler, but it shouldn&rsquo;t be hard to modify for your own platform.</li>
 </ul>
-
-<pre><code class="language-c">// -----------------------------------------------
-// PositionalPrintfTest.cpp
-
-#define UNICODE
-#include &lt;tchar.h&gt;
-#include &lt;stdio.h&gt;
-
-#include &quot;PositionalPrintf.h&quot;
-
-// Try different things with the fancy printf function
-int _tmain(int argc, _TCHAR* argv[])
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// -----------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// PositionalPrintfTest.cpp
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#define UNICODE
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;tchar.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdio.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;PositionalPrintf.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// Try different things with the fancy printf function
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">int</span> <span style="color:#0a0">_tmain</span>(<span style="color:#0aa">int</span> argc, _TCHAR* argv[])
 {
-  printf(_T(&quot;%s %g %d %c\n&quot;), _T(&quot;Hola&quot;), 3.4f, 34, _T('3'));
+  printf(_T(<span style="color:#a50"></span><span style="color:#a50">&#34;%s %g %d %c</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>), _T(<span style="color:#a50"></span><span style="color:#a50">&#34;Hola&#34;</span>), <span style="color:#099">3.4f</span>, <span style="color:#099">34</span>, _T(<span style="color:#a50"></span><span style="color:#a50">&#39;3&#39;</span>));
 
-  PositionalPrintf(&quot;%s %g %d %c\n&quot;, &quot;Hola&quot;, 3.4f, 34, '3');
-  PositionalPrintf(L&quot;%s %g %d %c\n&quot;, L&quot;Hola&quot;, 3.4f, 34, L'3');
-  PositionalPrintf(_T(&quot;%s %g %d %c\n&quot;), _T(&quot;Hola&quot;), 3.4f, 34, _T('3'));
+  PositionalPrintf(<span style="color:#a50"></span><span style="color:#a50">&#34;%s %g %d %c</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, <span style="color:#a50"></span><span style="color:#a50">&#34;Hola&#34;</span>, <span style="color:#099">3.4f</span>, <span style="color:#099">34</span>, <span style="color:#a50"></span><span style="color:#a50">&#39;3&#39;</span>);
+  PositionalPrintf(<span style="color:#a50">L</span><span style="color:#a50">&#34;%s %g %d %c</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, <span style="color:#a50">L</span><span style="color:#a50">&#34;Hola&#34;</span>, <span style="color:#099">3.4f</span>, <span style="color:#099">34</span>, <span style="color:#a50">L</span><span style="color:#a50">&#39;3&#39;</span>);
+  PositionalPrintf(_T(<span style="color:#a50"></span><span style="color:#a50">&#34;%s %g %d %c</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>), _T(<span style="color:#a50"></span><span style="color:#a50">&#34;Hola&#34;</span>), <span style="color:#099">3.4f</span>, <span style="color:#099">34</span>, _T(<span style="color:#a50"></span><span style="color:#a50">&#39;3&#39;</span>));
 
-  PositionalPrintf(&quot;%{3}c %g - %{0}s's %{1}s\n%{3}c %{4}g - El %{1}s de %{0}s&quot;, &quot;Rick&quot;, &quot;Bar&quot;, 'S', 'E', 3.1415f);
-}
-</code></pre>
+  PositionalPrintf(<span style="color:#a50"></span><span style="color:#a50">&#34;%{3}c %g - %{0}s&#39;s %{1}s</span><span style="color:#a50">\n</span><span style="color:#a50">%{3}c %{4}g - El %{1}s de %{0}s&#34;</span>, <span style="color:#a50"></span><span style="color:#a50">&#34;Rick&#34;</span>, <span style="color:#a50"></span><span style="color:#a50">&#34;Bar&#34;</span>, <span style="color:#a50"></span><span style="color:#a50">&#39;S&#39;</span>, <span style="color:#a50"></span><span style="color:#a50">&#39;E&#39;</span>, <span style="color:#099">3.1415f</span>);
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// -----------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// PositionalPrintf.h
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#aaa;font-style:italic">// Only two versions of this template are instantiated, char and wchar_t
+</span><span style="color:#aaa;font-style:italic">// Any other attempt to use this function will result in a link error.
+</span><span style="color:#aaa;font-style:italic"></span>template&lt;<span style="color:#00a">typename</span> T&gt;
+<span style="color:#0aa">void</span> PositionalPrintf(<span style="color:#00a">const</span> T *pszFmt, ...);</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// -----------------------------------------------
+</span><span style="color:#aaa;font-style:italic">// PositionalPrintf.cpp
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdarg.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdlib.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;stdio.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&lt;string.h&gt;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// Templated functions for char/wchar_t operations.
+</span><span style="color:#aaa;font-style:italic"></span>template &lt;<span style="color:#00a">typename</span> T&gt; <span style="color:#0aa">int</span> TempAtoi(<span style="color:#00a">const</span> T *p);
 
-<pre><code class="language-c">// -----------------------------------------------
-// PositionalPrintf.h
+template&lt;&gt; <span style="color:#0aa">int</span> TempAtoi(<span style="color:#00a">const</span> <span style="color:#0aa">char</span> *p) { <span style="color:#00a">return</span> atoi(p); }
+template&lt;&gt; <span style="color:#0aa">int</span> TempAtoi(<span style="color:#00a">const</span> wchar_t *p) { <span style="color:#00a">return</span> _wtoi(p); }
 
-// Only two versions of this template are instantiated, char and wchar_t
-// Any other attempt to use this function will result in a link error.
-template&lt;typename T&gt;
-void PositionalPrintf(const T *pszFmt, ...);
-</code></pre>
+template &lt;<span style="color:#00a">typename</span> T&gt; <span style="color:#0aa">void</span> TempVPrintf(<span style="color:#00a">const</span> T *p, va_list va);
 
-<pre><code class="language-c">// -----------------------------------------------
-// PositionalPrintf.cpp
-
-#include &lt;stdarg.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-// Templated functions for char/wchar_t operations.
-template &lt;typename T&gt; int TempAtoi(const T *p);
-
-template&lt;&gt; int TempAtoi(const char *p) { return atoi(p); }
-template&lt;&gt; int TempAtoi(const wchar_t *p) { return _wtoi(p); }
-
-template &lt;typename T&gt; void TempVPrintf(const T *p, va_list va);
-
-template&lt;&gt; void TempVPrintf(const char *p, va_list va)     { vprintf(p, va); }
+template&lt;&gt; <span style="color:#0aa">void</span> TempVPrintf(<span style="color:#00a">const</span> <span style="color:#0aa">char</span> *p, va_list va)     { vprintf(p, va); }
 
 
-template&lt;&gt; void TempVPrintf(const wchar_t *p, va_list va)  { vwprintf(p, va); }
+template&lt;&gt; <span style="color:#0aa">void</span> TempVPrintf(<span style="color:#00a">const</span> wchar_t *p, va_list va)  { vwprintf(p, va); }
 
-// The actual function
-template&lt;typename T&gt;
-void PositionalPrintf(const T *pszFmt, ...)
+<span style="color:#aaa;font-style:italic">// The actual function
+</span><span style="color:#aaa;font-style:italic"></span>template&lt;<span style="color:#00a">typename</span> T&gt;
+<span style="color:#0aa">void</span> PositionalPrintf(<span style="color:#00a">const</span> T *pszFmt, ...)
 {
-  enum TParam
+  <span style="color:#00a">enum</span> TParam
   {
     TP_UNK,
     TP_CHAR,
@@ -189,100 +181,100 @@ void PositionalPrintf(const T *pszFmt, ...)
     TP_STR,
     TP_FLOAT,
   };
-  static const int MAX_PARAMS = 100;
+  <span style="color:#00a">static</span> <span style="color:#00a">const</span> <span style="color:#0aa">int</span> MAX_PARAMS = <span style="color:#099">100</span>;
 
-  // Here we store the parameters we should be expecting on the stack
+  <span style="color:#aaa;font-style:italic">// Here we store the parameters we should be expecting on the stack
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-  // We decide this based on the format string.
-  int nParams  = 0;
-  int nextParam = 0;
+  <span style="color:#aaa;font-style:italic">// We decide this based on the format string.
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#0aa">int</span> nParams  = <span style="color:#099">0</span>;
+  <span style="color:#0aa">int</span> nextParam = <span style="color:#099">0</span>;
   TParam aParams[MAX_PARAMS];
 
-  // Here we store each '%' format element's data from the format string.
-  struct
+  <span style="color:#aaa;font-style:italic">// Here we store each &#39;%&#39; format element&#39;s data from the format string.
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">struct</span>
   {
     TParam param;
-    int    pos;
+    <span style="color:#0aa">int</span>    pos;
   } aFormats[MAX_PARAMS];
-  int nFormats = 0;
+  <span style="color:#0aa">int</span> nFormats = <span style="color:#099">0</span>;
 
-  for (int i = 0; i &lt; MAX_PARAMS; ++i)
+  <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; i &lt; MAX_PARAMS; ++i)
     aParams[i] = TP_UNK;
 
-  // Scan the format string to detect expected parameters and the way to extract them from the stack.
+  <span style="color:#aaa;font-style:italic">// Scan the format string to detect expected parameters and the way to extract them from the stack.
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-  bool bError = false;
-  for (const T *s = pszFmt; *s; ++s)
+  <span style="color:#0aa">bool</span> bError = <span style="color:#0aa">false</span>;
+  <span style="color:#00a">for</span> (<span style="color:#00a">const</span> T *s = pszFmt; *s; ++s)
   {
-    if (*s == T('%'))
+    <span style="color:#00a">if</span> (*s == T(<span style="color:#a50"></span><span style="color:#a50">&#39;%&#39;</span>))
     {
-      // Found a format element. First thing to do is identify the position of the parameter
-      // on the stack.
+      <span style="color:#aaa;font-style:italic">// Found a format element. First thing to do is identify the position of the parameter
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#aaa;font-style:italic">// on the stack.
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-      int pos;
-      if (*(s+1) == T('{'))
+      <span style="color:#0aa">int</span> pos;
+      <span style="color:#00a">if</span> (*(s+<span style="color:#099">1</span>) == T(<span style="color:#a50"></span><span style="color:#a50">&#39;{&#39;</span>))
       {
-        // Explicit position modifier
-        pos = TempAtoi(s+2);
-        nextParam = pos+1;
+        <span style="color:#aaa;font-style:italic">// Explicit position modifier
+</span><span style="color:#aaa;font-style:italic"></span>        pos = TempAtoi(s+<span style="color:#099">2</span>);
+        nextParam = pos+<span style="color:#099">1</span>;
       }
-      else
-        pos = nextParam++; // Just se the next position.
-      while (*s &amp;&amp; *s != T('c') &amp;&amp; *s != T('d') &amp;&amp; *s != T('g') &amp;&amp; *s != T('s'))
+      <span style="color:#00a">else</span>
+        pos = nextParam++; <span style="color:#aaa;font-style:italic">// Just se the next position.
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#00a">while</span> (*s &amp;&amp; *s != T(<span style="color:#a50"></span><span style="color:#a50">&#39;c&#39;</span>) &amp;&amp; *s != T(<span style="color:#a50"></span><span style="color:#a50">&#39;d&#39;</span>) &amp;&amp; *s != T(<span style="color:#a50"></span><span style="color:#a50">&#39;g&#39;</span>) &amp;&amp; *s != T(<span style="color:#a50"></span><span style="color:#a50">&#39;s&#39;</span>))
       {
-        // Here we could detect '*' parameters (which won't work), missing '}', etc.
-
+        <span style="color:#aaa;font-style:italic">// Here we could detect &#39;*&#39; parameters (which won&#39;t work), missing &#39;}&#39;, etc.
+</span><span style="color:#aaa;font-style:italic"></span>
 
         s++;
       }
-      if (!*s)
-        break;
+      <span style="color:#00a">if</span> (!*s)
+        <span style="color:#00a">break</span>;
 
-      if (pos &gt;= MAX_PARAMS)
+      <span style="color:#00a">if</span> (pos &gt;= MAX_PARAMS)
       {
-        // error
-        printf(&quot;ERROR! Parameter %d out of range.\n&quot;, pos);
-        bError = true;
+        <span style="color:#aaa;font-style:italic">// error
+</span><span style="color:#aaa;font-style:italic"></span>        printf(<span style="color:#a50"></span><span style="color:#a50">&#34;ERROR! Parameter %d out of range.</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, pos);
+        bError = <span style="color:#0aa">true</span>;
       }
-      else 
+      <span style="color:#00a">else</span> 
       {
-        // Identifica el tipo de parámetro que es
+        <span style="color:#aaa;font-style:italic">// Identifica el tipo de parámetro que es
+</span><span style="color:#aaa;font-style:italic"></span>
 
+        <span style="color:#aaa;font-style:italic">// Aqui podemos extender esto un montón para cubrir todos los tipos de formato
+</span><span style="color:#aaa;font-style:italic"></span>        TParam p;
+        <span style="color:#00a">if</span> (*s == T(<span style="color:#a50"></span><span style="color:#a50">&#39;c&#39;</span>))      p = TP_CHAR;
+        <span style="color:#00a">else</span> <span style="color:#0a0">if</span> (*s == T(<span style="color:#a50"></span><span style="color:#a50">&#39;d&#39;</span>)) p = TP_INT;
+        <span style="color:#00a">else</span> <span style="color:#0a0">if</span> (*s == T(<span style="color:#a50"></span><span style="color:#a50">&#39;s&#39;</span>)) p = TP_STR;
+        <span style="color:#00a">else</span>                   p = TP_FLOAT;
 
-        // Aqui podemos extender esto un montón para cubrir todos los tipos de formato
-        TParam p;
-        if (*s == T('c'))      p = TP_CHAR;
-        else if (*s == T('d')) p = TP_INT;
-        else if (*s == T('s')) p = TP_STR;
-        else                   p = TP_FLOAT;
-
-        if (aParams[pos] != TP_UNK &amp;&amp; aParams[pos] != p)
+        <span style="color:#00a">if</span> (aParams[pos] != TP_UNK &amp;&amp; aParams[pos] != p)
         {
-          // error
+          <span style="color:#aaa;font-style:italic">// error
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-          printf(&quot;ERROR! Parameter %d used with different format specifiers (%d and %d).\n&quot;, pos, aParams[pos], p);
-          bError = true;
+          printf(<span style="color:#a50"></span><span style="color:#a50">&#34;ERROR! Parameter %d used with different format specifiers (%d and %d).</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, pos, aParams[pos], p);
+          bError = <span style="color:#0aa">true</span>;
         }
 
-        // Store the parameter type to be expected at position 'pos' on the stack.
-        aParams[pos] = p;
-        if (nParams &lt;= pos)
-          nParams = pos+1;
+        <span style="color:#aaa;font-style:italic">// Store the parameter type to be expected at position &#39;pos&#39; on the stack.
+</span><span style="color:#aaa;font-style:italic"></span>        aParams[pos] = p;
+        <span style="color:#00a">if</span> (nParams &lt;= pos)
+          nParams = pos+<span style="color:#099">1</span>;
 
-        // Store the parameter type and position on the stack, for this format element.
-        if (nFormats &gt;= MAX_PARAMS)
+        <span style="color:#aaa;font-style:italic">// Store the parameter type and position on the stack, for this format element.
+</span><span style="color:#aaa;font-style:italic"></span>        <span style="color:#00a">if</span> (nFormats &gt;= MAX_PARAMS)
         {
-          // error
+          <span style="color:#aaa;font-style:italic">// error
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-          printf(&quot;ERROR! Too many format elements (%d)!\n&quot;, nFormats);
-          bError = true;
+          printf(<span style="color:#a50"></span><span style="color:#a50">&#34;ERROR! Too many format elements (%d)!</span><span style="color:#a50">\n</span><span style="color:#a50">&#34;</span>, nFormats);
+          bError = <span style="color:#0aa">true</span>;
         }
-        else
+        <span style="color:#00a">else</span>
         {
           aFormats[nFormats].param = p;
           aFormats[nFormats].pos   = pos;
@@ -292,103 +284,101 @@ void PositionalPrintf(const T *pszFmt, ...)
     }
   }
 
-  // Verify that all parameters on the stack are referenced. (optional)
-  for (int i = 0; i &lt; nParams; i++)
+  <span style="color:#aaa;font-style:italic">// Verify that all parameters on the stack are referenced. (optional)
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; i &lt; nParams; i++)
   {
-    if (aParams[i] == TP_UNK)
+    <span style="color:#00a">if</span> (aParams[i] == TP_UNK)
     {
-      // error
+      <span style="color:#aaa;font-style:italic">// error
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-      // Benign if we assume that unused parameters are of INT size.
-//      printf(&quot;ERROR! Parameter %d undefined.\n&quot;, i);
-//      bError = true;
-    }
+      <span style="color:#aaa;font-style:italic">// Benign if we assume that unused parameters are of INT size.
+</span><span style="color:#aaa;font-style:italic">//      printf(&#34;ERROR! Parameter %d undefined.\n&#34;, i);
+</span><span style="color:#aaa;font-style:italic">//      bError = true;
+</span><span style="color:#aaa;font-style:italic"></span>    }
   }
-  if (bError)
-    return;
+  <span style="color:#00a">if</span> (bError)
+    <span style="color:#00a">return</span>;
 
-  // Build a new format string removing the {n} modifiers
-  T szNewFmt[3000];
+  <span style="color:#aaa;font-style:italic">// Build a new format string removing the {n} modifiers
+</span><span style="color:#aaa;font-style:italic"></span>  T szNewFmt[<span style="color:#099">3000</span>];
   {
     T *p = szNewFmt;
 
-    szNewFmt[0] = T(0);
+    szNewFmt[<span style="color:#099">0</span>] = T(<span style="color:#099">0</span>);
 
-    for (const T *s = pszFmt; *s; s++)
+    <span style="color:#00a">for</span> (<span style="color:#00a">const</span> T *s = pszFmt; *s; s++)
     {
       *p++ = *s;
-      if (*s == T('%'))
+      <span style="color:#00a">if</span> (*s == T(<span style="color:#a50"></span><span style="color:#a50">&#39;%&#39;</span>))
       {
-        if (*(s+1) == T('{'))
+        <span style="color:#00a">if</span> (*(s+<span style="color:#099">1</span>) == T(<span style="color:#a50"></span><span style="color:#a50">&#39;{&#39;</span>))
         {
-          s += 2;
-          while (*s &amp;&amp; *s != T('}'))
+          s += <span style="color:#099">2</span>;
+          <span style="color:#00a">while</span> (*s &amp;&amp; *s != T(<span style="color:#a50"></span><span style="color:#a50">&#39;}&#39;</span>))
             s++;
-          if (!*s)
-            break;
+          <span style="color:#00a">if</span> (!*s)
+            <span style="color:#00a">break</span>;
         }
       }
     }
-    *p = T(0); // Zero-end the new format string
-
+    *p = T(<span style="color:#099">0</span>); <span style="color:#aaa;font-style:italic">// Zero-end the new format string
+</span><span style="color:#aaa;font-style:italic"></span>
 
   }
   
-  // Copy the parameters to the parameter buffer in correct order.
-  // Here comes the system-dependent part
-  char aParamBuf[3000];
+  <span style="color:#aaa;font-style:italic">// Copy the parameters to the parameter buffer in correct order.
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#aaa;font-style:italic">// Here comes the system-dependent part
+</span><span style="color:#aaa;font-style:italic"></span>  <span style="color:#0aa">char</span> aParamBuf[<span style="color:#099">3000</span>];
   {
-    char *p = aParamBuf;
+    <span style="color:#0aa">char</span> *p = aParamBuf;
 
-    for (int i = 0; i &lt; nFormats; ++i)
+    <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; i &lt; nFormats; ++i)
     {
       va_list va;
       va_start(va, pszFmt);
 
-      // Skip stack parameters until the one we're looking for.
+      <span style="color:#aaa;font-style:italic">// Skip stack parameters until the one we&#39;re looking for.
+</span><span style="color:#aaa;font-style:italic"></span>
 
-
-      // System-dependent: assumes that anything that is not of type double is of INT size
-      for (int j = 0; j &lt; aFormats[i].pos; ++j)
+      <span style="color:#aaa;font-style:italic">// System-dependent: assumes that anything that is not of type double is of INT size
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> j = <span style="color:#099">0</span>; j &lt; aFormats[i].pos; ++j)
       {
-        if (aParams[j] == TP_FLOAT)
-          va_arg(va, double);
-        else
+        <span style="color:#00a">if</span> (aParams[j] == TP_FLOAT)
+          va_arg(va, <span style="color:#0aa">double</span>);
+        <span style="color:#00a">else</span>
 
-          va_arg(va, int);
+          <span style="color:#0a0">va_arg</span>(va, <span style="color:#0aa">int</span>);
       }
 
-      // Copy the parameter into the new parameter buffer
-      // System-dependent: the size thing again.
-      // System-dependent: assumes things about the order in which parameters are stored on the stack.
-      if (aParams[j] == TP_FLOAT)
+      <span style="color:#aaa;font-style:italic">// Copy the parameter into the new parameter buffer
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#aaa;font-style:italic">// System-dependent: the size thing again.
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#aaa;font-style:italic">// System-dependent: assumes things about the order in which parameters are stored on the stack.
+</span><span style="color:#aaa;font-style:italic"></span>      <span style="color:#00a">if</span> (aParams[j] == TP_FLOAT)
       {
-        double d = va_arg(va, double);
-        memcpy(p, &amp;d, sizeof(d));
-        p += sizeof(d);
+        <span style="color:#0aa">double</span> d = va_arg(va, <span style="color:#0aa">double</span>);
+        memcpy(p, &amp;d, <span style="color:#00a">sizeof</span>(d));
+        p += <span style="color:#00a">sizeof</span>(d);
       }
-      else
+      <span style="color:#00a">else</span>
 
       {
-        int d = va_arg(va, int);
-        memcpy(p, &amp;d, sizeof(d));
-        p += sizeof(d);
+        <span style="color:#0aa">int</span> d = va_arg(va, <span style="color:#0aa">int</span>);
+        memcpy(p, &amp;d, <span style="color:#00a">sizeof</span>(d));
+        p += <span style="color:#00a">sizeof</span>(d);
       }
     }
   }
 
-  // System-dependent: assumes that aParamBuf can be cast straight to va_list.
-  TempVPrintf(szNewFmt, (va_list)aParamBuf);
+  <span style="color:#aaa;font-style:italic">// System-dependent: assumes that aParamBuf can be cast straight to va_list.
+</span><span style="color:#aaa;font-style:italic"></span>  TempVPrintf(szNewFmt, (va_list)aParamBuf);
 }
 
-// Instantiate the char and wchar_t versions of the function.
+<span style="color:#aaa;font-style:italic">// Instantiate the char and wchar_t versions of the function.
+</span><span style="color:#aaa;font-style:italic"></span>
+template <span style="color:#0aa">void</span> PositionalPrintf(<span style="color:#00a">const</span> <span style="color:#0aa">char</span> *pszFmt, ...);
 
-template void PositionalPrintf(const char *pszFmt, ...);
-
-template void PositionalPrintf(const wchar_t *pszFmt, ...);
-</code></pre>
-
+template <span style="color:#0aa">void</span> <span style="color:#0a0">PositionalPrintf</span>(<span style="color:#00a">const</span> wchar_t *pszFmt, ...);</code></pre></div>
                     </div>
                     
                 </section>

@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 06 Oct 2011 08:06:41 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Flash Stage 3D is out!</title>
@@ -17,46 +19,7 @@
       <guid>https://thejare.github.io/2011/10/flash-stage-3d-is-out/</guid>
       <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D&lt;/a&gt;. Here&amp;#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Make sure you have a Java runtime installed, you need it for the Flash compiler.&lt;/li&gt;
-&lt;li&gt;Download &lt;a href=&#34;http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.5.1.zip&#34; target=&#34;_blank&#34;&gt;Flash SDK 4.5.1&lt;/a&gt; from &lt;a href=&#34;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&#34;&gt;http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK&lt;/a&gt;&lt;/a&gt;. Extract to a folder (I will assume &lt;strong&gt;flex_sdk_4.5.1&lt;/strong&gt;).&lt;/li&gt;
-&lt;li&gt;Download the appropriate versions of the debug, standalone and plugin Flash Player 11 from &lt;a href=&#34;http://www.adobe.com/support/flashplayer/downloads.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://www.adobe.com/support/flashplayer/downloads.html&#34;&gt;http://www.adobe.com/support/flashplayer/downloads.html&lt;/a&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;While you&amp;#8217;re there, download the latest &lt;a href=&#34;http://fpdownload.macromedia.com/pub/flashplayer/updaters/11/playerglobal11_0.swc&#34;&gt;Flash Runtime library&lt;/a&gt;.&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Inside the folder &lt;strong&gt;flex_sdk_4.5.1/frameworks/libs/player/&lt;/strong&gt; create a folder &amp;#8220;&lt;strong&gt;11.0&lt;/strong&gt;&amp;#8220;. Copy the &lt;strong&gt;playerglobal11_0.swc&lt;/strong&gt; you just downloaded inside that folder, and rename it to &lt;strong&gt;playerglobal.swc&lt;/strong&gt;. Result:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;flex_sdk_4.5.1/frameworks/libs/player/11.0/playerglobal.swc&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create your working folder, and copy the &lt;a href=&#34;http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display3D/Context3D.html#includeExamplesSummary&#34; target=&#34;_blank&#34;&gt;rotating cube example&lt;/a&gt; from the Adobe docs into a file called &lt;strong&gt;Context3DExample.as&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Delete line 59: &lt;strong&gt;this.stage.nativeWindow.activate(); //AIR only&lt;/strong&gt; and also remove the third &amp;#8220;&lt;strong&gt;false&lt;/strong&gt;&amp;#8221; parameter from the calls to &lt;strong&gt;assemble()&lt;/strong&gt; from lines 70 and 71.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Download the &lt;a href=&#34;https://github.com/flashplatformsdk/Flash-Platform-SDK/zipball/master&#34;&gt;Flash Platform SDK&lt;/a&gt; as a ZIP file. Extract the contents of &amp;#8220;&lt;strong&gt;src&lt;/strong&gt;&amp;#8221; in your work folder. This should result in a folder called &amp;#8220;&lt;strong&gt;com&lt;/strong&gt;&amp;#8221; side by side with the file &amp;#8220;&lt;strong&gt;Context3DExample.as&lt;/strong&gt;&amp;#8220;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Compile the sample: &lt;strong&gt;flex_sdk_4.5.1/bin/mxmlc -static-link-runtime-shared-libraries -swf-version=13 -target-player=11.0 Context3DExample.as&lt;/strong&gt;. Note the &lt;strong&gt;swf-version&lt;/strong&gt; and &lt;strong&gt;target-player&lt;/strong&gt; parameters.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Run the resulting SWF file with the standalone player 11 you downloaded, or embed it inside a web page. Important: for Stage3D to work properly on hardware, you must add the parameter &lt;strong&gt;&lt;param value=&amp;#8221;direct&amp;#8221; name=&amp;#8221;wmode&amp;#8221;&gt;&lt;/strong&gt; to the swf &lt;strong&gt;&lt;object&gt;&lt;/strong&gt; tag, and the attribute &lt;strong&gt;wmode=&amp;#8221;direct&amp;#8221;&lt;/strong&gt; to the &lt;strong&gt;&lt;embed&gt;&lt;/strong&gt; tag.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The result should be a spinning cube like this (only visible if you have the updated plugin):&lt;/p&gt;
-
-&lt;p&gt;[kml_flashembed publishmethod=&amp;#8221;static&amp;#8221; fversion=&amp;#8221;11.0.0&amp;#8243; movie=&amp;#8221;/Jare/files/Stage3D/Test3D.swf&amp;#8221; width=&amp;#8221;320&amp;#8243; height=&amp;#8221;240&amp;#8243; targetclass=&amp;#8221;flashmovie&amp;#8221; wmode=&amp;#8221;direct&amp;#8221;]&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://adobe.com/go/getflashplayer&#34;&gt;&lt;img src=&#34;http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif&#34; alt=&#34;Get Adobe Flash player&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[/kml_flashembed]&lt;/p&gt;
-
-&lt;p&gt;Further reading and links:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/package-summary.html&#34; target=&#34;_blank&#34;&gt;Flash SDK documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/WSd6a006f2eb1dc31e-310b95831324724ec56-8000.html&#34; target=&#34;_blank&#34;&gt;Shader assembler docs&lt;/a&gt; from &lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/index.html&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://help.adobe.com/en_US/as3/dev/index.html&#34;&gt;http://help.adobe.com/en_US/as3/dev/index.html&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.flashdevelop.org/wikidocs/index.php?title=Main_Page&#34; target=&#34;_blank&#34;&gt;FlashDevelop&lt;/a&gt; for a convenient IDE.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D demos and frameworks/libraries&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Happy 3D&amp;#8217;ing!&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,42 +28,10 @@
       <pubDate>Thu, 12 May 2011 12:44:33 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/05/relinuxed/</guid>
-      <description>&lt;p&gt;Time for that old laptop to receive Ubuntu 11.04!&lt;/p&gt;
-
-&lt;p&gt;Er&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.&lt;/p&gt;
-
-&lt;p&gt;Then, the &lt;a href=&#34;http://www.iguanademos.com/Jare/jblog_viewtopic.php?topicid=1381&#34;&gt;same problem as before&lt;/a&gt;. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable. So here it goes this time (DISCLAIMER: I don&amp;#8217;t really know what I&amp;#8217;m doing and I don&amp;#8217;t care if I destroy the hard drive and its contents):&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; See &lt;a href=&#34;http://fenidik.blogspot.com/2010/03/ext4-disable-journal.html&#34; target=&#34;_blank&#34;&gt;this link&lt;/a&gt; for instructions.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; The problem is that I can&amp;#8217;t do these things on a boot partition while happily running the full system on the Gnome desktop.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Reboot in recovery mode (keep SHIFT pressed while booting), drop down to the recovery terminal.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;mount -no remount,ro /&lt;/strong&gt;&amp;#8216; to remount the file system in read only mode with. Ooops! can&amp;#8217;t do that while running services that have files open for writing.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;fuser -v -m /&lt;/strong&gt;&amp;#8216; lists which services have files open (look for a &amp;#8216;F&amp;#8217; or &amp;#8216;f&amp;#8217; in the flags) and get ready to kill some of these processes. Note that not all of them will need to be killed, so use some judgement and go one by one. Start with the &amp;#8216;F&amp;#8217; ones.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Try to kill them nicely first with &amp;#8216;&lt;strong&gt;stop &lt;em&gt;servicename&lt;/em&gt;&lt;/strong&gt;&amp;#8216;. In my case, I just did &amp;#8216;&lt;strong&gt;stop rsyslog&lt;/strong&gt;&amp;#8216; and tried to remount, it worked even though there were other services (&lt;strong&gt;recovery-menu&lt;/strong&gt; and &lt;strong&gt;root&lt;/strong&gt;) with &amp;#8216;f&amp;#8217; flags. We have a read only filesystem!&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;tune2fs -o journal_data_writeback /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;tune2fs -O ^has_journal /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;e2fsck -f /dev/sda1&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; &amp;#8216;&lt;strong&gt;reboot&lt;/strong&gt;&amp;#8216;&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Upon reboot, I see that the system is now complaining about a missing disk but it then proceeds. Looking at the /etc/fstab file, the missing disk was used as swap during installation.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; In the &lt;strong&gt;/etc/fstab&lt;/strong&gt; file, add the options &amp;#8216;&lt;strong&gt;data=writeback,noatime,nodiratime&lt;/strong&gt;&amp;#8216; for your / drive. Reboot.&lt;/p&gt;
-
-&lt;p&gt;&amp;#8211; Go to the Synaptyc Package Manager to continue updating the system. Mine complained about broken files, and asked me to do &amp;#8216;&lt;strong&gt;sudo dpkg &amp;#8211;configure -a&lt;/strong&gt;&amp;#8216;. That&amp;#8217;s all for now!&lt;/p&gt;
-
-&lt;p&gt;Well, I dunno what will be different for you.&lt;/p&gt;
-</description>
+      <description>Time for that old laptop to receive Ubuntu 11.04!
+Er&amp;#8230;
+Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.
+Then, the same problem as before. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable.</description>
     </item>
     
   </channel>

@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Stage3D Vertex Buffer formats &middot; Jare&#39;s Blog">
@@ -121,6 +120,8 @@
 
 <p><strong>Vector.<Number></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
 
+<p></p>
+
 <p>You must use a <strong>ByteArray</strong>, to which you will copy the values manually with the right format. In our example above, 3 <strong>writeFloat()</strong> calls plus a <strong>writeUnsignedInt()</strong> for the 32-bit color. A detail that stumped me for a while is that you must ensure the <strong>ByteArray</strong> is <strong>Endian.LITTLE_ENDIAN</strong>, it defaults to <strong>BIG_ENDIAN</strong>. I wrote this function to perform this process, with the aid of an array that stores the format of each varying parameter:</p>
 
 <pre>private static function DumpVectorComponentsIntoByteArray(dest:ByteArray,
@@ -193,7 +194,6 @@
         }
     }
 }</pre>
-
                     </div>
                     
                 </section>

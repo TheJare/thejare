@@ -7,7 +7,6 @@
 
     <meta name="description" content="">
 
-    <meta name="generator" content="Hugo 0.15" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="LoadLibrary-GetProcAddress Fun &middot; Jare&#39;s Blog">
@@ -110,125 +109,98 @@
 <p>I explain a macro trick used by the authors of the BASS sound library to help with dynamic loading of the DLL; then I introduce a way to make it even easier to apply. Afterwards I extend the idea with a modified macro + a header file trick which useful by itself. 3 totds in one! 🙂</p>
 
 <p>Last night, adding the sound library BASS (visit <a href="http://www.un4seen.com/music/">http://www.un4seen.com/music/</a>) to a pet project, I noticed they had added and documented a nice trick to help people who want to load the DLL at runtime instad of static-linking it. The trick is in the way all the functions in the DLL&#8217;s header file bass.h are declared:</p>
-
-<pre><code class="language-c">BOOL BASSDEF(BASS_GetDeviceDescription)(int devnum, char **desc)
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">BOOL BASSDEF(BASS_GetDeviceDescription)(<span style="color:#0aa">int</span> devnum, <span style="color:#0aa">char</span> **desc)</code></pre></div>
 <p>i.e. with the macro BASSDEF surrounding the function name. This macro is defined at the beginning:</p>
-
-<pre><code class="language-c">#ifndef BASSDEF
-#define BASSDEF(f) WINAPI f
-#endif
-
-// The declaration above is, after the macro substitution, a plain old 
-function declaration:
-BOOL WINAPI BASS_GetDeviceDescription(int devnum, char **desc);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#4c8317">#ifndef BASSDEF
+</span><span style="color:#4c8317">#define BASSDEF(f) WINAPI f
+</span><span style="color:#4c8317">#endif
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// The declaration above is, after the macro substitution, a plain old 
+</span><span style="color:#aaa;font-style:italic"></span>function declaration:
+BOOL WINAPI BASS_GetDeviceDescription(<span style="color:#0aa">int</span> devnum, <span style="color:#0aa">char</span> **desc);</code></pre></div>
 <p>Normally, if you want to load a DLL at runtime and GetProcAddress() the functions you want, you are forced to declare your own function pointer vars with the right parameter declaration. However, in BASS, when you include the header file, you can simply do</p>
-
-<pre><code class="language-c">#define BASSDEF(f) (WINAPI *f) // define the functions as pointers
-#include &quot;bass.h&quot;
-
-// The declaration above is now interpreted differently:
-BOOL (WINAPI *BASS_GetDeviceDescription)(int devnum, char **desc);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#4c8317">#define BASSDEF(f) (WINAPI *f) </span><span style="color:#aaa;font-style:italic">// define the functions as pointers
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;bass.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// The declaration above is now interpreted differently:
+</span><span style="color:#aaa;font-style:italic"></span>BOOL (WINAPI *BASS_GetDeviceDescription)(<span style="color:#0aa">int</span> devnum, <span style="color:#0aa">char</span> **desc);</code></pre></div>
 <p>and instead of the useless (for dynamic loading) function declarations, you have obtained a list of function pointer variables with the right parameters. Cool! Now it&#8217;s up to you to write:</p>
-
-<pre><code class="language-c">BASS_GetDeviceDescription = GetProcAddress(bass, &quot;BASS_GetDeviceDescription&quot;);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">BASS_GetDeviceDescription = GetProcAddress(bass, <span style="color:#a50"></span><span style="color:#a50">&#34;BASS_GetDeviceDescription&#34;</span>);</code></pre></div>
 <p>for each function you want, and then call BASS_GetDeviceDescription(-1, &amp;pInfo) just like you normally would. What a cool tip of the day, right?</p>
 
 <p>WRONG! You missed type checking. A C++ compiler will complain that BASS_GetDeviceDescription is of type int (\__stdcall *)(int, char**), while GetProcAddress() returns a int (__stdcall *)(void) value. DAMN! We&#8217;re right where we started because we have to typecast each GetProcAddress separately, and to do so we need the right parameters again.</p>
 
 <p>Instead of that mess, we can do some weird typecast trickery:</p>
-
-<pre><code class="language-cpp">*(void**)&amp;BASS_GetDeviceDescription=(void*)GetProcAddress(bass, &quot;BASS_GetDeviceDescription&quot;);
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">*(<span style="color:#0aa">void</span>**)&amp;BASS_GetDeviceDescription=(<span style="color:#0aa">void</span>*)GetProcAddress(bass, <span style="color:#a50"></span><span style="color:#a50">&#34;BASS_GetDeviceDescription&#34;</span>);</code></pre></div>
 <p>Since we already know the funcptr variables have the correct types (because they come from the official header), we can simply coerce the compiler into treating them as (void*) variables during the assignment, and avoid repeating the function declarations. I ended up using a macro to further simplify things:</p>
-
-<pre><code class="language-c">#define INITBASSF(f) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#4c8317">#define INITBASSF(f) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
+</span><span style="color:#4c8317"></span>
 INITBASSF(BASS_Init);
 INITBASSF(BASS_Start);
 INITBASSF(BASS_Stop);
 INITBASSF(BASS_Free);
-INITBASSF(BASS_GetInfo);
-</code></pre>
-
+INITBASSF(BASS_GetInfo);</code></pre></div>
 <p>There&#8217;s even more! We still have to write our list of funcptr initializations. Should we forget one, the funcptr variable will be uninitialized, trying to call it may cause major havok. I know this is a minor burden since you will catch most errors right away in a debug build; however, can we automate this further? YES! They could have separated the function declarations into their own header file (without any single-include guards), with the standard BASSDEF macro taking also the parameter declaration as a macro parameter:</p>
-
-<pre><code class="language-c">// Inside &quot;Bass.h&quot;
-#define BASSDEF(f,p) WINAPI f p
-...
-#include &quot;BassFunctions.h&quot;
-
-// BassFunctions.h:
-BOOL BASSDEF(BASS_GetDeviceDescription, (int devnum, char **desc));
-void BASSDEF(BASS_SetBufferLength, (float length));
-//... the rest of the BASSDEF function declarations
-</code></pre>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// Inside &#34;Bass.h&#34;
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#define BASSDEF(f,p) WINAPI f p
+</span><span style="color:#4c8317"></span>...
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;BassFunctions.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#aaa;font-style:italic">// BassFunctions.h:
+</span><span style="color:#aaa;font-style:italic"></span>BOOL BASSDEF(BASS_GetDeviceDescription, (<span style="color:#0aa">int</span> devnum, <span style="color:#0aa">char</span> **desc));
+<span style="color:#0aa">void</span> <span style="color:#0a0">BASSDEF</span>(BASS_SetBufferLength, (<span style="color:#0aa">float</span> length));
+//... the rest of the BASSDEF function declarations</code></pre></div>
 <p>With that little help bit, my MusicPlayer.cpp wrapper file would look something like this:</p>
-
-<pre><code class="language-c">#define BASSDEF(f,p) (WINAPI *f) p // define the functions as pointers
-#include &quot;Bass.h&quot;
-//....
-bool CMusicPlayer::Init()
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#4c8317">#define BASSDEF(f,p) (WINAPI *f) p </span><span style="color:#aaa;font-style:italic">// define the functions as pointers
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;Bass.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span><span style="color:#aaa;font-style:italic">//....
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#0aa">bool</span> CMusicPlayer::Init()
 {
-   HINSTANCE bass=LoadLibrary(&quot;BASS.DLL&quot;); // load BASS
-   if (!bass) return false;
+   HINSTANCE bass=LoadLibrary(<span style="color:#a50"></span><span style="color:#a50">&#34;BASS.DLL&#34;</span>); <span style="color:#aaa;font-style:italic">// load BASS
+</span><span style="color:#aaa;font-style:italic"></span>   <span style="color:#00a">if</span> (!bass) <span style="color:#00a">return</span> <span style="color:#0aa">false</span>;
 
-   #undef BASSDEF
-   #define BASSDEF(f,p) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
-   #include &quot;BassFunctions.h&quot;
-   // Your initialization here....
-}
-</code></pre>
-
+   <span style="color:#4c8317">#undef BASSDEF
+</span><span style="color:#4c8317"></span>   <span style="color:#4c8317">#define BASSDEF(f,p) *(void**)&amp;f=(void*)GetProcAddress(bass, #f)
+</span><span style="color:#4c8317"></span>   <span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;BassFunctions.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>   <span style="color:#aaa;font-style:italic">// Your initialization here....
+</span><span style="color:#aaa;font-style:italic"></span>}</code></pre></div>
 <p>And there you have it. No maintenance burden, no typing mistakes, no need to repeat a list of names. With the original BASS header file built the way I propose, you only need 6 lines of code to switch from static to dynamic linking.</p>
 
 <p>I have used the &#8220;declarator macro + listing include file&#8221; technique quite a few times, in situations well unrelated to DLLs, Windows, Visual C or games altogether, so I guess any C++ programmer can benefit from it. 🙂 For instance, you have a series of enumerated type constants and you want to have them available also in string form (say, to read the constant in string form from a text script file):</p>
-
-<pre><code class="language-c">// UnitIdList.h
-DECLARE_ID(UNITID_SOLDIER)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#aaa;font-style:italic">// UnitIdList.h
+</span><span style="color:#aaa;font-style:italic"></span>DECLARE_ID(UNITID_SOLDIER)
 DECLARE_ID(UNITID_WORKER)
 DECLARE_ID(UNITID_MACHINE)
 DECLARE_ID(UNITID_RESOURCE)
 
-// UnitId.h
-//...
-#define DECLARE_ID(a) a,
-enum TUnitId
+<span style="color:#aaa;font-style:italic">// UnitId.h
+</span><span style="color:#aaa;font-style:italic">//...
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#define DECLARE_ID(a) a,
+</span><span style="color:#4c8317"></span><span style="color:#00a">enum</span> TUnitId
 {
-#include &quot;UnitIdList.h&quot;
-   UNITID_INVALID
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;UnitIdList.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>   UNITID_INVALID
 };
-//...
-
-// somewhere in my cpps...
-#include &quot;UnitId.h&quot;
-
-#undef DECLARE_ID
-#define DECLARE_ID(a) { a, #a },
-static struct { int id; const char *pszId; }
+<span style="color:#aaa;font-style:italic">//...
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#aaa;font-style:italic">// somewhere in my cpps...
+</span><span style="color:#aaa;font-style:italic"></span><span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;UnitId.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>
+<span style="color:#4c8317">#undef DECLARE_ID
+</span><span style="color:#4c8317">#define DECLARE_ID(a) { a, #a },
+</span><span style="color:#4c8317"></span><span style="color:#00a">static</span> <span style="color:#00a">struct</span> { <span style="color:#0aa">int</span> id; <span style="color:#00a">const</span> <span style="color:#0aa">char</span> *pszId; }
 s_aUnitIds[] =
 {
-#include &quot;UnitIdList.h&quot;
-};
+<span style="color:#4c8317">#include</span> <span style="color:#4c8317">&#34;UnitIdList.h&#34;</span><span style="color:#4c8317">
+</span><span style="color:#4c8317"></span>};
 
-TUnitId FindUnitIdFromStringID(const char *pszId)
+TUnitId <span style="color:#0a0">FindUnitIdFromStringID</span>(<span style="color:#00a">const</span> <span style="color:#0aa">char</span> *pszId)
 {
-   for (int i = 0; i &lt; ARRAY_LEN(s_aUnitIds); i++)
-     if (0 == stricmp(s_aUnitIds[i].pszId, pszId))
-       return s_aUnitIds[i].id;
-   return UNITID_INVALID;
-}
-</code></pre>
-
+   <span style="color:#00a">for</span> (<span style="color:#0aa">int</span> i = <span style="color:#099">0</span>; i &lt; ARRAY_LEN(s_aUnitIds); i++)
+     <span style="color:#00a">if</span> (<span style="color:#099">0</span> == stricmp(s_aUnitIds[i].pszId, pszId))
+       <span style="color:#00a">return</span> s_aUnitIds[i].id;
+   <span style="color:#00a">return</span> UNITID_INVALID;
+}</code></pre></div>
                     </div>
                     
                 </section>

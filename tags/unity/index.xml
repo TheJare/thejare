@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Dec 2011 00:09:45 +0000</lastBuildDate>
-    <atom:link href="https://thejare.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://thejare.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Unity3D 3.5 Developer preview is out</title>
@@ -17,14 +19,7 @@
       <guid>https://thejare.github.io/2011/12/unity3d-3.5-developer-preview-is-out/</guid>
       <description>&lt;p&gt;And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it&amp;#8217;s a really odd situation. With the current outlook of Flash after the &amp;#8216;&lt;a href=&#34;http://creativecodingpodcast.com/?p=140&#34; target=&#34;_blank&#34;&gt;Flashmageddon&lt;/a&gt;&amp;#8216;, it&amp;#8217;s hard to say how relevant this will be in the long term, but it&amp;#8217;s an impressive feature! And the obligatory cube to celebrate it:&lt;/p&gt;
 
-&lt;p&gt;[kml_flashembed publishmethod=&amp;#8221;static&amp;#8221; fversion=&amp;#8221;11.0.0&amp;#8243; movie=&amp;#8221;/Jare/files/Stage3D/testcube.swf&amp;#8221; width=&amp;#8221;480&amp;#8243; height=&amp;#8221;320&amp;#8243; targetclass=&amp;#8221;flashmovie&amp;#8221; wmode=&amp;#8221;direct&amp;#8221;]&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://adobe.com/go/getflashplayer&#34;&gt;&lt;img src=&#34;http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif&#34; alt=&#34;Get Adobe Flash player&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[/kml_flashembed]&lt;/p&gt;
-
-&lt;p&gt;The good side is, Unity is incredibly easy to use (&lt;a href=&#34;http://catlikecoding.com/unity/tutorials/&#34; target=&#34;_blank&#34;&gt;these tutorials&lt;/a&gt; were my starting point). The bad side, the generated SWF takes a hefty 2Mb (the unity web player object is just 41Kb). Anyway, &lt;a href=&#34;http://unity3d.com/&#34; target=&#34;_blank&#34;&gt;Grab Unity&lt;/a&gt; and start playing!&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

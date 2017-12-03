@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://thejare.github.io/</loc>
-    <lastmod>2016-05-02T03:14:02+02:00</lastmod>
-    <priority>0</priority>
+    <loc>https://thejare.github.io/2017/12/ludum-dare-40/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
   </url>
   
   <url>
@@ -68,7 +68,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2012/03/unity3d-3.5-mobile-is-free</loc>
+    <loc>https://thejare.github.io/2012/03/unity3d-3.5-mobile-is-free#8230/</loc>
     <lastmod>2012-03-07T03:37:03+00:00</lastmod>
   </url>
   
@@ -163,7 +163,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2011/06/google/</loc>
+    <loc>https://thejare.github.io/2011/06/google-/</loc>
     <lastmod>2011-06-30T22:53:54+00:00</lastmod>
   </url>
   
@@ -418,7 +418,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2007/07/from-zero-to</loc>
+    <loc>https://thejare.github.io/2007/07/from-zero-to#8230-a-fng-mess/</loc>
     <lastmod>2007-07-13T09:04:00+00:00</lastmod>
   </url>
   
@@ -488,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2007/05/don</loc>
+    <loc>https://thejare.github.io/2007/05/don#8217t-anger-the-game-developer/</loc>
     <lastmod>2007-05-02T09:16:00+00:00</lastmod>
   </url>
   
@@ -633,7 +633,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2006/11/when-things-don</loc>
+    <loc>https://thejare.github.io/2006/11/when-things-don#8217t-go-as-planned/</loc>
     <lastmod>2006-11-10T17:04:00+00:00</lastmod>
   </url>
   
@@ -683,7 +683,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2006/09/joel</loc>
+    <loc>https://thejare.github.io/2006/09/joel#8217s-gems/</loc>
     <lastmod>2006-09-11T03:11:00+00:00</lastmod>
   </url>
   
@@ -693,7 +693,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2006/09/shoot</loc>
+    <loc>https://thejare.github.io/2006/09/shoot#8217em-up-competition/</loc>
     <lastmod>2006-09-01T09:40:00+00:00</lastmod>
   </url>
   
@@ -878,7 +878,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2006/02/that</loc>
+    <loc>https://thejare.github.io/2006/02/that#8217s-what-i-call-a-touchscreen/</loc>
     <lastmod>2006-02-09T02:42:00+00:00</lastmod>
   </url>
   
@@ -903,7 +903,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/12/will-they-fly-a-plane</loc>
+    <loc>https://thejare.github.io/2005/12/will-they-fly-a-plane#8230/</loc>
     <lastmod>2005-12-25T07:50:00+00:00</lastmod>
   </url>
   
@@ -923,12 +923,12 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/12/a-little-ai-goes-a-long-way</loc>
+    <loc>https://thejare.github.io/2005/12/a-little-ai-goes-a-long-way#8230/</loc>
     <lastmod>2005-12-15T13:56:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/12/c</loc>
+    <loc>https://thejare.github.io/2005/12/c#-and-const-correctness/</loc>
     <lastmod>2005-12-14T17:51:00+00:00</lastmod>
   </url>
   
@@ -953,7 +953,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/11/alabama-1-</loc>
+    <loc>https://thejare.github.io/2005/11/alabama-1-#8211-jack-0/</loc>
     <lastmod>2005-11-22T10:02:00+00:00</lastmod>
   </url>
   
@@ -963,7 +963,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/11/360</loc>
+    <loc>https://thejare.github.io/2005/11/360#8217s-backwards-compatibility-report/</loc>
     <lastmod>2005-11-12T00:34:00+00:00</lastmod>
   </url>
   
@@ -983,7 +983,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/10/before-you-criticise-microsoft-windows</loc>
+    <loc>https://thejare.github.io/2005/10/before-you-criticise-microsoft-windows#8230/</loc>
     <lastmod>2005-10-29T03:15:00+00:00</lastmod>
   </url>
   
@@ -998,7 +998,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/10/f</loc>
+    <loc>https://thejare.github.io/2005/10/f#038%23ng-ipod/</loc>
     <lastmod>2005-10-24T17:11:00+00:00</lastmod>
   </url>
   
@@ -1073,7 +1073,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/08/atitd</loc>
+    <loc>https://thejare.github.io/2005/08/atitd#8217s-anecdote/</loc>
     <lastmod>2005-08-25T01:04:00+00:00</lastmod>
   </url>
   
@@ -1133,7 +1133,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/07/life-at-60-in-wow-</loc>
+    <loc>https://thejare.github.io/2005/07/life-at-60-in-wow-#8211-ii/</loc>
     <lastmod>2005-07-16T10:42:00+00:00</lastmod>
   </url>
   
@@ -1213,7 +1213,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2005/05/sony-1-</loc>
+    <loc>https://thejare.github.io/2005/05/sony-1-#8211-microsoft-0/</loc>
     <lastmod>2005-05-17T03:52:00+00:00</lastmod>
   </url>
   
@@ -1338,7 +1338,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2004/11/</loc>
+    <loc>https://thejare.github.io/2004/11/#8230and-the-half-life-2-opinion/</loc>
     <lastmod>2004-11-23T11:33:00+00:00</lastmod>
   </url>
   
@@ -1358,7 +1358,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2004/11/random-bits</loc>
+    <loc>https://thejare.github.io/2004/11/random-bits#8230/</loc>
     <lastmod>2004-11-04T16:38:00+00:00</lastmod>
   </url>
   
@@ -1378,7 +1378,7 @@
   </url>
   
   <url>
-    <loc>https://thejare.github.io/2004/10/strange-day</loc>
+    <loc>https://thejare.github.io/2004/10/strange-day#8230/</loc>
     <lastmod>2004-10-15T12:21:00+00:00</lastmod>
   </url>
   
@@ -1390,6 +1390,218 @@
   <url>
     <loc>https://thejare.github.io/2004/10/welcome/</loc>
     <lastmod>2004-10-11T19:43:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/html/ld40/</loc>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/about-me/</loc>
+    <lastmod>2012-07-09T00:35:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/articles/</loc>
+    <lastmod>2012-07-09T00:35:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/baby/</loc>
+    <lastmod>2011-12-26T10:07:57+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/demoscene/</loc>
+    <lastmod>2013-05-04T02:55:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/development/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/downloads/</loc>
+    <lastmod>2012-07-09T00:35:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/flash/</loc>
+    <lastmod>2011-12-28T00:09:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/functional/</loc>
+    <lastmod>2013-03-03T23:05:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/games/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/gdc/</loc>
+    <lastmod>2014-03-19T01:52:19+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/github/</loc>
+    <lastmod>2013-05-04T02:55:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/haskell/</loc>
+    <lastmod>2013-03-03T23:05:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/html5/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/html/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/install/</loc>
+    <lastmod>2011-10-06T08:06:41+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/javascript/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/linux/</loc>
+    <lastmod>2011-05-12T12:44:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/ludumdare/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/me/</loc>
+    <lastmod>2012-07-09T00:35:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/mobile/</loc>
+    <lastmod>2011-12-26T10:07:57+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/node/</loc>
+    <lastmod>2012-01-28T03:47:06+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/post/</loc>
+    <lastmod>2017-12-03T01:27:02+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/programming/</loc>
+    <lastmod>2013-03-03T23:05:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/server/</loc>
+    <lastmod>2012-01-28T03:47:06+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/slides/</loc>
+    <lastmod>2014-03-19T01:52:19+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/source-code/</loc>
+    <lastmod>2013-05-04T02:55:18+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/spainjs/</loc>
+    <lastmod>2012-07-09T00:35:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/stage3d/</loc>
+    <lastmod>2011-12-28T00:09:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/system/</loc>
+    <lastmod>2012-01-28T03:47:06+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/</loc>
+    <lastmod>2011-12-26T10:07:57+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/ubuntu/</loc>
+    <lastmod>2011-05-12T12:44:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/categories/uncategorized/</loc>
+    <lastmod>2013-03-16T11:59:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://thejare.github.io/tags/unity/</loc>
+    <lastmod>2011-12-28T00:09:45+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>
