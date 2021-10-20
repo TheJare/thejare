@@ -1,27 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gdc on Jare&#39;s Blog</title>
+    <title>gdc on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/gdc/</link>
-    <description>Recent content in Gdc on Jare&#39;s Blog</description>
+    <description>Recent content in gdc on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Mar 2014 01:52:19 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/gdc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 19 Mar 2014 01:52:19 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/gdc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GDC 2014 Slides Compilation</title>
       <link>https://thejare.github.io/2014/03/gdc-2014-slides-compilation/</link>
       <pubDate>Wed, 19 Mar 2014 01:52:19 +0000</pubDate>
       
       <guid>https://thejare.github.io/2014/03/gdc-2014-slides-compilation/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: I think the &lt;a href=&#34;http://www.gdcvault.com/free/gdc-14&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt; has been updated with all available content, so you may want to go there instead. See you next year!?&lt;/p&gt;
-
-&lt;p&gt;Get&amp;#8217;em while they&amp;#8217;re fresh! If you know of stuff missing here, please tell me about it on Twitter &lt;a href=&#34;https://twitter.com/TheJare&#34; target=&#34;_blank&#34;&gt;@TheJare&lt;/a&gt;. You can also check industry sites like &lt;a href=&#34;http://www.gamasutra.com/&#34; target=&#34;_blank&#34;&gt;Gamasutra&lt;/a&gt;, &lt;a href=&#34;http://www.polygon.com/&#34; target=&#34;_blank&#34;&gt;Polygon&lt;/a&gt; or &lt;a href=&#34;http://www.develop-online.net/&#34; target=&#34;_blank&#34;&gt;Develop&lt;/a&gt; for ongoing coverage, and hopefully a lot of these materials will show up in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt; soon.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: I think the &lt;a href=&#34;http://www.gdcvault.com/free/gdc-14&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GDC Vault&lt;/a&gt; has been updated with all available content, so you may want to go there instead. See you next year!?&lt;/p&gt;
+&lt;p&gt;Get’em while they’re fresh! If you know of stuff missing here, please tell me about it on Twitter &lt;a href=&#34;https://twitter.com/TheJare&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@TheJare&lt;/a&gt;. You can also check industry sites like &lt;a href=&#34;http://www.gamasutra.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gamasutra&lt;/a&gt;, &lt;a href=&#34;http://www.polygon.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Polygon&lt;/a&gt; or &lt;a href=&#34;http://www.develop-online.net/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Develop&lt;/a&gt; for ongoing coverage, and hopefully a lot of these materials will show up in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GDC Vault&lt;/a&gt; soon.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,9 +23,7 @@
       <pubDate>Thu, 28 Mar 2013 21:22:04 +0000</pubDate>
       
       <guid>https://thejare.github.io/2013/03/gdc-2013/</guid>
-      <description>&lt;p&gt;It&amp;#8217;s that time of the year again, when everyone else is partying and having fun (&lt;a href=&#34;http://www.forbes.com/sites/carolpinchefsky/2013/03/27/really-igda-party-at-gdc-brings-on-the-female-dancers/&#34; target=&#34;_blank&#34;&gt;or maybe not &amp;#8211; WTF IGDA?&lt;/a&gt;) at GDC in San Francisco. I&amp;#8217;ll try to collect any links to lecture materials I come across. If you know of stuff missing here, please tell me about it on Twitter &lt;a href=&#34;https://twitter.com/TheJare&#34; target=&#34;_blank&#34;&gt;@TheJare&lt;/a&gt;. You can also check industry sites like &lt;a href=&#34;http://www.gamasutra.com/&#34; target=&#34;_blank&#34;&gt;Gamasutra&lt;/a&gt;, &lt;a href=&#34;http://www.polygon.com/2013/3/25/4145780/gdc-2013-panels-announcements-and-more-live-from-san-francisco&#34; target=&#34;_blank&#34;&gt;Polygon&lt;/a&gt; or &lt;a href=&#34;http://www.develop-online.net/&#34; target=&#34;_blank&#34;&gt;Develop&lt;/a&gt; for ongoing coverage, and hopefully a lot of these materials will show up in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34;&gt;GDC Vault&lt;/a&gt; soon.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;It’s that time of the year again, when everyone else is partying and having fun (&lt;a href=&#34;http://www.forbes.com/sites/carolpinchefsky/2013/03/27/really-igda-party-at-gdc-brings-on-the-female-dancers/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;or maybe not – WTF IGDA?&lt;/a&gt;) at GDC in San Francisco. I’ll try to collect any links to lecture materials I come across. If you know of stuff missing here, please tell me about it on Twitter &lt;a href=&#34;https://twitter.com/TheJare&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@TheJare&lt;/a&gt;. You can also check industry sites like &lt;a href=&#34;http://www.gamasutra.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gamasutra&lt;/a&gt;, &lt;a href=&#34;http://www.polygon.com/2013/3/25/4145780/gdc-2013-panels-announcements-and-more-live-from-san-francisco&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Polygon&lt;/a&gt; or &lt;a href=&#34;http://www.develop-online.net/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Develop&lt;/a&gt; for ongoing coverage, and hopefully a lot of these materials will show up in the &lt;a href=&#34;http://www.gdcvault.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GDC Vault&lt;/a&gt; soon.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -41,9 +32,7 @@
       <pubDate>Fri, 09 Mar 2012 01:25:41 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/03/gdc-2012/</guid>
-      <description>&lt;p&gt;[Edit]: The &lt;a href=&#34;http://www.gdcvault.com/free/gdc-12&#34; target=&#34;_blank&#34;&gt;GDC Vault is now open&lt;/a&gt; for business, with lots of slides and presentations. Meggan Scavio also had &lt;a href=&#34;https://twitter.com/#!/megganpez/status/185857804324712448&#34; target=&#34;_blank&#34;&gt;good news on Twitter&lt;/a&gt; about availability of free videos.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;[Edit]: The &lt;a href=&#34;http://www.gdcvault.com/free/gdc-12&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GDC Vault is now open&lt;/a&gt; for business, with lots of slides and presentations. Meggan Scavio also had &lt;a href=&#34;https://twitter.com/#!/megganpez/status/185857804324712448&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;good news on Twitter&lt;/a&gt; about availability of free videos.&lt;/p&gt;</description>
     </item>
     
   </channel>

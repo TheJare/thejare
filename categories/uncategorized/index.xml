@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Uncategorized on Jare&#39;s Blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Uncategorized on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Mar 2013 11:59:45 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/categories/uncategorized/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 16 Mar 2013 11:59:45 +0000</lastBuildDate><atom:link href="https://thejare.github.io/categories/uncategorized/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Improv math</title>
       <link>https://thejare.github.io/2013/03/improv-math/</link>
@@ -18,12 +14,8 @@
       
       <guid>https://thejare.github.io/2013/03/improv-math/</guid>
       <description>&lt;p&gt;I always loved math and it was one of my favourite subjects during school. I have to thank my dad and my bro for instilling that love in my head. My young self was always baffled by how most people around me not only hated math, but they seemed to have a hard time with it. How could it be hard? It was all logical, you hardly needed to work or memorize anything because, hey, with just a few basics in your head you could deduce any formulas or theorems you needed during an exam, right? Heh.&lt;/p&gt;
-
-&lt;p&gt;This year I&amp;#8217;m one of the tutors for the &lt;a href=&#34;http://www.u-tad.com/masteres-2/programacion-videojuegos/&#34; target=&#34;_blank&#34;&gt;Master on Game Programming&lt;/a&gt; at the U-Tad. The subject I&amp;#8217;m teaching this course is Game Architecture: Game Objects, Main Loop and Timing, Reading &amp;amp; Saving, etc. This is the Master&amp;#8217;s debut year, so while I believe the course is going great (and students seem to agree so far), some bits and pieces are not ideal and will need improvement for the following years.&lt;/p&gt;
-
-&lt;p&gt;One of them is, unsurprisingly, math.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;This year I’m one of the tutors for the &lt;a href=&#34;http://www.u-tad.com/masteres-2/programacion-videojuegos/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Master on Game Programming&lt;/a&gt; at the U-Tad. The subject I’m teaching this course is Game Architecture: Game Objects, Main Loop and Timing, Reading &amp;amp; Saving, etc. This is the Master’s debut year, so while I believe the course is going great (and students seem to agree so far), some bits and pieces are not ideal and will need improvement for the following years.&lt;/p&gt;
+&lt;p&gt;One of them is, unsurprisingly, math.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -32,7 +24,7 @@
       <pubDate>Wed, 07 Mar 2012 03:37:03 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/03/unity3d-3.5-mobile-is-free#8230/</guid>
-      <description>..Until April 8th. It normally costs around $800, so get it even if you don&amp;#8217;t have immediate plans to use it.</description>
+      <description>..Until April 8th. It normally costs around $800, so get it even if you don’t have immediate plans to use it.</description>
     </item>
     
     <item>
@@ -41,8 +33,8 @@
       <pubDate>Wed, 07 Mar 2012 03:18:08 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/03/metro-and-javascript/</guid>
-      <description>On Facebook I wrote a bunch of thoughts on the fact that Windows 8 treats JavaScript as a first-class citizen for native Metro apps. It was triggered by this and a few other related reads on WinJS.
-In general, there is value in having a single language available for all your needs and platforms even if it&amp;#8217;s not 100% portable (look at C/C++). JavaScript is the most widely available language today and, while ugly, the popularity of runtimes like NodeJS and the myriad HTML5 mobile app wrappers like PhoneGap prove that it is viable.</description>
+      <description>On Facebook I wrote a bunch of thoughts on the fact that Windows 8 treats JavaScript as a first-class citizen for native Metro apps. It was triggered by thisand a few other related reads on WinJS.
+In general, there is value in having a single language available for all your needs and platforms even if it’s not 100% portable (look at C/C++). JavaScript is the most widely available language today and, while ugly, the popularity of runtimes like NodeJS and the myriad HTML5 mobile app wrappers like PhoneGap prove that it is viable.</description>
     </item>
     
     <item>
@@ -51,18 +43,15 @@ In general, there is value in having a single language available for all your ne
       <pubDate>Sat, 04 Feb 2012 02:45:34 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/02/facebook-ipo-and-mobile-social-games/</guid>
-      <description>&lt;p&gt;Facebook&amp;#8217;s IPO has been announced, and this means lots of details on Facebook financials have become public. The most interesting bits for social game developers (in VERY broad terms):&lt;/p&gt;
-
+      <description>&lt;p&gt;Facebook’s IPO has been announced, and this means lots of details on Facebook financials have become public. The most interesting bits for social game developers (in VERY broad terms):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Almost all revenue from Facebook Credits is generated by games.&lt;/li&gt;
 &lt;li&gt;Zynga makes up 80% of the total Facebook Credits revenue.&lt;/li&gt;
-&lt;li&gt;In broad numbers, on Facebook, Zynga has MAU equal to 1.5x all other game devs combined. But Zynga&amp;#8217;s FB Credits revenue is 4x. That&amp;#8217;s an idea of how much better Zynga is at getting players to pay.&lt;/li&gt;
-&lt;li&gt;Most of Facebook&amp;#8217;s revenues come form advertising.&lt;/li&gt;
+&lt;li&gt;In broad numbers, on Facebook, Zynga has MAU equal to 1.5x all other game devs combined. But Zynga’s FB Credits revenue is 4x. That’s an idea of how much better Zynga is at getting players to pay.&lt;/li&gt;
+&lt;li&gt;Most of Facebook’s revenues come form advertising.&lt;/li&gt;
 &lt;li&gt;Facebook mobile gaming is in its infancy.&lt;/li&gt;
 &lt;li&gt;Half of Facebook users use the site via mobile, and this percentage is growing very quickly, but Facebook does not monetize them with games nor advertising.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -71,13 +60,9 @@ In general, there is value in having a single language available for all your ne
       <pubDate>Sat, 08 Oct 2011 02:00:59 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/</guid>
-      <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&amp;#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
-
-&lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color&amp;#8217;s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Vector.&lt;Number&gt;&lt;/strong&gt; and &lt;strong&gt;uploadFromVector()&lt;/strong&gt; do not give you control over the byte format of value. How do you solve this?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it’s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
+&lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color’s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vector.&lt;!-- raw HTML omitted --&gt;&lt;/strong&gt; and &lt;strong&gt;uploadFromVector()&lt;/strong&gt; do not give you control over the byte format of value. How do you solve this?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -86,8 +71,8 @@ In general, there is value in having a single language available for all your ne
       <pubDate>Thu, 29 Sep 2011 21:50:34 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/09/fun-with-html5/</guid>
-      <description>I have been playing around with HTML5, Canvas and WebGL. Not a lot to show for it, but at least I forced myself to write a bit again. Check it out here if you&amp;#8217;re curious, and good luck reaching a score of 150 on Lesson 5!
-By the way, for some reason Firefox has started to run Lesson 5 rather slow in both my PCs. I&amp;#8217;m pretty sure it used to be a rock solid 60 fps back when I wrote the game, but at some point either upgrading past Firefox 5, or upgrading to Windows 7, has made it slow.</description>
+      <description>I have been playing around with HTML5, Canvas and WebGL. Not a lot to show for it, but at least I forced myself to write a bit again. Check it out here if you’re curious, and good luck reaching a score of 150 on Lesson 5!
+By the way, for some reason Firefox has started to run Lesson 5 rather slow in both my PCs. I’m pretty sure it used to be a rock solid 60 fps back when I wrote the game, but at some point either upgrading past Firefox 5, or upgrading to Windows 7, has made it slow.</description>
     </item>
     
     <item>
@@ -105,8 +90,7 @@ By the way, for some reason Firefox has started to run Lesson 5 rather slow in b
       <pubDate>Thu, 30 Jun 2011 22:53:54 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/06/google-/</guid>
-      <description>Catch me there:
-https://plus.google.com/109393462510769944302/</description>
+      <description>Catch me there: https://plus.google.com/109393462510769944302/</description>
     </item>
     
     <item>
@@ -116,8 +100,8 @@ https://plus.google.com/109393462510769944302/</description>
       
       <guid>https://thejare.github.io/2011/05/relinuxed/</guid>
       <description>Time for that old laptop to receive Ubuntu 11.04!
-Er&amp;#8230;
-Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.
+Er…
+Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it’s a good idea to have a working Linux machine.
 Then, the same problem as before. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable.</description>
     </item>
     

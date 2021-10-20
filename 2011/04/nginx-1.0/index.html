@@ -104,24 +104,21 @@
                     </header>
                     
                     <div class="post-description">
-                        <p>Since I started working on Pyro&#8217;s server backend for its social games, I have grown to love the <a href="http://nginx.org/">nginx</a> web server. Compact, efficient and fully featured, it&#8217;s a great alternative to Apache if you are in full control of your web server and apps.</p>
-
+                        <p>Since I started working on Pyro’s server backend for its social games, I have grown to love the <a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a> web server. Compact, efficient and fully featured, it’s a great alternative to Apache if you are in full control of your web server and apps.</p>
 <p>A few days ago nginx came of age with the release of 1.0, so I did a refresh of my simple web dev setup at home:</p>
-
-<p>&#8211; Download nginx 1.0 Windows binary <a href="http://nginx.org/download/nginx-1.0.0.zip">here</a><br />
-&#8211; Download thread-safe php Windows binary <a href="http://windows.php.net/downloads/releases/php-5.3.6-Win32-VC9-x86.zip">here</a><br />
-&#8211; Unzip them to their own folders<br />
-&#8211; Copy php.ini-development to php.ini. Edit php.ini and uncomment the lines containing <strong>extension=php_mysql.dll</strong> and <strong>extension_dir = &ldquo;ext&rdquo;</strong>.<br />
-&#8211; Start php by running <strong>php-cgi.exe -b 127.0.0.1:9000</strong>. You can later stop it with Ctrl-C, <strong>taskkill /IM php-cgi.exe</strong> or with your favourite process killing method.<br />
-&#8211; Make the following edits to <strong>conf\nginx.conf</strong>:<br />
-&#8211; If you are running Vista or later with IPv6, change the line <strong>listen 80</strong> to <strong>listen [::]:80</strong>. This makes nginx listen on both IPv4 and IPv6. Even if you are not doing any work related to IPv6, your Windows hosts file will probably contain the IPv6 loopback entry for localhost (::1), and your browsers will try to use that IPv6 address for localhost. Enabling IPv6 in nginx lets you use all three loopbacks (<a href="http://127.0.0.1/">http://127.0.0.1/</a>, <a href="http://[::1]/">http://[::1]/</a> and <a href="http://localhost/">http://localhost/</a>) intercheangeably and without problems.<br />
-&#8211; Uncomment the block lines starting with <strong>location ~ .php$</strong> to enable php scripts.<br />
-&#8211; Change the fastcgi_param line to eliminate the hardcoded &ldquo;scripts&rdquo; folder path. It should be <strong>fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</strong>.<br />
-&#8211; Add index.php to the index line so it looks like <strong>index index.html index.htm index.php;</strong><br />
-&#8211; Remove all the <strong>root html;</strong> lines and leave a single <strong>root d:\dev\mywebdevfolder</strong> line at the server scope. I usually put it just below the <strong>server_name localhost;</strong> line.<br />
-&#8211; Start nginx by running <strong>nginx.exe</strong> or, since it can&#8217;t be killed with Ctrl-C, <strong>start nginx.exe</strong>.<br />
-&#8211; use the command-line signals to control nginx: <strong>nginx -s quit</strong> to stop it, <strong>nginx -s reload</strong> to reload the configuration.</p>
-
+<p>– Download nginx 1.0 Windows binary <a href="http://nginx.org/download/nginx-1.0.0.zip" target="_blank" rel="noopener">here</a><br>
+– Download thread-safe php Windows binary <a href="http://windows.php.net/downloads/releases/php-5.3.6-Win32-VC9-x86.zip" target="_blank" rel="noopener">here</a><br>
+– Unzip them to their own folders<br>
+– Copy php.ini-development to php.ini. Edit php.ini and uncomment the lines containing <strong>extension=php_mysql.dll</strong> and <strong>extension_dir = &ldquo;ext&rdquo;</strong>.<br>
+– Start php by running <strong>php-cgi.exe -b 127.0.0.1:9000</strong>. You can later stop it with Ctrl-C, <strong>taskkill /IM php-cgi.exe</strong> or with your favourite process killing method.<br>
+– Make the following edits to <strong>conf\nginx.conf</strong>:<br>
+– If you are running Vista or later with IPv6, change the line <strong>listen 80</strong> to <strong>listen [::]:80</strong>. This makes nginx listen on both IPv4 and IPv6. Even if you are not doing any work related to IPv6, your Windows hosts file will probably contain the IPv6 loopback entry for localhost (::1), and your browsers will try to use that IPv6 address for localhost. Enabling IPv6 in nginx lets you use all three loopbacks (<a href="http://127.0.0.1/" target="_blank" rel="noopener">http://127.0.0.1/</a>, <a href="http://[::1]/" target="_blank" rel="noopener">http://[::1]/</a> and <a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a>) intercheangeably and without problems.<br>
+– Uncomment the block lines starting with <strong>location ~ .php$</strong> to enable php scripts.<br>
+– Change the fastcgi_param line to eliminate the hardcoded &ldquo;scripts&rdquo; folder path. It should be <strong>fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</strong>.<br>
+– Add index.php to the index line so it looks like <strong>index index.html index.htm index.php;</strong><br>
+– Remove all the <strong>root html;</strong> lines and leave a single <strong>root d:\dev\mywebdevfolder</strong> line at the server scope. I usually put it just below the <strong>server_name localhost;</strong> line.<br>
+– Start nginx by running <strong>nginx.exe</strong> or, since it can’t be killed with Ctrl-C, <strong>start nginx.exe</strong>.<br>
+– use the command-line signals to control nginx: <strong>nginx -s quit</strong> to stop it, <strong>nginx -s reload</strong> to reload the configuration.</p>
 <p>That should be it, nginx+php in 5 minutes or less!</p>
 
                     </div>

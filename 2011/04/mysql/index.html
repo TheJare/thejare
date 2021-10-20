@@ -104,17 +104,16 @@
                     </header>
                     
                     <div class="post-description">
-                        <p>In the previous post, I made references to MySQL but didn&#8217;t say anything about a quick local setup. So here&#8217;s what I did for mine:</p>
-
-<p>&#8211; Download MySQL binaries from <a href="http://dev.mysql.com/downloads/mysql/">http://dev.mysql.com/downloads/mysql/</a>. I chose the huge 64-bit Zip archive.<br />
-&#8211; I unzipped the <strong>/bin/</strong>, <strong>/data/</strong>, <strong>/docs/</strong> and <strong>/share/english/</strong> folders into my destination MySQL folder. Then I deleted all the *.pdb files.<br />
-&#8211; Start the server via <strong>start mysqld</strong>. You can later stop it with <strong>mysqladmin.exe shutdown -u root</strong>.<br />
-&#8211; By default it has a root user without password, and an anonymous user.<br />
-&#8211; Run the client with <strong>mysql -u root</strong>.<br />
-&#8211; Delete the anonymous user or it will mess up with your ability to connect using other users you create: <strong>DELETE FROM mysql.user WHERE user=&#8221;; FLUSH PRIVILEGES;</strong><br />
-&#8211; Create your database and your development user: <strong>CREATE DATABASE MyDatabase; GRANT SELECT, CREATE, DELETE, UPDATE, INSERT ON MyDatabase.* to MyUser@&#8217;%&#8217; IDENTIFIED BY &ldquo;MyPassword&rdquo;;</strong><br />
-&#8211; Now you can connect as your development user with <strong>mysql -u MyUser -pMyPassword</strong>.<br />
-&#8211; I recommend downloading MySQL Workbench from <a href="http://dev.mysql.com/downloads/workbench/">http://dev.mysql.com/downloads/workbench/</a> to perform database maintenance.</p>
+                        <p>In the previous post, I made references to MySQL but didn’t say anything about a quick local setup. So here’s what I did for mine:</p>
+<p>– Download MySQL binaries from <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/mysql/</a>. I chose the huge 64-bit Zip archive.<br>
+– I unzipped the <strong>/bin/</strong>, <strong>/data/</strong>, <strong>/docs/</strong> and <strong>/share/english/</strong> folders into my destination MySQL folder. Then I deleted all the <em>.pdb files.<br>
+– Start the server via <strong>start mysqld</strong>. You can later stop it with <strong>mysqladmin.exe shutdown -u root</strong>.<br>
+– By default it has a root user without password, and an anonymous user.<br>
+– Run the client with <strong>mysql -u root</strong>.<br>
+– Delete the anonymous user or it will mess up with your ability to connect using other users you create: <strong>DELETE FROM mysql.user WHERE user=”; FLUSH PRIVILEGES;</strong><br>
+– Create your database and your development user: <em><em>CREATE DATABASE MyDatabase; GRANT SELECT, CREATE, DELETE, UPDATE, INSERT ON MyDatabase.</em> to MyUser@’%’ IDENTIFIED BY &ldquo;MyPassword&rdquo;;</em></em><br>
+– Now you can connect as your development user with <strong>mysql -u MyUser -pMyPassword</strong>.<br>
+– I recommend downloading MySQL Workbench from <a href="http://dev.mysql.com/downloads/workbench/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/workbench/</a> to perform database maintenance.</p>
 
                     </div>
                     

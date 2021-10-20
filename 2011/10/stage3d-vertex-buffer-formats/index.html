@@ -114,86 +114,20 @@
                     </header>
                     
                     <div class="post-description">
-                        <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
-
-<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color&#8217;s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
-
-<p><strong>Vector.<Number></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
-
-<p></p>
-
+                        <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480" target="_blank" rel="noopener">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it’s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
+<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color’s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
+<p><strong>Vector.<!-- raw HTML omitted --></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
 <p>You must use a <strong>ByteArray</strong>, to which you will copy the values manually with the right format. In our example above, 3 <strong>writeFloat()</strong> calls plus a <strong>writeUnsignedInt()</strong> for the 32-bit color. A detail that stumped me for a while is that you must ensure the <strong>ByteArray</strong> is <strong>Endian.LITTLE_ENDIAN</strong>, it defaults to <strong>BIG_ENDIAN</strong>. I wrote this function to perform this process, with the aid of an array that stores the format of each varying parameter:</p>
-
-<pre>private static function DumpVectorComponentsIntoByteArray(dest:ByteArray,
-                                                          src:Vector.&lt;Number&gt;,
-                                                          componentFormats:Array): void
-{
-    dest.endian = Endian.LITTLE_ENDIAN;
-    for (var i:int = 0; i &lt; src.length; )
-    {
-        for (var j:int = 0; j &lt; componentFormats.length; ++j)
-        {
-            switch (componentFormats[j])
-            {
-                case Context3DVertexBufferFormat.FLOAT_2:
-                    dest.writeFloat(src[i]);
-                    dest.writeFloat(src[i+1]);
-                    i += 2;
-                    break;
-                case Context3DVertexBufferFormat.FLOAT_3:
-                    dest.writeFloat(src[i]);
-                    dest.writeFloat(src[i + 1]);
-                    dest.writeFloat(src[i + 2]);
-                    i += 3;
-                    break;
-                case Context3DVertexBufferFormat.FLOAT_4:
-                    dest.writeFloat(src[i]);
-                    dest.writeFloat(src[i + 1]);
-                    dest.writeFloat(src[i + 2]);
-                    dest.writeFloat(src[i + 3]);
-                    i += 4;
-                    break;
-                case Context3DVertexBufferFormat.BYTES_4:
-                    dest.writeUnsignedInt(src[i]);
-                    ++i;
-                    break;
-            }
-        }
-    }
-}</pre>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>So, in the case of the spinning cube, the component array would be:</p>
-
-<pre>var vertexBufferComponents:Array = new Array(
-    Context3DVertexBufferFormat.FLOAT_3,
-    Context3DVertexBufferFormat.BYTES_4
-);</pre>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>With that array in hand, another useful function to set the array components into the context:</p>
-
-<pre>private function SetVertexArrays(componentFormats:Array, vertices:VertexBuffer3D): void
-{
-    var offset:int = 0;
-    for (var j:int = 0; j &lt; componentFormats.length; ++j)
-    {
-        renderContext.setVertexBufferAt( j, vertices, offset, componentFormats[j] );
-        switch (componentFormats[j])
-        {
-            case Context3DVertexBufferFormat.FLOAT_2:
-                offset += 2;
-                break;
-            case Context3DVertexBufferFormat.FLOAT_3:
-                offset += 3;
-                break;
-            case Context3DVertexBufferFormat.FLOAT_4:
-                offset += 4;
-                break;
-            case Context3DVertexBufferFormat.BYTES_4:
-                offset += 1;
-                break;
-        }
-    }
-}</pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<blockquote>
+</blockquote>
                     </div>
                     
                 </section>

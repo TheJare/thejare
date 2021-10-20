@@ -114,103 +114,16 @@
                     </header>
                     
                     <div class="post-description">
-                        <p>Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that&#8217;s just what we do.</p>
-
-<p>Back in MS-DOS days, my editor of choice was <a title="QEdit" href="http://www.semware.com/" target="_blank">QEdit</a>, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to <a title="Emacs" href="http://www.gnu.org/s/emacs/" target="_blank">Emacs</a> multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.</p>
-
-<p>After Windows 95 came and became my regular environment, the best choice was <a title="Ultraedit" href="http://www.ultraedit.com/" target="_blank">Ultraedit</a>. Very soon, Microsoft Visual Studio became the compiler and IDE of choice for Win95 development, and its built-in editor proved quite powerful, so I would use Ultraedit for editing files that were not C++.</p>
-
-<p>The big annoyance with Ultraedit was that, being a paid product, it was not readily available everywhere I could go. At work, at someone else&#8217;s computer, etc. And it seemed to become more bloated with each version. I started looking for alternatives, and settled with <a title="SciTE" href="http://www.scintilla.org/SciTE.html" target="_blank">SciTE</a>. SciTE is the editor built around the Scintilla text-editing component / library. It&#8217;s a very powerful and extensible text editor, but the default installation is rather barebones and lacks many useful text manipulation tools. I was also bothered by the way it implemented rectangular block selections. So I started looking for alternatives again.</p>
-
-<p>The next editor I used was <a title="Notepad++" href="http://notepad-plus-plus.org/" target="_blank">Notepad++</a>, another editor built around Scintilla. Free, lots of features, and lots of free and easy to install plugins. I was completely comfortable with it, no major complaints. Ok well, yeah, one major complaint actually: the &#8220;Find in Files&#8221; dialog box was fixed in size, and the space available for the listbox of folders to search in was rather short. It was annoying to work with long, descriptive paths. I changed the dialog size and recompiled the editor, but it sucked to do that for every new version of the editor. The other issue with Notepad++ was that I was using Linux (Ubuntu) both at work and on my netbook, and Notepad++ is 100% Windows-only. Oh, and some of the settings are really awkward to configure. Yeah, a great editor, but a number of annoyances.</p>
-
-<p>In text-mode terminals on Ubuntu I had been using joe for quick edits, but for any significant amount of work I slowly started using (and getting used to) <a title="vim" href="http://www.vim.org/" target="_blank">vim</a> again. Since I was restless with Notepad++, I tried getting used to gvim on Windows, but despite its <a href="http://www.viemu.com/a-why-vi-vim.html" target="_blank">many good points</a>, I just could not stomach it. When working in a GUI, sorry but I need at least decent multi-file support with tabs, Ctrl-N to quickly create a scratch file, and of course my Ctrl-C and Ctrl-V and common GUI shortcuts; gvim&#8217;s UI is at odds with everything else in the GUI world.</p>
-
-<p>Then someone pointed me to <a title="Sublime Text 2" href="http://www.sublimetext.com/" target="_blank">Sublime Text 2</a>. Great editor, lots of tools, features, and neat details. Works on Windows, Mac and Linux. Supports the notion of projects. Scriptable in Python, awesome! I have been using it on and off for a while to see if I really want to switch to it. It is a commercial product, and I suspect that some of the old ghosts with rectangular block selections and Find in Files will come back and deter me from ST2, but for now I&#8217;m enjoying it. I wrote a little plugin to add basic Perforce integration:</p>
-
-<!--more-->
-
-<pre># Simple Perforce plugin for Sublime Text 2
-# (C) 2011 by Javier Arevalo
-# Free for anyone to use, distribute and modify
-
-# Copy this file to ST2's Data/Packages/User/perforce.py
-# Add the functions to the Tools menu with the following in a file named
-#   Data/Packages/User/Main.sublime-menu:
-#[
-#    {
-#        "id": "tools",
-#        "children":
-#        [
-#            { "caption": "-" },
-#            { "command": "p4_edit", "caption": "P4 Edit" },
-#            { "command": "p4_revert", "caption": "P4 Revert" },
-#            { "command": "p4_add", "caption": "P4 Add" }
-#        ]
-#    }
-#]
-# And/or in Data/Packages/User/Context.sublime-menu:
-#[
-#    { "caption": "-" },
-#    { "command": "p4_edit", "caption": "P4 Edit" },
-#    { "command": "p4_revert", "caption": "P4 Revert" },
-#    { "command": "p4_add", "caption": "P4 Add" }
-#]
-
-import sublime, sublime_plugin
-import os, stat
-
-def UpdateViewWriteability(view):
-    if view.file_name():
-        if os.access(view.file_name(), os.W_OK):
-            view.set_read_only(False)
-        else:
-            view.set_read_only(True)
-
-# Detect readonly / writable files
-# These are both false for non-file buffers
-def IsWriteable(view):
-    return view.file_name() and os.access(view.file_name(), os.W_OK)
-
-def IsWriteProtected(view):
-    return view.file_name() and not os.access(view.file_name(), os.W_OK)
-
-# Event to catch buffer activation and check readonly/writeable
-# Note: Running the commands doesn't de- and re-activate the view focus,
-# so the ReadOnlyCheck event doesn't fire. We call the function manually
-# for each command.
-class ReadOnlyCheck(sublime_plugin.EventListener):
-    def on_activated(self, view):
-        UpdateViewWriteability(view)
-
-# Commands
-
-class P4EditCommand(sublime_plugin.TextCommand):
-    """P4 Edit"""
-    def run(self, edit):
-        os.system("p4 edit \"" + self.view.file_name() + "\"")
-        UpdateViewWriteability(self.view) 
-
-    def is_enabled(self):
-        return IsWriteProtected(self.view)
-
-class P4RevertCommand(sublime_plugin.TextCommand):
-    """P4 Revert if unchanged"""
-    def run(self, edit):
-        os.system("p4 revert -a \"" + self.view.file_name() + "\"")
-        UpdateViewWriteability(self.view)
-
-    def is_enabled(self):
-        return IsWriteable(self.view)
-
-class P4AddCommand(sublime_plugin.TextCommand):
-    """P4 Add"""
-    def run(self, edit):
-        os.system("p4 add \"" + self.view.file_name() + "\"")
-        UpdateViewWriteability(self.view)
-
-    def is_enabled(self):
-        return IsWriteable(self.view)</pre>
+                        <p>Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that’s just what we do.</p>
+<p>Back in MS-DOS days, my editor of choice was <!-- raw HTML omitted -->QEdit<!-- raw HTML omitted -->, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to <!-- raw HTML omitted -->Emacs<!-- raw HTML omitted --> multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.</p>
+<p>After Windows 95 came and became my regular environment, the best choice was <!-- raw HTML omitted -->Ultraedit<!-- raw HTML omitted -->. Very soon, Microsoft Visual Studio became the compiler and IDE of choice for Win95 development, and its built-in editor proved quite powerful, so I would use Ultraedit for editing files that were not C++.</p>
+<p>The big annoyance with Ultraedit was that, being a paid product, it was not readily available everywhere I could go. At work, at someone else’s computer, etc. And it seemed to become more bloated with each version. I started looking for alternatives, and settled with <!-- raw HTML omitted -->SciTE<!-- raw HTML omitted -->. SciTE is the editor built around the Scintilla text-editing component / library. It’s a very powerful and extensible text editor, but the default installation is rather barebones and lacks many useful text manipulation tools. I was also bothered by the way it implemented rectangular block selections. So I started looking for alternatives again.</p>
+<p>The next editor I used was <!-- raw HTML omitted -->Notepad++<!-- raw HTML omitted -->, another editor built around Scintilla. Free, lots of features, and lots of free and easy to install plugins. I was completely comfortable with it, no major complaints. Ok well, yeah, one major complaint actually: the “Find in Files” dialog box was fixed in size, and the space available for the listbox of folders to search in was rather short. It was annoying to work with long, descriptive paths. I changed the dialog size and recompiled the editor, but it sucked to do that for every new version of the editor. The other issue with Notepad++ was that I was using Linux (Ubuntu) both at work and on my netbook, and Notepad++ is 100% Windows-only. Oh, and some of the settings are really awkward to configure. Yeah, a great editor, but a number of annoyances.</p>
+<p>In text-mode terminals on Ubuntu I had been using joe for quick edits, but for any significant amount of work I slowly started using (and getting used to) <!-- raw HTML omitted -->vim<!-- raw HTML omitted --> again. Since I was restless with Notepad++, I tried getting used to gvim on Windows, but despite its <a href="http://www.viemu.com/a-why-vi-vim.html" target="_blank" rel="noopener">many good points</a>, I just could not stomach it. When working in a GUI, sorry but I need at least decent multi-file support with tabs, Ctrl-N to quickly create a scratch file, and of course my Ctrl-C and Ctrl-V and common GUI shortcuts; gvim’s UI is at odds with everything else in the GUI world.</p>
+<p>Then someone pointed me to <!-- raw HTML omitted -->Sublime Text 2<!-- raw HTML omitted -->. Great editor, lots of tools, features, and neat details. Works on Windows, Mac and Linux. Supports the notion of projects. Scriptable in Python, awesome! I have been using it on and off for a while to see if I really want to switch to it. It is a commercial product, and I suspect that some of the old ghosts with rectangular block selections and Find in Files will come back and deter me from ST2, but for now I’m enjoying it. I wrote a little plugin to add basic Perforce integration:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
                     </div>
                     
                 </section>

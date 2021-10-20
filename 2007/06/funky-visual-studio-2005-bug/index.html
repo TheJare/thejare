@@ -104,28 +104,24 @@
                     </header>
                     
                     <div class="post-description">
-                        <p>I ran into this today with VS2005 SP1: if you define the body of a specialization of a template class&#8217; member function in a separate cpp file, the linker will barf:</p>
-
+                        <p>I ran into this today with VS2005 SP1: if you define the body of a specialization of a template class’ member function in a separate cpp file, the linker will barf:</p>
 <blockquote>
-<hr />
-
-<p><code>template&lt;class&amp;nbsp;T&gt;&amp;nbsp;struct&amp;nbsp;A&amp;nbsp;{&amp;nbsp;void&amp;nbsp;f()&amp;nbsp;{}&amp;nbsp;};&lt;br /&gt;template&lt;&gt;&amp;nbsp;void&amp;nbsp;A&lt;int&gt;::f();&amp;nbsp;//&amp;nbsp;body&amp;nbsp;in&amp;nbsp;a&amp;nbsp;separate&amp;nbsp;cpp&lt;/p&gt;
-&lt;p&gt;void&amp;nbsp;main()&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;A&lt;int&gt;&amp;nbsp;a;&lt;br /&gt;&amp;nbsp;&amp;nbsp;a.f();&amp;nbsp;//&amp;nbsp;Linker&amp;nbsp;complains&amp;nbsp;that&amp;nbsp;this&amp;nbsp;function&amp;nbsp;is&amp;nbsp;undefined.&lt;br /&gt;}</code></p>
-
-<hr />
+<hr>
+<p>`template&lt;class T&gt; struct A { void f() {} };<!-- raw HTML omitted -->template&lt;&gt; void A<!-- raw HTML omitted -->::f(); // body in a separate cpp<!-- raw HTML omitted --></p>
 </blockquote>
-
+<!-- raw HTML omitted -->
+<blockquote>
+<hr>
+</blockquote>
 <p>You have to define the body in all source files (or at least one) that actually use the specialization of that function, normally in the header file:</p>
-
 <blockquote>
-<hr />
-
-<p><code>template&lt;class&amp;nbsp;T&gt;&amp;nbsp;struct&amp;nbsp;A&amp;nbsp;{&amp;nbsp;void&amp;nbsp;f()&amp;nbsp;{}&amp;nbsp;};&lt;br /&gt;template&lt;&gt;&amp;nbsp;void&amp;nbsp;A&lt;int&gt;::f()&amp;nbsp;{&amp;nbsp;}&lt;/p&gt;
-&lt;p&gt;void&amp;nbsp;main()&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;A&lt;int&gt;&amp;nbsp;a;&lt;br /&gt;&amp;nbsp;&amp;nbsp;a.f();&lt;br /&gt;}</code></p>
-
-<hr />
+<hr>
+<p>`template&lt;class T&gt; struct A { void f() {} };<!-- raw HTML omitted -->template&lt;&gt; void A<!-- raw HTML omitted -->::f() { }<!-- raw HTML omitted --></p>
 </blockquote>
-
+<!-- raw HTML omitted -->
+<blockquote>
+<hr>
+</blockquote>
 <p>Not sure if I have explained correctly, but I hope you get the idea.</p>
 
                     </div>

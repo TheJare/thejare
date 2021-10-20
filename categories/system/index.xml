@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>System on Jare&#39;s Blog</title>
@@ -6,27 +6,19 @@
     <description>Recent content in System on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jan 2012 03:47:06 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/categories/system/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 28 Jan 2012 03:47:06 +0000</lastBuildDate><atom:link href="https://thejare.github.io/categories/system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>node.js</title>
       <link>https://thejare.github.io/2012/01/node.js/</link>
       <pubDate>Sat, 28 Jan 2012 03:47:06 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/01/node.js/</guid>
-      <description>&lt;p&gt;cdoral in &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2385#comment-3491&#34;&gt;another post&lt;/a&gt; mentions &lt;a href=&#34;http://nodejs.org/&#34; target=&#34;_blank&#34;&gt;node.js&lt;/a&gt;. I have been following this project for a while so I thought I&amp;#8217;d write a little blurb about it and include a few links for further and more in-depth information. Coincidentally, the &lt;a href=&#34;http://nodesummit.com/&#34; target=&#34;_blank&#34;&gt;Node Summit&lt;/a&gt; was held this week in SF, so there may be interesting and fresh material coming from there soon.&lt;/p&gt;
-
-&lt;p&gt;First things first: I have played with node.js for little experiments but haven&amp;#8217;t yet found an opportunity to put it to real, production use. Version 0.6 addressed some of my questions about its capabilities and performance, and it is already being used on production servers for many traffic-heavy sites like eBay or LinkedIn, so it&amp;#8217;s clearly gone beyond the experimental stage. If you are building a web service today, node.js is a technology you should consider.&lt;/p&gt;
-
+      <description>&lt;p&gt;cdoral in &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2385#comment-3491&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;another post&lt;/a&gt; mentions &lt;a href=&#34;http://nodejs.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;node.js&lt;/a&gt;. I have been following this project for a while so I thought I’d write a little blurb about it and include a few links for further and more in-depth information. Coincidentally, the &lt;a href=&#34;http://nodesummit.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Node Summit&lt;/a&gt; was held this week in SF, so there may be interesting and fresh material coming from there soon.&lt;/p&gt;
+&lt;p&gt;First things first: I have played with node.js for little experiments but haven’t yet found an opportunity to put it to real, production use. Version 0.6 addressed some of my questions about its capabilities and performance, and it is already being used on production servers for many traffic-heavy sites like eBay or LinkedIn, so it’s clearly gone beyond the experimental stage. If you are building a web service today, node.js is a technology you should consider.&lt;/p&gt;
 &lt;p&gt;Node is a stand-alone executable that will run a JavaScript file passed on the command line:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;node app.js&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Your JavaScript program can use the standard JavaScript libraries (Math, etc) and a bunch of node-specific libraries. In most cases, your program will enter an infinite event loop and start receiving, processing and responding to network requests.&lt;/p&gt;</description>
     </item>
     
@@ -36,11 +28,9 @@
       <pubDate>Thu, 15 Dec 2011 08:48:58 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/12/text-editors/</guid>
-      <description>&lt;p&gt;Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that&amp;#8217;s just what we do.&lt;/p&gt;
-
-&lt;p&gt;Back in MS-DOS days, my editor of choice was &lt;a title=&#34;QEdit&#34; href=&#34;http://www.semware.com/&#34; target=&#34;_blank&#34;&gt;QEdit&lt;/a&gt;, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to &lt;a title=&#34;Emacs&#34; href=&#34;http://www.gnu.org/s/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt; multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.&lt;/p&gt;
-
-&lt;p&gt;After Windows 95 came and became my regular environment, the best choice was &lt;a title=&#34;Ultraedit&#34; href=&#34;http://www.ultraedit.com/&#34; target=&#34;_blank&#34;&gt;Ultraedit&lt;/a&gt;. Very soon, Microsoft Visual Studio became the compiler and IDE of choice for Win95 development, and its built-in editor proved quite powerful, so I would use Ultraedit for editing files that were not C++.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Programmers spend most of our time in front of a text editor. Whether it is a standalone editor, or one integrated in an IDE, that’s just what we do.&lt;/p&gt;
+&lt;p&gt;Back in MS-DOS days, my editor of choice was &lt;!-- raw HTML omitted --&gt;QEdit&lt;!-- raw HTML omitted --&gt;, later renamed to The Semware Editor. I loved its configurability, and remapped pretty much everything in it to suit my preferences. Around that time I was also working on Unix systems and used vi there, although only for short editing sessions. I had been exposed to &lt;!-- raw HTML omitted --&gt;Emacs&lt;!-- raw HTML omitted --&gt; multiple times (starting with MicroEmacs on the Atari ST), but I could never get comfortable with its crazy keyboard combos.&lt;/p&gt;
+&lt;p&gt;After Windows 95 came and became my regular environment, the best choice was &lt;!-- raw HTML omitted --&gt;Ultraedit&lt;!-- raw HTML omitted --&gt;. Very soon, Microsoft Visual Studio became the compiler and IDE of choice for Win95 development, and its built-in editor proved quite powerful, so I would use Ultraedit for editing files that were not C++.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Functional on Jare&#39;s Blog</title>
+    <title>functional on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/functional/</link>
-    <description>Recent content in Functional on Jare&#39;s Blog</description>
+    <description>Recent content in functional on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Mar 2013 23:05:18 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/functional/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 03 Mar 2013 23:05:18 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/functional/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Haskell</title>
       <link>https://thejare.github.io/2013/03/haskell/</link>
       <pubDate>Sun, 03 Mar 2013 23:05:18 +0000</pubDate>
       
       <guid>https://thejare.github.io/2013/03/haskell/</guid>
-      <description>&lt;p&gt;Back in my 2nd year in college (1990), I took a half year course on functional programming. Back then, having several years of heavy duty Z80 assembly &lt;a href=&#34;http://www.mobygames.com/game/star-dust&#34; target=&#34;_blank&#34;&gt;videogames &lt;/a&gt;&lt;a href=&#34;http://computeremuzone.com/ficha.php?id=281&#34; target=&#34;_blank&#34;&gt;programming&lt;/a&gt;, and being recently introduced to high level languages via Pascal and Modula 2, my brain was very fresh and open to new paradigms and ideas. Structured languages like Pascal and C were a great way to remove some of the tedium and bureaucracy of assembly, but functional was mindblowing. I already understood the idea of passing functions around as parameters, since we did a lot of that in our semi-OOP approach to game character behaviour. But when you create your first infinite list, wow, that&amp;#8217;s a moment to remember!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Back in my 2nd year in college (1990), I took a half year course on functional programming. Back then, having several years of heavy duty Z80 assembly &lt;a href=&#34;http://www.mobygames.com/game/star-dust&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;videogames &lt;/a&gt;&lt;a href=&#34;http://computeremuzone.com/ficha.php?id=281&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;programming&lt;/a&gt;, and being recently introduced to high level languages via Pascal and Modula 2, my brain was very fresh and open to new paradigms and ideas. Structured languages like Pascal and C were a great way to remove some of the tedium and bureaucracy of assembly, but functional was mindblowing. I already understood the idea of passing functions around as parameters, since we did a lot of that in our semi-OOP approach to game character behaviour. But when you create your first infinite list, wow, that’s a moment to remember!&lt;/p&gt;</description>
     </item>
     
   </channel>

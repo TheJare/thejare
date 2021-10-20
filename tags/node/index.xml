@@ -1,32 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Node on Jare&#39;s Blog</title>
+    <title>node on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/node/</link>
-    <description>Recent content in Node on Jare&#39;s Blog</description>
+    <description>Recent content in node on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jan 2012 03:47:06 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 28 Jan 2012 03:47:06 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>node.js</title>
       <link>https://thejare.github.io/2012/01/node.js/</link>
       <pubDate>Sat, 28 Jan 2012 03:47:06 +0000</pubDate>
       
       <guid>https://thejare.github.io/2012/01/node.js/</guid>
-      <description>&lt;p&gt;cdoral in &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2385#comment-3491&#34;&gt;another post&lt;/a&gt; mentions &lt;a href=&#34;http://nodejs.org/&#34; target=&#34;_blank&#34;&gt;node.js&lt;/a&gt;. I have been following this project for a while so I thought I&amp;#8217;d write a little blurb about it and include a few links for further and more in-depth information. Coincidentally, the &lt;a href=&#34;http://nodesummit.com/&#34; target=&#34;_blank&#34;&gt;Node Summit&lt;/a&gt; was held this week in SF, so there may be interesting and fresh material coming from there soon.&lt;/p&gt;
-
-&lt;p&gt;First things first: I have played with node.js for little experiments but haven&amp;#8217;t yet found an opportunity to put it to real, production use. Version 0.6 addressed some of my questions about its capabilities and performance, and it is already being used on production servers for many traffic-heavy sites like eBay or LinkedIn, so it&amp;#8217;s clearly gone beyond the experimental stage. If you are building a web service today, node.js is a technology you should consider.&lt;/p&gt;
-
+      <description>&lt;p&gt;cdoral in &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2385#comment-3491&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;another post&lt;/a&gt; mentions &lt;a href=&#34;http://nodejs.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;node.js&lt;/a&gt;. I have been following this project for a while so I thought I’d write a little blurb about it and include a few links for further and more in-depth information. Coincidentally, the &lt;a href=&#34;http://nodesummit.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Node Summit&lt;/a&gt; was held this week in SF, so there may be interesting and fresh material coming from there soon.&lt;/p&gt;
+&lt;p&gt;First things first: I have played with node.js for little experiments but haven’t yet found an opportunity to put it to real, production use. Version 0.6 addressed some of my questions about its capabilities and performance, and it is already being used on production servers for many traffic-heavy sites like eBay or LinkedIn, so it’s clearly gone beyond the experimental stage. If you are building a web service today, node.js is a technology you should consider.&lt;/p&gt;
 &lt;p&gt;Node is a stand-alone executable that will run a JavaScript file passed on the command line:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;node app.js&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Your JavaScript program can use the standard JavaScript libraries (Math, etc) and a bunch of node-specific libraries. In most cases, your program will enter an infinite event loop and start receiving, processing and responding to network requests.&lt;/p&gt;</description>
     </item>
     

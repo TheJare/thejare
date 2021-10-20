@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Install on Jare&#39;s Blog</title>
+    <title>install on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/install/</link>
-    <description>Recent content in Install on Jare&#39;s Blog</description>
+    <description>Recent content in install on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Oct 2011 08:06:41 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 06 Oct 2011 08:06:41 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Flash Stage 3D is out!</title>
       <link>https://thejare.github.io/2011/10/flash-stage-3d-is-out/</link>
       <pubDate>Thu, 06 Oct 2011 08:06:41 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/10/flash-stage-3d-is-out/</guid>
-      <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D&lt;/a&gt;. Here&amp;#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stage3D&lt;/a&gt;. Here’s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,8 +23,8 @@
       
       <guid>https://thejare.github.io/2011/05/relinuxed/</guid>
       <description>Time for that old laptop to receive Ubuntu 11.04!
-Er&amp;#8230;
-Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&amp;#8217;s a good idea to have a working Linux machine.
+Er…
+Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it’s a good idea to have a working Linux machine.
 Then, the same problem as before. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable.</description>
     </item>
     

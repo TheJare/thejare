@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ludumdare on Jare&#39;s Blog</title>
+    <title>ludumdare on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/ludumdare/</link>
-    <description>Recent content in Ludumdare on Jare&#39;s Blog</description>
+    <description>Recent content in ludumdare on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Dec 2017 01:27:02 +0200</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/ludumdare/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 03 Dec 2017 01:27:02 +0200</lastBuildDate><atom:link href="https://thejare.github.io/tags/ludumdare/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ludum Dare 40</title>
       <link>https://thejare.github.io/2017/12/ludum-dare-40/</link>
       <pubDate>Sun, 03 Dec 2017 01:27:02 +0200</pubDate>
       
       <guid>https://thejare.github.io/2017/12/ludum-dare-40/</guid>
-      <description>&lt;p&gt;I made a little Ludum Dare 40 entry by the name of Idle Icon. &lt;a href=&#34;../../html/ld40/&#34;&gt;Try it here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I made a little Ludum Dare 40 entry by the name of Idle Icon. &lt;a href=&#34;../../html/ld40/&#34;&gt;Try it here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

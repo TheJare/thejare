@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Jare&#39;s Blog</title>
@@ -6,10 +6,7 @@
     <description>Recent content in Categories on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-	<atom:link href="https://thejare.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 03 Dec 2017 01:27:02 +0200</lastBuildDate><atom:link href="https://thejare.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Development</title>
       <link>https://thejare.github.io/categories/development/</link>
@@ -29,6 +26,15 @@
     </item>
     
     <item>
+      <title>Uncategorized</title>
+      <link>https://thejare.github.io/categories/uncategorized/</link>
+      <pubDate>Sat, 16 Mar 2013 11:59:45 +0000</pubDate>
+      
+      <guid>https://thejare.github.io/categories/uncategorized/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Me</title>
       <link>https://thejare.github.io/categories/me/</link>
       <pubDate>Mon, 09 Jul 2012 00:35:38 +0000</pubDate>
@@ -43,15 +49,6 @@
       <pubDate>Sat, 28 Jan 2012 03:47:06 +0000</pubDate>
       
       <guid>https://thejare.github.io/categories/system/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Uncategorized</title>
-      <link>https://thejare.github.io/categories/uncategorized/</link>
-      <pubDate>Sat, 16 Mar 2013 11:59:45 +0000</pubDate>
-      
-      <guid>https://thejare.github.io/categories/uncategorized/</guid>
       <description></description>
     </item>
     

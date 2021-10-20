@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me on Jare&#39;s Blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Me on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Jul 2012 00:35:38 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/categories/me/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 09 Jul 2012 00:35:38 +0000</lastBuildDate><atom:link href="https://thejare.github.io/categories/me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Me</title>
       <link>https://thejare.github.io/about-me/</link>
@@ -19,7 +15,7 @@
       <guid>https://thejare.github.io/about-me/</guid>
       <description>My name is Javier Arévalo Baeza, I was born in sunny Spain in the year 1970. I have been making videogames for over 25 years, and I intend to keep doing that for as long as I can.
 Other places you can reach me:
- Facebook: https://www.facebook.com/TheJare Twitter: https://twitter.com/TheJare Github: https://github.com/TheJare Google+: https://plus.google.com/109393462510769944302/  </description>
+ Facebook: https://www.facebook.com/TheJare Twitter: https://twitter.com/TheJare Github: https://github.com/TheJare  </description>
     </item>
     
   </channel>

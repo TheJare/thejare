@@ -1,25 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mobile on Jare&#39;s Blog</title>
+    <title>mobile on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/mobile/</link>
-    <description>Recent content in Mobile on Jare&#39;s Blog</description>
+    <description>Recent content in mobile on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Dec 2011 10:07:57 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/mobile/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 26 Dec 2011 10:07:57 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/mobile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Colors!</title>
       <link>https://thejare.github.io/2011/12/colors/</link>
       <pubDate>Mon, 26 Dec 2011 10:07:57 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/12/colors/</guid>
-      <description>&lt;p&gt;Our little one loves to grab anything shiny, but is especially attracted to LCD screens of any type. He loves the netbook, the MacBook, my desktop&amp;#8217;s dual monitors, and of course the big TV, but most of all he loves the iPhone. I often activate the camera in reverse mode and let him play with it, but there&amp;#8217;s always been a problem: while he manipulates the phone, he will push some control or other and stop the camera, go to the desktop and start pushing random icons. I was wishing for some sort of &amp;#8216;baby mode&amp;#8217; where something neat would be happening on the screen, but controls would be disabled.&lt;/p&gt;
-
-&lt;p&gt;I decided to use the Sunday morning to dust off my Canvas, CSS and JavaScript skills to code, with Alba&amp;#8217;s design input and feedback, a little BabySaver that could keep his attention with bright colors, and be impossible to quit for him. &lt;a title=&#34;Colors BabySaver&#34; href=&#34;http://www.iguanademos.com/Jare/temp/html5/BabySavers/Colors/&#34; target=&#34;_blank&#34;&gt;Click here&lt;/a&gt; to see its current form. Click on the &amp;#8220;Endless&amp;#8221; button to enable interactions, otherwise any clicks will take you to my homepage.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Our little one loves to grab anything shiny, but is especially attracted to LCD screens of any type. He loves the netbook, the MacBook, my desktop’s dual monitors, and of course the big TV, but most of all he loves the iPhone. I often activate the camera in reverse mode and let him play with it, but there’s always been a problem: while he manipulates the phone, he will push some control or other and stop the camera, go to the desktop and start pushing random icons. I was wishing for some sort of ‘baby mode’ where something neat would be happening on the screen, but controls would be disabled.&lt;/p&gt;
+&lt;p&gt;I decided to use the Sunday morning to dust off my Canvas, CSS and JavaScript skills to code, with Alba’s design input and feedback, a little BabySaver that could keep his attention with bright colors, and be impossible to quit for him. &lt;!-- raw HTML omitted --&gt;Click here&lt;!-- raw HTML omitted --&gt; to see its current form. Click on the “Endless” button to enable interactions, otherwise any clicks will take you to my homepage.&lt;/p&gt;</description>
     </item>
     
   </channel>

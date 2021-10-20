@@ -113,39 +113,22 @@
                     
                     <div class="post-description">
                         <p>Time for that old laptop to receive Ubuntu 11.04!</p>
-
-<p>Er&#8230;</p>
-
-<p>Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it&#8217;s a good idea to have a working Linux machine.</p>
-
-<p>Then, the <a href="http://www.iguanademos.com/Jare/jblog_viewtopic.php?topicid=1381">same problem as before</a>. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable. So here it goes this time (DISCLAIMER: I don&#8217;t really know what I&#8217;m doing and I don&#8217;t care if I destroy the hard drive and its contents):</p>
-
-<p>&#8211; See <a href="http://fenidik.blogspot.com/2010/03/ext4-disable-journal.html" target="_blank">this link</a> for instructions.</p>
-
-<p>&#8211; The problem is that I can&#8217;t do these things on a boot partition while happily running the full system on the Gnome desktop.</p>
-
-<p>&#8211; Reboot in recovery mode (keep SHIFT pressed while booting), drop down to the recovery terminal.</p>
-
-<p>&#8211; &#8216;<strong>mount -no remount,ro /</strong>&#8216; to remount the file system in read only mode with. Ooops! can&#8217;t do that while running services that have files open for writing.</p>
-
-<p>&#8211; &#8216;<strong>fuser -v -m /</strong>&#8216; lists which services have files open (look for a &#8216;F&#8217; or &#8216;f&#8217; in the flags) and get ready to kill some of these processes. Note that not all of them will need to be killed, so use some judgement and go one by one. Start with the &#8216;F&#8217; ones.</p>
-
-<p>&#8211; Try to kill them nicely first with &#8216;<strong>stop <em>servicename</em></strong>&#8216;. In my case, I just did &#8216;<strong>stop rsyslog</strong>&#8216; and tried to remount, it worked even though there were other services (<strong>recovery-menu</strong> and <strong>root</strong>) with &#8216;f&#8217; flags. We have a read only filesystem!</p>
-
-<p>&#8211; &#8216;<strong>tune2fs -o journal_data_writeback /dev/sda1</strong>&#8216;</p>
-
-<p>&#8211; &#8216;<strong>tune2fs -O ^has_journal /dev/sda1</strong>&#8216;</p>
-
-<p>&#8211; &#8216;<strong>e2fsck -f /dev/sda1</strong>&#8216;</p>
-
-<p>&#8211; &#8216;<strong>reboot</strong>&#8216;</p>
-
-<p>&#8211; Upon reboot, I see that the system is now complaining about a missing disk but it then proceeds. Looking at the /etc/fstab file, the missing disk was used as swap during installation.</p>
-
-<p>&#8211; In the <strong>/etc/fstab</strong> file, add the options &#8216;<strong>data=writeback,noatime,nodiratime</strong>&#8216; for your / drive. Reboot.</p>
-
-<p>&#8211; Go to the Synaptyc Package Manager to continue updating the system. Mine complained about broken files, and asked me to do &#8216;<strong>sudo dpkg &#8211;configure -a</strong>&#8216;. That&#8217;s all for now!</p>
-
+<p>Er…</p>
+<p>Apparently, the graphics card is too old to run the fancy new Unity UI. Ah well, in any case, it’s a good idea to have a working Linux machine.</p>
+<p>Then, the <a href="http://www.iguanademos.com/Jare/jblog_viewtopic.php?topicid=1381" target="_blank" rel="noopener">same problem as before</a>. And I hate myself for not detailing precisely what I did to speed up the HDD. I need to fix this ASAP because the system has started doing massive checks to update packages and the machine is completely unusable. So here it goes this time (DISCLAIMER: I don’t really know what I’m doing and I don’t care if I destroy the hard drive and its contents):</p>
+<p>– See <a href="http://fenidik.blogspot.com/2010/03/ext4-disable-journal.html" target="_blank" rel="noopener">this link</a> for instructions.</p>
+<p>– The problem is that I can’t do these things on a boot partition while happily running the full system on the Gnome desktop.</p>
+<p>– Reboot in recovery mode (keep SHIFT pressed while booting), drop down to the recovery terminal.</p>
+<p>– ‘<strong>mount -no remount,ro /</strong>‘ to remount the file system in read only mode with. Ooops! can’t do that while running services that have files open for writing.</p>
+<p>– ‘<strong>fuser -v -m /</strong>‘ lists which services have files open (look for a ‘F’ or ‘f’ in the flags) and get ready to kill some of these processes. Note that not all of them will need to be killed, so use some judgement and go one by one. Start with the ‘F’ ones.</p>
+<p>– Try to kill them nicely first with ‘<strong>stop <em>servicename</em></strong>‘. In my case, I just did ‘<strong>stop rsyslog</strong>‘ and tried to remount, it worked even though there were other services (<strong>recovery-menu</strong> and <strong>root</strong>) with ‘f’ flags. We have a read only filesystem!</p>
+<p>– ‘<strong>tune2fs -o journal_data_writeback /dev/sda1</strong>‘</p>
+<p>– ‘<strong>tune2fs -O ^has_journal /dev/sda1</strong>‘</p>
+<p>– ‘<strong>e2fsck -f /dev/sda1</strong>‘</p>
+<p>– ‘<strong>reboot</strong>‘</p>
+<p>– Upon reboot, I see that the system is now complaining about a missing disk but it then proceeds. Looking at the /etc/fstab file, the missing disk was used as swap during installation.</p>
+<p>– In the <strong>/etc/fstab</strong> file, add the options ‘<strong>data=writeback,noatime,nodiratime</strong>‘ for your / drive. Reboot.</p>
+<p>– Go to the Synaptyc Package Manager to continue updating the system. Mine complained about broken files, and asked me to do ‘<strong>sudo dpkg –configure -a</strong>‘. That’s all for now!</p>
 <p>Well, I dunno what will be different for you.</p>
 
                     </div>

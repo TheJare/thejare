@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash &middot; Jare&#39;s Blog</title>
+    <title>flash &middot; Jare&#39;s Blog</title>
 
     <meta name="description" content="Stuff I write">
 
     <meta name="twitter:card" content="summary">
     
-    <meta name="twitter:title" content="Flash &middot; Jare&#39;s Blog">
+    <meta name="twitter:title" content="flash &middot; Jare&#39;s Blog">
     <meta name="twitter:description" content="Stuff I write">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Flash &middot; Jare&#39;s Blog">
+    <meta property="og:title" content="flash &middot; Jare&#39;s Blog">
     <meta property="og:description" content="Stuff I write">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
@@ -114,9 +114,7 @@
 
                     
                         <div class="post-description">
-                            <p>And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it&#8217;s a really odd situation. With the current outlook of Flash after the &#8216;<a href="http://creativecodingpodcast.com/?p=140" target="_blank">Flashmageddon</a>&#8216;, it&#8217;s hard to say how relevant this will be in the long term, but it&#8217;s an impressive feature! And the obligatory cube to celebrate it:</p>
-
-<p></p>
+                            <p>And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it’s a really odd situation. With the current outlook of Flash after the ‘<a href="http://creativecodingpodcast.com/?p=140" target="_blank" rel="noopener">Flashmageddon</a>‘, it’s hard to say how relevant this will be in the long term, but it’s an impressive feature! And the obligatory cube to celebrate it:</p>
                         </div>
                         <p><a href="https://thejare.github.io/2011/12/unity3d-3.5-developer-preview-is-out/" class="post-readmore">Read more...</a></p>
                     
@@ -148,13 +146,9 @@
 
                     
                         <div class="post-description">
-                            <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
-
-<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color&#8217;s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
-
-<p><strong>Vector.<Number></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
-
-<p></p>
+                            <p>If you played with the Stage3D spinning cube sample I linked in the <a href="http://www.iguanademos.com/Jare/wp/?p=2480" target="_blank" rel="noopener">previous post</a>, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it’s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).</p>
+<p>If you look in the Stage3D docs, you will find the constant <strong>Context3DVertexBufferFormat.BYTES_4</strong> to use in the call to <strong>Context3D.setVertexBufferAt()</strong>. But if you naively just change the vertex buffer array to turn each vertex color’s set of 3 components into a single hex value, make <strong>dataPerVertex</strong> = 4 instead of 6, and use <strong>BYTES_4</strong> for va1, then you will find that the colors are coming out wrong. Why? Because the function <strong>VertexBuffer3D.uploadFromVector()</strong> always stores the values from the Vector in <em>floating point format</em>. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our <strong>BYTES_4</strong> color value to be stored verbatim as a 32-bit uint.</p>
+<p><strong>Vector.<!-- raw HTML omitted --></strong> and <strong>uploadFromVector()</strong> do not give you control over the byte format of value. How do you solve this?</p>
                         </div>
                         <p><a href="https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/" class="post-readmore">Read more...</a></p>
                     
@@ -184,9 +178,7 @@
 
                     
                         <div class="post-description">
-                            <p>A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as <a href="http://www.adobe.com/devnet/flashplayer/stage3d.html" target="_blank">Stage3D</a>. Here&#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.</p>
-
-<p></p>
+                            <p>A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as <a href="http://www.adobe.com/devnet/flashplayer/stage3d.html" target="_blank" rel="noopener">Stage3D</a>. Here’s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.</p>
                         </div>
                         <p><a href="https://thejare.github.io/2011/10/flash-stage-3d-is-out/" class="post-readmore">Read more...</a></p>
                     

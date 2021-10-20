@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Stage3d on Jare&#39;s Blog</title>
+    <title>stage3d on Jare&#39;s Blog</title>
     <link>https://thejare.github.io/tags/stage3d/</link>
-    <description>Recent content in Stage3d on Jare&#39;s Blog</description>
+    <description>Recent content in stage3d on Jare&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Dec 2011 00:09:45 +0000</lastBuildDate>
-    
-	<atom:link href="https://thejare.github.io/tags/stage3d/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 28 Dec 2011 00:09:45 +0000</lastBuildDate><atom:link href="https://thejare.github.io/tags/stage3d/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unity3D 3.5 Developer preview is out</title>
       <link>https://thejare.github.io/2011/12/unity3d-3.5-developer-preview-is-out/</link>
       <pubDate>Wed, 28 Dec 2011 00:09:45 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/12/unity3d-3.5-developer-preview-is-out/</guid>
-      <description>&lt;p&gt;And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it&amp;#8217;s a really odd situation. With the current outlook of Flash after the &amp;#8216;&lt;a href=&#34;http://creativecodingpodcast.com/?p=140&#34; target=&#34;_blank&#34;&gt;Flashmageddon&lt;/a&gt;&amp;#8216;, it&amp;#8217;s hard to say how relevant this will be in the long term, but it&amp;#8217;s an impressive feature! And the obligatory cube to celebrate it:&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;And it includes a fancy exporter to Flash11 / Stage3D. All of a sudden, the best way to author advanced Flash content is Unity, not Flash. Considering that Adobe makes their money from Flash tools rather than the plugin, it’s a really odd situation. With the current outlook of Flash after the ‘&lt;a href=&#34;http://creativecodingpodcast.com/?p=140&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Flashmageddon&lt;/a&gt;‘, it’s hard to say how relevant this will be in the long term, but it’s an impressive feature! And the obligatory cube to celebrate it:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,13 +22,9 @@
       <pubDate>Sat, 08 Oct 2011 02:00:59 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/10/stage3d-vertex-buffer-formats/</guid>
-      <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it&amp;#8217;s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
-
-&lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color&amp;#8217;s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Vector.&lt;Number&gt;&lt;/strong&gt; and &lt;strong&gt;uploadFromVector()&lt;/strong&gt; do not give you control over the byte format of value. How do you solve this?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;If you played with the Stage3D spinning cube sample I linked in the &lt;a href=&#34;http://www.iguanademos.com/Jare/wp/?p=2480&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;previous post&lt;/a&gt;, you will notice one thing: the vertex colors in the vertex buffer are given as 3 floats (red, green and blue). This is rather wasteful in most cases because color components often vary between 0.0 and 1.0, and it’s more efficient to specify vertex colors (including alpha) as a single 32-bit value. For example, in hexadecimal notation, 0xFF800040 would mean alpha of 1.0 (0xFF), blue 0.5 (0x80), green 0 (0x00) and red 0.25 (0x40).&lt;/p&gt;
+&lt;p&gt;If you look in the Stage3D docs, you will find the constant &lt;strong&gt;Context3DVertexBufferFormat.BYTES_4&lt;/strong&gt; to use in the call to &lt;strong&gt;Context3D.setVertexBufferAt()&lt;/strong&gt;. But if you naively just change the vertex buffer array to turn each vertex color’s set of 3 components into a single hex value, make &lt;strong&gt;dataPerVertex&lt;/strong&gt; = 4 instead of 6, and use &lt;strong&gt;BYTES_4&lt;/strong&gt; for va1, then you will find that the colors are coming out wrong. Why? Because the function &lt;strong&gt;VertexBuffer3D.uploadFromVector()&lt;/strong&gt; always stores the values from the Vector in &lt;em&gt;floating point format&lt;/em&gt;. Of course! This is the most common situation for the components of the vertex positions, normals, texture coordinates and such. But we need our &lt;strong&gt;BYTES_4&lt;/strong&gt; color value to be stored verbatim as a 32-bit uint.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vector.&lt;!-- raw HTML omitted --&gt;&lt;/strong&gt; and &lt;strong&gt;uploadFromVector()&lt;/strong&gt; do not give you control over the byte format of value. How do you solve this?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,9 +33,7 @@
       <pubDate>Thu, 06 Oct 2011 08:06:41 +0000</pubDate>
       
       <guid>https://thejare.github.io/2011/10/flash-stage-3d-is-out/</guid>
-      <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34;&gt;Stage3D&lt;/a&gt;. Here&amp;#8217;s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A couple of days ago, Adobe released to the masses a new version of their Flash Player, and an updated SDK. The biggest change (for me at least) is the inclusion of hardware-accelerated 3D, known as &lt;a href=&#34;http://www.adobe.com/devnet/flashplayer/stage3d.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stage3D&lt;/a&gt;. Here’s a quick tour of what I did to compile and run my first Stage3D program (Windows 7 PC but should be applicable everywhere). Useful because the Adobe site is not really clear about this.&lt;/p&gt;</description>
     </item>
     
   </channel>
